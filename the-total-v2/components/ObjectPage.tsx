@@ -40,7 +40,7 @@ export function ObjectPage({ slug }: { slug: (typeof COLLECTION)[number]['slug']
       {slug === 'the-question' && (
         <section className="orient" aria-label="두 가지 삶">
           {ORIENTATION.map((o, i) => (
-            <div key={o.key} className={`orient-${i + 1}`} data-reveal>
+            <div key={o.key} className={`orient-${i + 1}`}>
               <p className="ch-tag">{o.key}</p>
               <p className="orient-text">
                 {o.text.map((t) => (
@@ -57,7 +57,7 @@ export function ObjectPage({ slug }: { slug: (typeof COLLECTION)[number]['slug']
           <Image src={c.alt.src} width={1195} height={1600} sizes="(max-width: 719px) 80vw, 34vw" alt={c.alt.alt} />
         </figure>
         {'edits' in c && (
-          <ol className="edits" data-reveal>
+          <ol className="edits">
             {c.edits.map((e) => (
               <li key={e.key}>
                 <span>{e.key}</span>

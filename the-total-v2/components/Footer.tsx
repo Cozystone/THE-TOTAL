@@ -1,17 +1,14 @@
 import Link from 'next/link';
-import { FOOT_MENU, MENU, SITE } from '@/lib/copy';
+import { HOUSE_MENU, MENU, SITE } from '@/lib/copy';
 
-/* 바닥 — 캠페인과 THE HOUSE 를 두 줄로. */
+/* 바닥 — THE HOUSE 와 캠페인을 두 줄로. */
 export function Footer() {
   return (
     <footer className="foot">
       <div className="foot-row">
-        <span className="foot-season">
-          {SITE.name} <span>{SITE.season}</span>
-        </span>
-        <nav aria-label="캠페인">
-          <Link href="/start">시작하기</Link>
-          {MENU.map((m) => (
+        <span className="foot-season">THE HOUSE</span>
+        <nav aria-label="THE HOUSE">
+          {HOUSE_MENU.map((m) => (
             <Link key={m.href} href={m.href}>
               {m.label}
             </Link>
@@ -19,9 +16,11 @@ export function Footer() {
         </nav>
       </div>
       <div className="foot-row foot-row-house">
-        <span className="foot-season">THE HOUSE</span>
-        <nav aria-label="THE HOUSE">
-          {FOOT_MENU.map((m) => (
+        <span className="foot-season">
+          {SITE.name} <span>{SITE.season}</span>
+        </span>
+        <nav aria-label="캠페인">
+          {MENU.map((m) => (
             <Link key={m.href} href={m.href}>
               {m.label}
             </Link>

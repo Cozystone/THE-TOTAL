@@ -6,6 +6,8 @@ import './entry.css';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Reveal } from '@/components/Reveal';
+import { RouteTransition } from '@/components/RouteTransition';
+import { Suspense } from 'react';
 import { SITE } from '@/lib/copy';
 
 export const metadata: Metadata = {
@@ -28,6 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Footer />
         <Reveal />
+        <Suspense fallback={null}>
+          <RouteTransition />
+        </Suspense>
       </body>
     </html>
   );

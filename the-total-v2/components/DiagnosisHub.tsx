@@ -6,9 +6,20 @@ import { Diagnosis } from '@/components/Diagnosis';
 import { ForumDiagnosis } from '@/components/ForumDiagnosis';
 
 /*
- * 온라인 진단의 첫 화면 — 두 경로 중 하나를 고른다.
- * 각 진단은 독립 주소(/diagnosis/academic · /diagnosis/forum)를 가진다. 예전 ?track= 주소도 그대로 열린다.
+ * 온라인 진단의 첫 화면 — 학생과 부모는 완전히 다른 여정.
+ *   학생: 나의 INDEX(약 7분) · 학업과정 진단(약 5분) · FORUM 지원 진단(약 10분)
+ *   부모: 자녀의 학습 방향(약 5분)
+ * 예전 ?track= 주소도 그대로 열린다.
  */
+const STUDENT = [
+  { href: '/diagnosis/my-index', title: '나의 INDEX', text: '잘하는 것 · 어려운 것 · 오래 남은 장면 · 궁금한 것', meta: '약 7분 · 처음이라면 여기서' },
+  { href: '/diagnosis/academic', title: '학업과정 진단', text: '과목 · 학습 상태 · 학습 환경 중심', meta: '초등 · 중등 · 고등 · 약 5분' },
+  { href: '/diagnosis/forum', title: 'FORUM 지원 진단', text: '관심사 · 표현 · 만들고 싶은 것 중심', meta: 'THE TOTAL FORUM · 약 10분' },
+];
+const PARENT = [
+  { href: '/diagnosis/parent', title: '자녀의 학습 방향 살펴보기', text: '학업 · 학습 환경 · 아이와 나눌 대화', meta: '약 5분 · 아이를 평가하지 않습니다' },
+];
+
 export function DiagnosisHub() {
   const params = useSearchParams();
   const router = useRouter();
@@ -19,40 +30,44 @@ export function DiagnosisHub() {
   if (track === 'forum') return <ForumDiagnosis onExit={exit} />;
 
   return (
-    <section className="dx" aria-labelledby="hub-title">
-      <h2 className="dx-title" id="hub-title">
-        어떤 진단을 시작할까요?
-      </h2>
-      <p className="dx-lead">두 진단은 묻는 것이 다릅니다. 지원하려는 과정에 맞는 진단을 골라 주세요.</p>
-
-      <ul className="tracks-choice">
-        <li>
-          <Link href="/diagnosis/academic">
-            <span className="choice-kicker">ACADEMIC</span>
-            <span className="choice-title">학업과정 진단</span>
-            <span className="choice-text">학습 상태, 과목별 필요, 목표와 수업 방식을 확인합니다.</span>
-            <span className="choice-meta">초등 · 중등 · 고등 과정 · 약 5분</span>
-            <span className="choice-go">
-              시작하기 <span aria-hidden="true">→</span>
-            </span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/diagnosis/forum">
-            <span className="choice-kicker">FORUM</span>
-            <span className="choice-title">FORUM 지원 진단</span>
-            <span className="choice-text">
-              관심사, 생각의 방식, 표현하고 싶은 것,
-              <br />
-              앞으로 만들고 싶은 작업을 확인합니다.
-            </span>
-            <span className="choice-meta">THE TOTAL FORUM · 약 10분</span>
-            <span className="choice-go">
-              시작하기 <span aria-hidden="true">→</span>
-            </span>
-          </Link>
-        </li>
-      </ul>
+    <section className="hub" aria-labelledby="hub-title">
+      <div className="frame">
+        <div className="frame-main">
+          <h2 className="frame-title" id="hub-title">
+            누구의 진단인가요?
+          </h2>
+        </div>
+        <div className="frame-side">
+          <p>학생과 부모는 묻는 것이 다릅니다. 이름과 연락처는 묻지 않으며, 응답은 저장 · 전송되지 않습니다.</p>
+        </div>
+      </div>
+      <div className="hub-cols">
+        {[
+          ['학생', STUDENT],
+          ['부모', PARENT],
+        ].map(([who, list]) => (
+          <div key={who as string} className="hub-col">
+            <h3 className="prg-branch">{who as string}</h3>
+            <ul className="sp-list">
+              {(list as typeof STUDENT).map((c) => (
+                <li key={c.href}>
+                  <Link href={c.href}>
+                    <span className="sp-label">{c.title}</span>
+                    <span className="sp-meta">
+                      {c.text}
+                      <br />
+                      {c.meta}
+                    </span>
+                    <span className="sp-arrow" aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

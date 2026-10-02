@@ -1,9 +1,11 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
 /* [data-reveal] 요소가 화면에 들어올 때 한 번 떠오른다. 동작 줄이기 설정이면 그대로 보인다. */
 export function Reveal() {
+  const path = usePathname();
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const io = new IntersectionObserver(
@@ -22,6 +24,6 @@ export function Reveal() {
       io.observe(el);
     });
     return () => io.disconnect();
-  }, []);
+  }, [path]);
   return null;
 }

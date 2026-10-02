@@ -60,7 +60,7 @@ export default function TheQuestion() {
         <p className="ch-tag">
           {CHAPTERS.c2.no} — {CHAPTERS.c2.title}
         </p>
-        <h2 className="ch2-line" id="c2" data-reveal>
+        <h2 className="ch2-line" id="c2">
           {CHAPTERS.c2.line}
         </h2>
         <figure className="ch2-photo" data-reveal>
@@ -80,9 +80,9 @@ export default function TheQuestion() {
         <p className="ch-tag ch-tag-signal">
           {CHAPTERS.c3.no} — {CHAPTERS.c3.title}
         </p>
-        <h2 className="ch3-lines" id="c3">
+        <h2 className="ch3-lines" id="c3" data-reveal>
           {CHAPTERS.c3.lines.map((l, i) => (
-            <span key={l} className={`c3l c3l-${i + 1}`} data-reveal>
+            <span key={l} className={`c3l c3l-${i + 1}`}>
               {l}
             </span>
           ))}
@@ -95,13 +95,13 @@ export default function TheQuestion() {
           <p className="ch-tag">
             {CHAPTERS.c4.no} — {CHAPTERS.c4.title}
           </p>
-          <h2 className="ch4-line" id="c4" data-reveal>
+          <h2 className="ch4-line" id="c4">
             {CHAPTERS.c4.line}
           </h2>
         </div>
-        <ul className="research">
+        <ul className="research" data-reveal>
           {RESEARCH.map((r, i) => (
-            <li key={r.src} className={`rs rs-${i + 1}`} data-reveal>
+            <li key={r.src} className={`rs rs-${i + 1}`}>
               <Image src={r.src} width={r.w} height={r.h} sizes="(max-width: 719px) 90vw, 30vw" alt={r.alt} />
               <span className="rs-cap">{r.cap}</span>
             </li>
@@ -111,9 +111,9 @@ export default function TheQuestion() {
 
       {/* 열림 */}
       <section className="open" aria-label="열림">
-        <p className="open-text">
+        <p className="open-text" data-reveal>
           {OPEN.map((l, i) => (
-            <span key={l} className={`ol ol-${i + 1}`} data-reveal>
+            <span key={l} className={`ol ol-${i + 1}`}>
               {l}
             </span>
           ))}
@@ -121,9 +121,9 @@ export default function TheQuestion() {
       </section>
 
       {/* 목표지향 / 자기지향 */}
-      <section className="orient" aria-label="두 가지 삶">
+      <section className="orient" aria-label="두 가지 삶" data-reveal>
         {ORIENTATION.map((o, i) => (
-          <div key={o.key} className={`orient-${i + 1}`} data-reveal>
+          <div key={o.key} className={`orient-${i + 1}`}>
             <p className="ch-tag">{o.key}</p>
             <p className="orient-text">
               {o.text.map((t) => (

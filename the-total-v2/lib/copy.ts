@@ -10,26 +10,40 @@ export const SITE = {
   place: '서울 · 대치',
 };
 
-/** 캠페인 — 머리에 늘 보이는 층. 브랜드명과 INDEX 외에는 한국어 */
+/** 머리의 주 메뉴 — 실제로 들어오는 길. 캠페인은 THE TOTAL 패널 안으로 */
+export const NAV = [
+  { href: '/start', label: '시작하기' },
+  { href: '/programs', label: '교육과정' },
+  { href: '/diagnosis', label: '온라인 진단' },
+  { href: '/admissions', label: '입학 안내' },
+] as const;
+
+/** 캠페인 — 패널 안 */
 export const MENU = [
   { href: '/the-question', label: '첫 질문' },
   { href: '/the-index', label: '나의 INDEX' },
   { href: '/the-world', label: '세계' },
 ] as const;
 
-/** THE HOUSE — 메뉴 오버레이의 기관 층 */
+/** THE HOUSE — 패널 안 */
 export const HOUSE_MENU = [
+  { href: '/start', label: '시작하기' },
   { href: '/programs', label: '교육과정' },
   { href: '/forum', label: 'THE TOTAL FORUM' },
+  { href: '/diagnosis', label: '온라인 진단' },
   { href: '/admissions', label: '입학 안내' },
   { href: '/about', label: '소개' },
+  { href: '/notices', label: '공지' },
 ] as const;
 
-/** 바닥 — 오버레이에 없는 진단 · 공지까지 */
-export const FOOT_MENU = [...HOUSE_MENU, { href: '/diagnosis', label: '온라인 진단' }, { href: '/notices', label: '공지' }] as const;
+/** 정체성 — 홈 첫 화면과 /start */
+export const IDENTITY = ['학업의 현실을 정확히 다루며,', '한 사람의 방향을 함께 설계하는 교육.'];
 
-/** 정체성 한 줄 — 홈 첫 화면과 /start */
-export const IDENTITY = ['AI 시대의 개인화 교육.', '더 넓은 세계를 보고,', '자신만의 방향을 발견하는 곳.'];
+/** 학생 / 부모 입구 — 짧은 보조 문구와 함께 */
+export const DOORS = [
+  { href: '/start/student', label: '나는 학생입니다', sub: '나에게 맞는 시작을 찾습니다' },
+  { href: '/start/parent', label: '나는 부모입니다', sub: '자녀에게 필요한 다음을 함께 봅니다' },
+] as const;
 
 export const HERO = ['당신은 정말', '당신을 위한 공부를', '하고 있나요?'];
 

@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CHOICES, START } from '@/lib/entry';
+import { START } from '@/lib/entry';
 
 /*
- * /start/student · /start/parent — 두 번째 화면.
- *   한 화면: 이미지 띠 → 질문 → 짧은 설명 → [나의/자녀의 시작 찾기]
- *   한 번 더 내리면: 세 가지 선택(ACADEMIC 개인진단 · FORUM 지원 진단 · 입학 안내).
+ * /start/student · /start/parent — 완전히 다른 두 입구.
+ *   구도: 사진 | 큰 질문 + 짧은 설명 + (세로 구분선) 주 CTA + 보조 선택지
+ *   학생 → 나의 INDEX(약 7분) / 부모 → 자녀의 학습 방향(약 5분). 보조 선택지도 서로 다르다.
  */
 export function StartPath({ who }: { who: keyof typeof START }) {
   const s = START[who];
@@ -13,47 +13,50 @@ export function StartPath({ who }: { who: keyof typeof START }) {
     <main id="main" className="sp">
       <section className="sp-screen" aria-labelledby="sp-title">
         <figure className="sp-img">
-          <Image src={s.img} fill priority sizes="(max-width: 719px) 100vw, 50vw" alt={s.alt} />
+          <Image src={s.img} fill priority sizes="(max-width: 719px) 100vw, 46vw" alt={s.alt} />
         </figure>
         <div className="sp-body">
-          <p className="ch-tag ch-tag-signal">{s.tag}</p>
+          <p className="sp-loc">
+            <Link href="/start">시작하기</Link> <span aria-hidden="true">/</span> {s.who}
+          </p>
           <h1 className="sp-title" id="sp-title">
             {s.title.map((l) => (
               <span key={l}>{l}</span>
             ))}
           </h1>
-          <p className="sp-text">
-            {s.body.map((l) => (
-              <span key={l}>{l}</span>
+          <div className="sp-rule">
+            <p className="sp-text">
+              {s.body.map((l) => (
+                <span key={l}>{l}</span>
+              ))}
+            </p>
+            <Link className="cta cta-solid sp-main" href={s.main.href}>
+              <span className="door-text">
+                <span className="door-label">{s.main.label}</span>
+                <span className="door-sub">{s.main.meta}</span>
+              </span>
+              <span className="door-arrow" aria-hidden="true">
+                →
+              </span>
+            </Link>
+          </div>
+          <ul className="sp-list" aria-label="다른 시작">
+            {s.more.map((c) => (
+              <li key={c.href}>
+                <Link href={c.href}>
+                  <span className="sp-label">{c.label}</span>
+                  <span className="sp-meta">{c.meta}</span>
+                  <span className="sp-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
+              </li>
             ))}
+          </ul>
+          <p className="sp-other">
+            <Link href={s.other.href}>{s.other.label} →</Link>
           </p>
-          <Link className="cta cta-solid sp-cta" href="/diagnosis">
-            {s.cta} <span aria-hidden="true">→</span>
-          </Link>
         </div>
-      </section>
-
-      <section className="sp-choose" id="choose" aria-labelledby="choose-title">
-        <h2 className="sp-choose-title" id="choose-title">
-          어디서부터 시작할까요?
-        </h2>
-        <ul className="sp-list">
-          {CHOICES.map((c) => (
-            <li key={c.href}>
-              <Link href={c.href}>
-                <span className="sp-label">{c.label}</span>
-                <span className="sp-meta">{c.meta}</span>
-                <span className="sp-arrow" aria-hidden="true">
-                  →
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <p className="sp-other">
-          <Link href={s.other.href}>{s.other.label} →</Link>
-          <Link href="/start">처음으로</Link>
-        </p>
       </section>
     </main>
   );

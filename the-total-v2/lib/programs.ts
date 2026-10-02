@@ -7,6 +7,8 @@ import type { CourseId } from '@/lib/schedule';
 export type Program = {
   id: CourseId;
   name: string;
+  /** 홈 · 목록의 한 줄 */
+  tagline: string;
   line: [string, string];
   grades: string;
   start: string;
@@ -21,6 +23,7 @@ export const PROGRAMS: Program[] = [
   {
     id: 'elementary',
     name: '초등과정',
+    tagline: '관찰하고 말하는 힘의 기초',
     line: ['공부를 오래 이어갈 습관과', '생각의 기초를 만듭니다.'],
     grades: '초등학교 1–6학년',
     start: '온라인 개인진단 또는 입학시험',
@@ -33,6 +36,7 @@ export const PROGRAMS: Program[] = [
   {
     id: 'middle',
     name: '중등과정',
+    tagline: '성적과 사고가 갈라지지 않도록 설계하는 시기',
     line: ['내신과 교과 이해를 바로 세우고,', '공부 방식을 다시 설계합니다.'],
     grades: '중학교 1–3학년',
     start: '온라인 개인진단 또는 입학시험',
@@ -45,6 +49,7 @@ export const PROGRAMS: Program[] = [
   {
     id: 'high',
     name: '고등과정',
+    tagline: '입시의 현실과 이후의 방향을 함께 다루는 과정',
     line: ['대입의 현실을 기준으로', '과목별 전략과 우선순위를 설계합니다.'],
     grades: '고등학교 1–3학년',
     start: '온라인 개인진단 또는 입학시험',

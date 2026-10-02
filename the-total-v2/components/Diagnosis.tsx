@@ -330,7 +330,7 @@ export function Diagnosis({ onExit }: { onExit?: () => void }) {
                 입학 안내 요청하기
               </Link>
               {course && (
-                <Link className="text-link" href={`/programs#${course}`}>
+                <Link className="text-link" href={`/programs/${course}`}>
                   {COURSES[course].label} 보기 →
                 </Link>
               )}

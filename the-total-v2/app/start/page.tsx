@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Doors } from '@/components/Doors';
 import { HERO, IDENTITY } from '@/lib/copy';
 
 export const metadata: Metadata = { title: '시작하기' };
 
 /*
  * /start — 포스터 QR 이 여는 곳. 휴대폰 우선, 한 화면에서 끝난다.
- * 질문 → 정체성 → 학생 / 부모. 캠페인 · 컬렉션 · 여러 이미지는 넣지 않는다.
+ * 질문 → 정체성 → 학생 / 부모. 캠페인으로 빠지는 링크(첫 질문으로)는 두지 않는다.
  */
 export default function Start() {
   return (
@@ -33,14 +34,7 @@ export default function Start() {
               <span key={l}>{l}</span>
             ))}
           </p>
-          <div className="st-cta">
-            <Link className="cta cta-solid" href="/start/student">
-              나는 학생입니다 <span aria-hidden="true">→</span>
-            </Link>
-            <Link className="cta cta-line" href="/start/parent">
-              나는 부모입니다 <span aria-hidden="true">→</span>
-            </Link>
-          </div>
+          <Doors className="st-cta" />
           <Link className="st-skip" href="/admissions">
             입학 안내 바로 보기
           </Link>
