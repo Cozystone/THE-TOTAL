@@ -272,6 +272,18 @@ video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
+}
+
+/* 휴대폰 브라우저의 기본 재생 버튼 · 컨트롤을 숨긴다 — 자동 재생이 막혀도 정지 이미지로만 보인다 */
+.film::-webkit-media-controls,
+.film::-webkit-media-controls-panel,
+.film::-webkit-media-controls-overlay-play-button,
+.film::-webkit-media-controls-start-playback-button,
+.film::-webkit-media-controls-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0 !important;
 }
 
 .hero-film {
