@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Film } from '@/components/Film';
-import { CHAPTERS, CLOSE, COLLECTION, HERO, RESEARCH, SITE } from '@/lib/copy';
+import { CHAPTERS, CLOSE, COLLECTION, HERO, OPEN, RESEARCH, SITE } from '@/lib/copy';
 
 /*
  * S.01 — THE FIRST QUESTION. 홈은 하나의 캠페인.
  *   첫 장면(무음 영상, 21:9) → 01 전체 화면 영상(어둠) → 02 좁은 세로 사진 + 여백(오프화이트)
  *   → 03 흰 바탕의 짧은 문장(시그널 레드) → 04 리서치 이미지 여러 장 + 작은 캡션(검정)
- *   → 컬렉션 세 오브제(오프화이트) → 맺음.
+ *   → 열림(보조 문장) → 컬렉션 세 오브제(오프화이트) → 맺음(산파술).
  * 장면마다 비율 · 밝기 · 글자 위치가 다르다. 문장은 장면의 제목.
  */
 export default function Campaign() {
@@ -106,6 +106,17 @@ export default function Campaign() {
         </ul>
       </section>
 
+      {/* 열림 — 보조 문장 */}
+      <section className="open" aria-label="열림">
+        <p className="open-text">
+          {OPEN.map((l, i) => (
+            <span key={l} className={`ol ol-${i + 1}`} data-reveal>
+              {l}
+            </span>
+          ))}
+        </p>
+      </section>
+
       {/* 컬렉션 */}
       <section className="collection" aria-labelledby="collection-title">
         <div className="collection-head">
@@ -138,9 +149,9 @@ export default function Campaign() {
             <span key={l}>{l}</span>
           ))}
         </p>
-        <a className="closing-link" href={`${SITE.academy}/diagnosis`}>
-          첫 질문에서 시작하기 <span aria-hidden="true">↗</span>
-        </a>
+        <Link className="closing-link" href="/the-question">
+          첫 질문으로 <span aria-hidden="true">→</span>
+        </Link>
       </section>
     </main>
   );

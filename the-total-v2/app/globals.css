@@ -492,6 +492,72 @@ video {
   margin-top: -4vh;
 }
 
+/* ── 열림 — 보조 문장. 밝은 바탕, 넓게 엇갈린 네 줄 ── */
+
+.open {
+  padding: clamp(120px, 20vh, 240px) var(--m);
+  background: var(--white);
+}
+
+.open-text {
+  font-size: clamp(30px, 4.2vw, 72px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+}
+
+.ol {
+  display: block;
+}
+
+.ol-2 {
+  padding-left: 12vw;
+}
+
+.ol-3 {
+  margin-top: 0.9em;
+  padding-left: 34vw;
+  color: var(--signal);
+}
+
+.ol-4 {
+  padding-left: 40vw;
+}
+
+/* ── 목표지향 / 자기지향 ── */
+
+.orient {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px var(--m);
+  padding: clamp(96px, 14vh, 160px) var(--m) 0;
+}
+
+.orient > div {
+  padding-top: 18px;
+  border-top: 1px solid var(--ink);
+}
+
+.orient-2 .ch-tag {
+  color: var(--signal);
+}
+
+.orient-1 {
+  color: #6a6863;
+}
+
+.orient-text {
+  margin-top: 20px;
+  font-size: clamp(22px, 2.2vw, 36px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.035em;
+}
+
+.orient-text span {
+  display: block;
+}
+
 /* ── 컬렉션 ── */
 
 .collection {
@@ -893,6 +959,19 @@ video {
 }
 
 @media (max-width: 719px) {
+  .ol-2 {
+    padding-left: 8vw;
+  }
+
+  .ol-3,
+  .ol-4 {
+    padding-left: 16vw;
+  }
+
+  .orient {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .hero-film {
     object-position: 22% 50%;
   }

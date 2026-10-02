@@ -8,7 +8,7 @@ import { MENU, SITE } from '@/lib/copy';
 
 /*
  * 머리 — 고정, difference 블렌드(사진 위에서도 종이 위에서도 읽힌다).
- * 메뉴(임시): S.01 · THE QUESTION · THE INDEX · THE WORLD · ACADEMY ↗. 1023px 이하는 메뉴 버튼 → 전체 화면.
+ * 메뉴(임시): S.01 · THE QUESTION · THE INDEX · THE WORLD. 1023px 이하는 메뉴 버튼 → 전체 화면.
  */
 export function Header() {
   const path = usePathname();
@@ -43,9 +43,6 @@ export function Header() {
               {m.label}
             </Link>
           ))}
-          <a href={SITE.academy}>
-            ACADEMY <span aria-hidden="true">↗</span>
-          </a>
         </nav>
         <button
           ref={opener}
@@ -73,9 +70,6 @@ export function Header() {
                 {m.label}
               </Link>
             ))}
-            <a href={SITE.academy}>
-              ACADEMY <span aria-hidden="true">↗</span>
-            </a>
           </nav>
           <p className="sheet-foot">{SITE.season}</p>
         </div>

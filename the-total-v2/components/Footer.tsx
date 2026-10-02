@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { MENU, SITE } from '@/lib/copy';
 
-/* 바닥 — 시즌 표기, 메뉴, 운영 사이트로 가는 길. */
+/* 바닥 — 시즌 표기, 메뉴, 위치. */
 export function Footer() {
   return (
     <footer className="foot">
@@ -15,9 +15,6 @@ export function Footer() {
               {m.label}
             </Link>
           ))}
-          <a href={SITE.academy}>
-            ACADEMY — 진단 · 입학시험 · 공지 <span aria-hidden="true">↗</span>
-          </a>
         </nav>
         <span className="foot-place">{SITE.place}</span>
       </div>

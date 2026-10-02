@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { COLLECTION, SITE } from '@/lib/copy';
+import { COLLECTION, ORIENTATION } from '@/lib/copy';
 
 /*
  * 컬렉션 오브제 한 편 — 룩북 한 장처럼.
- *  큰 사진(왼쪽, 화면 높이) | 이름 · 한 줄 · 본문 · 실제 다음 걸음(ACADEMY)
- *  → 두 번째 사진과 (THE WORLD 는) 편집 목록 → 다음 오브제.
+ *  큰 사진(왼쪽, 화면 높이) | 이름 · 한 줄 · 본문
+ *  → (THE QUESTION 은) 목표지향 / 자기지향 → 두 번째 사진과 (THE WORLD 는) 편집 목록 → 다음 오브제.
  */
 export function ObjectPage({ slug }: { slug: (typeof COLLECTION)[number]['slug'] }) {
   const i = COLLECTION.findIndex((c) => c.slug === slug);
@@ -31,11 +31,23 @@ export function ObjectPage({ slug }: { slug: (typeof COLLECTION)[number]['slug']
               {b}
             </p>
           ))}
-          <a className="obj-cta" href={`${SITE.academy}${c.cta.href}`}>
-            {c.cta.label} <span aria-hidden="true">↗</span>
-          </a>
         </div>
       </section>
+
+      {slug === 'the-question' && (
+        <section className="orient" aria-label="두 가지 삶">
+          {ORIENTATION.map((o, i) => (
+            <div key={o.key} className={`orient-${i + 1}`} data-reveal>
+              <p className="ch-tag">{o.key}</p>
+              <p className="orient-text">
+                {o.text.map((t) => (
+                  <span key={t}>{t}</span>
+                ))}
+              </p>
+            </div>
+          ))}
+        </section>
+      )}
 
       <section className="obj-second" aria-label="두 번째 장면">
         <figure data-reveal>
