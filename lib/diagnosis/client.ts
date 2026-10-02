@@ -1,7 +1,7 @@
-import type { DiagnosisInput, DiagnosisResponse } from '@/lib/diagnosis/schema';
+import type { DiagnosisPayload, DiagnosisResponse } from '@/lib/diagnosis/schema';
 
 /** 화면 → API. 실패하면 'not_connected' 로 다룬다(결과를 지어내지 않는다). */
-export async function submitDiagnosis(input: DiagnosisInput): Promise<DiagnosisResponse> {
+export async function submitDiagnosis(input: DiagnosisPayload): Promise<DiagnosisResponse> {
   try {
     const res = await fetch('/api/diagnosis', {
       method: 'POST',

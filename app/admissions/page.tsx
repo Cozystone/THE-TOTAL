@@ -50,7 +50,7 @@ export default function Admissions() {
           ))}
         </ol>
         <div className="actions">
-          <Link className="button" href="/diagnosis">
+          <Link className="button" href="/diagnosis?track=academic">
             온라인 진단 시작하기
           </Link>
         </div>
@@ -65,7 +65,7 @@ export default function Admissions() {
             원하는 과정의 회차 일정과 응시 방법을 이메일로 안내합니다. 일정이 준비 중인 회차는 일정 문의로 남겨 주세요.
           </p>
           <Notify
-            topics={['초등과정 응시 안내', '중등과정 응시 안내', '고등과정 응시 안내', '일정 문의']}
+            topics={['초등과정 응시 안내', '중등과정 응시 안내', '고등과정 응시 안내', 'FORUM 지원 안내', '일정 문의']}
             submitLabel="응시 안내 받기"
           />
         </div>

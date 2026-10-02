@@ -1701,13 +1701,366 @@ a.list-title:hover {
   color: var(--mute);
 }
 
-/* ── 태블릿 ── */
+/* ── THE TOTAL FORUM ── */
 
-@media (max-width: 1023px) {
-  :root {
-    --head-h: 64px;
-  }
+.forum-axes {
+  margin-left: 10px;
+  color: var(--mute);
+  font-weight: 500;
+}
 
+.forum-hero .actions {
+  margin-top: 32px;
+}
+
+/* 네 가지 과정 — 세로 목록: 번호 · 이름 | 제목 | 설명 */
+.tracks {
+  border-top: 1px solid var(--rule);
+}
+
+.tracks li {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 4fr) minmax(0, 7fr);
+  align-items: baseline;
+  gap: 8px var(--gap);
+  padding-block: 28px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.track-key {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.track-name {
+  font-family: var(--latin);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.tracks h3 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.track-text {
+  color: var(--char);
+  line-height: 1.85;
+}
+
+/* 운영 방식 — 다섯 단계, 화살표로 이어짐 */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 24px clamp(20px, 2.4vw, 36px);
+}
+
+.flow li {
+  position: relative;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink);
+}
+
+.flow li + li::before {
+  content: '→';
+  position: absolute;
+  top: -14px;
+  left: calc(clamp(20px, 2.4vw, 36px) / -2 - 7px);
+  padding: 0 2px;
+  background: var(--paper);
+  font-size: 15px;
+  line-height: 28px;
+}
+
+.flow h3 {
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.flow p {
+  margin-top: 8px;
+  color: var(--char);
+  font-size: 14.5px;
+  line-height: 1.8;
+}
+
+.video {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.defs {
+  border-top: 1px solid var(--rule);
+}
+
+.defs > div {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 16px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.defs dt {
+  font-weight: 700;
+}
+
+.defs dd {
+  color: var(--char);
+}
+
+.statement-quiet {
+  max-width: 880px;
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.body-gap + .body-gap {
+  margin-top: 14px;
+}
+
+.actions-gap {
+  margin-top: 24px;
+}
+
+/* 홈의 FORUM 구획 — 위아래 굵은 선으로 묶은 하나의 강한 덩어리 */
+.forum-band {
+  padding: clamp(32px, 4vw, 56px) 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+.forum-band-kicker {
+  font-family: var(--latin);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.forum-band-kicker .forum-axes {
+  font-family: var(--font);
+  letter-spacing: 0;
+}
+
+.forum-band .split {
+  margin-top: 24px;
+}
+
+.forum-band-title {
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.035em;
+}
+
+.forum-keys {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  margin: 24px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.forum-keys li {
+  padding-block: 10px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--char);
+  font-size: 14.5px;
+}
+
+.forum-keys span {
+  display: inline-block;
+  min-width: 64px;
+  color: var(--ink);
+  font-family: var(--latin);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* 교육과정 — 두 분기 */
+.branches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(40px, 5vw, 64px);
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.branch {
+  padding: 28px 0 32px;
+}
+
+.branch:first-child {
+  padding-right: var(--gap);
+}
+
+.branch + .branch {
+  padding-left: var(--gap);
+  border-left: 1px solid var(--line);
+}
+
+.branch-kicker {
+  font-family: var(--latin);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.branch-title {
+  margin: 10px 0 12px;
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.branch .tabs,
+.branch .actions {
+  margin-top: 20px;
+}
+
+.branch-label {
+  margin-top: clamp(56px, 6vw, 88px);
+  font-family: var(--latin);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  scroll-margin-top: calc(var(--head-h) + 24px);
+}
+
+.branch-label .muted {
+  font-family: var(--font);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.branch-label + .program {
+  margin-top: 20px;
+}
+
+/* 온라인 진단 — 경로 선택 */
+.tracks-choice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.tracks-choice a {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding: 28px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  transition: border-color 300ms var(--ease);
+}
+
+.tracks-choice a:hover {
+  border-color: var(--ink);
+}
+
+.choice-kicker {
+  color: var(--mute);
+  font-family: var(--latin);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.choice-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.choice-text {
+  color: var(--char);
+  line-height: 1.75;
+}
+
+.choice-meta {
+  margin-top: 8px;
+  color: var(--mute);
+  font-size: 13.5px;
+}
+
+.choice-go {
+  margin-top: auto;
+  padding-top: 16px;
+  font-weight: 600;
+}
+
+.choice-go span {
+  display: inline-block;
+  transition: transform 500ms var(--ease);
+}
+
+.tracks-choice a:hover .choice-go span {
+  transform: translateX(4px);
+}
+
+/* 서술형 문항 */
+.field textarea {
+  width: 100%;
+  min-height: 168px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.75;
+  resize: vertical;
+}
+
+.field textarea:hover {
+  border-color: var(--faint);
+}
+
+.field textarea:focus-visible {
+  outline-offset: 0;
+  border-color: var(--ink);
+}
+
+.option strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.option em {
+  display: block;
+  margin-top: 2px;
+  color: var(--char);
+  font-size: 14.5px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.option span:has(strong) {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.chip[data-disabled] span {
+  color: var(--faint);
+  cursor: not-allowed;
+}
+
+.summary-text {
+  white-space: pre-wrap;
+}
+
+/* ── 메뉴가 여섯 개라 1179px 이하에서는 햄버거로 ── */
+
+@media (max-width: 1179px) {
   .menu {
     display: none;
   }
@@ -1718,6 +2071,14 @@ a.list-title:hover {
 
   .hamburger {
     display: block;
+  }
+}
+
+/* ── 태블릿 ── */
+
+@media (max-width: 1023px) {
+  :root {
+    --head-h: 64px;
   }
 
   .wordmark {
@@ -1744,6 +2105,36 @@ a.list-title:hover {
 
   .program {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tracks li {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+
+  .track-text {
+    grid-column: 2;
+  }
+
+  .flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .flow li + li::before {
+    content: none;
+  }
+
+  .branches {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .branch:first-child {
+    padding-right: 0;
+  }
+
+  .branch + .branch {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
   }
 }
 
@@ -1809,6 +2200,35 @@ a.list-title:hover {
   .filter button {
     flex: 1;
     min-width: 0;
+  }
+
+  .tracks li,
+  .flow,
+  .tracks-choice,
+  .forum-keys,
+  .defs > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .track-text {
+    grid-column: 1;
+  }
+
+  .tracks li {
+    gap: 6px;
+  }
+
+  .defs > div {
+    gap: 2px;
+  }
+
+  .track-text br,
+  .forum-band .body br {
+    display: none;
+  }
+
+  .tracks-choice a {
+    padding: 22px;
   }
 }
 

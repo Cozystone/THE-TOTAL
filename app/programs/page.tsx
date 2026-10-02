@@ -36,17 +36,40 @@ export default function Programs() {
         <p className="eyebrow">교육과정</p>
         <h1 className="page-title">같은 학년이라도, 출발점은 다릅니다.</h1>
         <p className="lead">
-          세 과정은 모두 온라인 개인진단과 입학시험에서 시작합니다. 과정의 큰 틀은 같아도 수업의 순서와 속도, 분량은 학생마다
-          다르게 설계됩니다.
+          THE TOTAL의 교육은 두 분기로 이루어집니다. 학업 성취와 입시를 다루는 ACADEMIC, 사고와 표현과 방향을 다루는
+          FORUM입니다.
         </p>
-        <nav className="tabs" aria-label="과정 바로가기">
-          {PROGRAMS.map((p) => (
-            <a key={p.id} href={`#${p.id}`}>
-              {COURSES[p.id].label}
-            </a>
-          ))}
-        </nav>
       </header>
+
+      {/* 두 분기 */}
+      <section className="branches" aria-label="교육 분기">
+        <div className="branch">
+          <p className="branch-kicker">ACADEMIC</p>
+          <h2 className="branch-title">초등과정 / 중등과정 / 고등과정</h2>
+          <p className="body">학업 성취와 입시 전략을 진단과 입학시험에서 시작해 학생별 수업으로 설계합니다.</p>
+          <nav className="tabs" aria-label="학업과정 바로가기">
+            {PROGRAMS.map((p) => (
+              <a key={p.id} href={`#${p.id}`}>
+                {COURSES[p.id].label}
+              </a>
+            ))}
+          </nav>
+        </div>
+        <div className="branch">
+          <p className="branch-kicker">FORUM</p>
+          <h2 className="branch-title">사고 · 표현 · 방향</h2>
+          <p className="body">더 넓은 세계를 읽고, 자기 생각을 글과 말로 표현하며, 자신만의 작업을 완성하는 과정입니다.</p>
+          <div className="actions">
+            <Link className="text-link" href="/forum">
+              THE TOTAL FORUM 보기 <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <p className="branch-label" id="academic">
+        ACADEMIC <span className="muted">· 세 과정 모두 온라인 개인진단과 입학시험에서 시작하며, 수업의 순서와 속도, 분량은 학생마다 다르게 설계됩니다.</span>
+      </p>
 
       {PROGRAMS.map((p) => (
         <section key={p.id} className="block program" id={p.id} aria-labelledby={`${p.id}-title`}>
@@ -76,7 +99,7 @@ export default function Programs() {
             <div>
               <dt>다음 단계</dt>
               <dd className="actions">
-                <Link className="button button-sm" href="/diagnosis">
+                <Link className="button button-sm" href="/diagnosis?track=academic">
                   온라인 진단
                 </Link>
                 <Link className="text-link" href="/admissions#schedule">

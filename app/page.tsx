@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Schedule } from '@/components/Schedule';
+import { TRACKS } from '@/lib/forum';
 import { latestNotices, NOTICE_TYPES } from '@/lib/notices';
 import { COURSES, STATUS, formatDay, formatShort, nextSessions, statusOf, toKey } from '@/lib/schedule';
 import { seoulToday } from '@/lib/today';
@@ -9,7 +10,7 @@ export const revalidate = 3600;
 
 /*
  * 홈 — 10초 안에: 무슨 기관인지 · 어떤 과정을 하는지 · 어떻게 지원하는지.
- *   첫 화면(문장 · 설명 · 진단 시작 · 입학 일정 달력) → 방식 → 과정 → 온라인 개인진단 → 입학 안내
+ *   첫 화면(문장 · 설명 · 진단 시작 · 입학 일정 달력) → 방식 → 과정 → THE TOTAL FORUM → 온라인 개인진단 → 입학 안내
  */
 const STEPS = [
   { no: '01', title: '온라인 개인진단', text: '학년과 과목별 상태, 목표와 어려움, 선호하는 수업 방식을 확인합니다.' },
@@ -45,7 +46,7 @@ export default function Home() {
             설계합니다. 입시의 현실을 정확히 다루되, 학생을 성적표 하나로 설명하지 않습니다.
           </p>
           <div className="actions">
-            <Link className="button" href="/diagnosis">
+            <Link className="button" href="/diagnosis?track=academic">
               온라인 개인진단 시작하기
             </Link>
             <Link className="text-link" href="/admissions#schedule">
@@ -79,7 +80,7 @@ export default function Home() {
       {/* 과정 */}
       <section className="block" aria-labelledby="course-title">
         <div className="block-head">
-          <h2 id="course-title">과정</h2>
+          <h2 id="course-title">학업과정</h2>
           <Link className="text-link" href="/programs">
             교육과정 전체 <span aria-hidden="true">→</span>
           </Link>
@@ -99,6 +100,42 @@ export default function Home() {
         </ul>
       </section>
 
+      {/* THE TOTAL FORUM — 홈에 단 하나 */}
+      <section className="block forum-band" aria-labelledby="forum-home-title">
+        <p className="forum-band-kicker">
+          THE TOTAL FORUM <span className="forum-axes">사고 · 표현 · 방향</span>
+        </p>
+        <div className="split">
+          <h2 className="forum-band-title" id="forum-home-title">
+            성적 이후에도
+            <br />
+            남는 능력을 만듭니다.
+          </h2>
+          <div>
+            <p className="body">
+              AI가 만든 답을 판단하고,{' '}
+              <br />
+              자기 생각을 글과 말로 표현하며,{' '}
+              <br />
+              자신만의 작업으로 세상에 답하는 학생을 위한 과정.
+            </p>
+            <ul className="forum-keys" aria-label="네 가지 과정">
+              {TRACKS.map((t) => (
+                <li key={t.key}>
+                  <span>{t.key}</span>
+                  {t.title}
+                </li>
+              ))}
+            </ul>
+            <div className="actions">
+              <Link className="text-link" href="/forum">
+                FORUM 알아보기 <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 온라인 개인진단 */}
       <section className="block" aria-labelledby="dx-home-title">
         <div className="block-head">
@@ -112,7 +149,7 @@ export default function Home() {
               설계의 출발점이 됩니다. 학년 선택부터 응답 확인까지 약 5분이 걸립니다.
             </p>
             <div className="actions">
-              <Link className="button" href="/diagnosis">
+              <Link className="button" href="/diagnosis?track=academic">
                 진단 시작하기
               </Link>
             </div>

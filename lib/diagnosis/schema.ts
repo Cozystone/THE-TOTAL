@@ -79,3 +79,42 @@ export type DiagnosisResponse =
   | { status: 'not_connected' }
   | { status: 'received'; referenceId: string }
   | { status: 'analyzed'; referenceId: string; result: DiagnosisResult };
+
+/* ── FORUM 지원 진단 ──
+ * 시험이 아니라 자기 서술 중심. 정답 · 점수 없음.
+ * 자유 서술에는 이름 · 연락처 · 학교명을 쓰지 않도록 화면에서 안내한다.
+ */
+export const FORUM_FIELDS = [
+  '예술',
+  '브랜드',
+  '기술',
+  '돈과 경제',
+  '도시와 공간',
+  '알고리즘과 미디어',
+  '과학',
+  '사회와 제도',
+  '문학과 언어',
+  '몸과 스포츠',
+] as const;
+export const MAX_FIELDS = 3;
+
+export const FORUM_MODES = [
+  { id: 'write', label: '글', text: '생각을 문장으로 정리하고 다듬을 때 가장 분명해진다.' },
+  { id: 'speak', label: '말', text: '누군가와 이야기하고 부딪힐 때 생각이 자란다.' },
+  { id: 'make', label: '프로젝트', text: '무언가를 직접 만들어 볼 때 생각이 구체해진다.' },
+] as const;
+
+export const TEXT_MAX = 400;
+export const TEXT_MIN = 10;
+
+export type ForumInput = {
+  grade: Grade;
+  selfIntro: string;
+  fields: string[];
+  question: string;
+  want: string;
+  mode: (typeof FORUM_MODES)[number]['id'];
+};
+
+/** API 로 보내는 형태 — 경로(track)로 구분 */
+export type DiagnosisPayload = ({ track: 'academic' } & DiagnosisInput) | ({ track: 'forum' } & ForumInput);

@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { FOUNDER } from '@/lib/forum';
 
 export const metadata: Metadata = { title: '소개' };
 
 /*
  * 소개 — 첫 문장 · 교육 철학(교육철학 페이지를 여기로 통합) · J. LEE.
- * J. LEE: 이름만. 경력 · 실적 · 숫자를 만들지 않는다.
+ * 설립: Maestro Vin(Founder & Curator). 원장: J. LEE. 둘 다 경력 · 실적 · 숫자를 만들지 않는다.
  */
 const PRINCIPLES = [
   {
@@ -69,6 +70,30 @@ export default function About() {
         </div>
       </section>
 
+      <section className="block" aria-labelledby="founder-title">
+        <div className="block-head">
+          <h2 id="founder-title">설립</h2>
+        </div>
+        <div className="split director">
+          <div>
+            <p className="director-name">{FOUNDER.name}</p>
+            <p className="muted">{FOUNDER.title}</p>
+          </div>
+          <div>
+            {FOUNDER.text.map((t) => (
+              <p key={t} className="body body-gap">
+                {t}
+              </p>
+            ))}
+            <div className="actions actions-gap">
+              <Link className="text-link" href="/forum">
+                THE TOTAL FORUM <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="block" aria-labelledby="director-title">
         <div className="block-head">
           <h2 id="director-title">원장</h2>
@@ -94,7 +119,7 @@ export default function About() {
       <section className="block block-cta" aria-label="다음 단계">
         <p>THE TOTAL의 수업은 진단에서 시작됩니다.</p>
         <div className="actions">
-          <Link className="button" href="/diagnosis">
+          <Link className="button" href="/diagnosis?track=academic">
             온라인 개인진단 시작하기
           </Link>
           <Link className="text-link" href="/programs">

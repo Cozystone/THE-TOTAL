@@ -29,7 +29,7 @@ import { COURSES } from '@/lib/schedule';
 type Step = 'intro' | 'grade' | 'subjects' | 'goal' | 'difficulties' | 'style' | 'hours' | 'review' | 'done';
 const FLOW: Step[] = ['grade', 'subjects', 'goal', 'difficulties', 'style', 'hours', 'review'];
 const TITLES: Record<Step, string> = {
-  intro: '온라인 개인진단',
+  intro: '학업과정 진단',
   grade: '학년을 선택해 주세요.',
   subjects: '과목별로 지금의 상태를 골라 주세요.',
   goal: '이번 학기 가장 중요한 목표는 무엇인가요?',
@@ -50,7 +50,7 @@ type Draft = Partial<Omit<DiagnosisInput, 'subjects' | 'difficulties'>> & {
   difficulties: string[];
 };
 
-export function Diagnosis() {
+export function Diagnosis({ onExit }: { onExit?: () => void }) {
   const [step, setStep] = useState<Step>('intro');
   const [consent, setConsent] = useState(false);
   const [draft, setDraft] = useState<Draft>({ subjects: {}, difficulties: [] });
@@ -96,7 +96,7 @@ export function Diagnosis() {
 
   const submit = async () => {
     setSending(true);
-    const res = await submitDiagnosis(draft as DiagnosisInput);
+    const res = await submitDiagnosis({ track: 'academic', ...(draft as DiagnosisInput) });
     setResponse(res);
     setSending(false);
     go('done');
@@ -173,6 +173,11 @@ export function Diagnosis() {
               <button type="button" className="button" disabled={!consent} onClick={() => go('grade')}>
                 진단 시작하기
               </button>
+              {onExit && (
+                <button type="button" className="text-button" onClick={onExit}>
+                  ← 진단 선택으로
+                </button>
+              )}
             </div>
           </div>
         )}
