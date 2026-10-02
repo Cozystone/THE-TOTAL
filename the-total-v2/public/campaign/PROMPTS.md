@@ -29,3 +29,30 @@
 
 Higgsfield 가 영상 프롬프트를 자체 프리셋("IN THE DARK")으로 바꾸자고 제안했으나 거절하고 그대로 생성.
 비용: 정지 13장 × 2.75 = 35.75 크레딧, 영상 2 × 72 = 144 크레딧.
+
+
+---
+
+## 2차 — 밝은 세트로 교체 (2026-10-02)
+새 명세가 "검정 · 회색 반복의 우울함", "외로운 학생" 을 금지하고 열림 · 호기심 · 발견 · 가능성을 요구 → 밤 이미지 대부분을 교체.
+교체: hero · desire · escalator · question · question-alt (같은 파일명), 리서치 r-desk · r-corridor · r-paper → r-atlas · r-museum · r-making(+ r-crosswalk 밝은 판).
+유지: index · index-alt · world · world-alt. 1차 원본은 `raw/old/`.
+
+| 파일 | 자리 | 비율 | job id | 프롬프트 |
+|---|---|---|---|---|
+| hero.jpg | 첫 화면 | 21:9 | 41e92a57-7171-495c-a202-a115fca8c2a4 | Wide cinematic campaign photograph, early morning. A quiet upper-floor study room in Seoul flooded with low golden sunlight. In the left third, a teenage student seen from behind pushes open a tall window; a sheer white curtain lifts in the breeze. Beyond: a bright, clear city with green hills on the horizon and a pale blue sky. Large calm area of bright sky and soft wall in the right half for typography. Feeling of opening, curiosity, possibility. Documentary realism meets high-fashion campaign, natural warm grading, soft halation, 35mm film grain. No face visible, no readable text, no logos. |
+| desire.jpg | 01 BORROWED DESIRES | 16:9 | ac2e2743-b2fa-4820-9d13-53b4ca7a11d4 | Cinematic campaign photograph, bright afternoon on a busy Seoul shopping street. A young person's hand rests against a large shop window; in the glass, colorful reflections of passing people, screens and signs layer over the products inside, all blurred and illegible, so it is unclear what is chosen and what is shown. Vivid but restrained colors, sunlight flares, shallow depth of field. Documentary meets fashion editorial, 35mm film grain. No face, no readable text, no logos. |
+| escalator.jpg | 02 THE WORLD IS MOVING | 9:16 | a2f26306-1163-4337-8706-6d2df6878c75 | Tall narrow campaign photograph, bright morning. A student seen from behind rides a long escalator up through a sunlit glass atrium toward a big open sky; other people around are soft motion blur. Light, airy, clean blues and whites with warm sun patches. Strong vertical composition with lots of sky above. Documentary realism with high-fashion composition, 35mm film grain. No faces, no readable signs, no logos. |
+| r-atlas.jpg | 04 리서치 | 3:4 | 1327da67-05c4-48c2-931b-8cc08c49773f | Overhead editorial still life on a sunlit wooden table by a window: an open atlas with colorful map pages, colored pencils, a magnifying glass, a few postcards of distant places, a red pencil, a cup of tea, crisp morning shadows. Curious, inviting, bright. 35mm film, fine grain. No readable text, no logos. |
+| r-crosswalk.jpg | 04 리서치 | 1:1 | 8130f38b-c2e6-4e7f-8141-5edce8e959d0 | Top-down photograph of a wide city crosswalk in Seoul on a bright day after rain, pedestrians as small figures crossing in many directions, several colorful umbrellas (yellow, blue, one red), wet asphalt shining with sky reflections. Graphic, joyful, documentary. 35mm film grain. No readable text, no logos. |
+| r-museum.jpg | 04 리서치 | 3:4 | 7835c2c9-8541-4b89-ae10-6433408435ff | Bright museum gallery with tall white walls and skylight. Two teenagers seen from behind stand close to a very large abstract color-field painting (original, made of broad fields of deep blue, orange and a thin red stripe), one pointing at a detail while the other leans in, curious. Daylight, calm, editorial. 35mm film grain. No faces, no readable text, no logos, no recognizable existing artwork. |
+| r-making.jpg | 04 리서치 | 3:4 | 12110717-9b6e-47d3-a595-4c9c8b6692f0 | Close-up of young hands building a small architectural model from white card, cardboard and a strip of red tape on a sunny worktable, cutting mat, scissors, sketches nearby, natural window light, shallow depth of field. Making, discovery, focus. Editorial, 35mm film grain. No face, no readable text, no logos. |
+| question.jpg | THE QUESTION | 3:4 | e096fa0f-03c5-46ee-9e39-e9494a149b69 | Fashion-campaign photograph: a teenage student seen from behind stands in a wide open doorway at the end of a cool, shaded school corridor, looking out into a bright sunlit courtyard full of green trees and sky. The doorway frames intense daylight; the student is about to step out. Feeling of possibility and choice, not loneliness. Restrained, cinematic. 35mm film grain. No face visible, no readable text, no logos. |
+| question-alt.jpg | THE QUESTION(호버) | 3:4 | dc92a14c-be19-46a5-b08a-11bfe9e85d59 | Still life photograph: an open blank notebook and a pencil on a windowsill in morning sun, the window wide open to a soft blue sky, a light curtain moving, a small red bookmark ribbon across the page. Fresh, hopeful, quiet. 35mm film grain. No people, no readable text, no logos. |
+
+| 영상 | 시작 이미지 | job id | 프롬프트 |
+|---|---|---|---|
+| hero.mp4 | hero (41e92a57…) | cc79649d-f09e-4030-8934-b2c790a3e82a | Locked-off camera. The student slowly pushes the window further open; the sheer white curtain lifts and billows gently in the morning breeze; sunlight flickers softly across the wall; far city and hills stay calm. Gentle, hopeful, quiet. No camera movement, no cuts. (21:9, 6s, 1080p, 무음) |
+| desire.mp4 | desire (ac2e2743…) | 6c156cc1-2166-46ec-ae02-1d8b682db596 | The hand stays resting on the shop window. In the glass, colorful reflections of passing people and glowing screens slide past and overlap with the products inside, sunlight flares drift. Very slow, almost still camera. Bright afternoon, no cuts. (16:9, 6s, 1080p, 무음) |
+
+비용(2차): 정지 9 × 2.75 = 24.75, 영상 2 × 72 = 144 크레딧.

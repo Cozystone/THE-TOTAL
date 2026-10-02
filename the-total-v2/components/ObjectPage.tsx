@@ -4,7 +4,7 @@ import { COLLECTION, ORIENTATION } from '@/lib/copy';
 
 /*
  * 컬렉션 오브제 한 편 — 룩북 한 장처럼.
- *  큰 사진(왼쪽, 화면 높이) | 이름 · 한 줄 · 본문
+ *  큰 사진(왼쪽, 화면 높이) | 이름 · 한 줄 · 본문 · THE HOUSE 의 실제 다음 걸음
  *  → (THE QUESTION 은) 목표지향 / 자기지향 → 두 번째 사진과 (THE WORLD 는) 편집 목록 → 다음 오브제.
  */
 export function ObjectPage({ slug }: { slug: (typeof COLLECTION)[number]['slug'] }) {
@@ -31,6 +31,9 @@ export function ObjectPage({ slug }: { slug: (typeof COLLECTION)[number]['slug']
               {b}
             </p>
           ))}
+          <Link className="obj-cta" href={c.cta.href}>
+            {c.cta.label} <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 

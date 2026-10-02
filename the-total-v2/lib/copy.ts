@@ -10,12 +10,22 @@ export const SITE = {
   place: '서울 · 대치',
 };
 
-/** 메뉴 — 명세 4절이 잘려 도착해 임시안. 시즌 · 세 컬렉션. */
+/** 캠페인 — 머리에 늘 보이는 층 */
 export const MENU = [
   { href: '/', label: 'S.01' },
   { href: '/the-question', label: 'THE QUESTION' },
   { href: '/the-index', label: 'THE INDEX' },
   { href: '/the-world', label: 'THE WORLD' },
+] as const;
+
+/** THE HOUSE — 세계에 들어온 뒤 발견되는, 실제로 동작하는 기관의 층 */
+export const HOUSE_MENU = [
+  { href: '/about', label: 'ABOUT', ko: '소개' },
+  { href: '/programs', label: 'PROGRAMS', ko: '교육과정' },
+  { href: '/forum', label: 'FORUM', ko: 'THE TOTAL FORUM' },
+  { href: '/diagnosis', label: 'DIAGNOSIS', ko: '온라인 진단' },
+  { href: '/admissions', label: 'ADMISSIONS', ko: '입학 안내' },
+  { href: '/notices', label: 'NOTICES', ko: '공지' },
 ] as const;
 
 export const HERO = ['당신은 정말', '당신을 위한 공부를', '하고 있나요?'];
@@ -29,10 +39,10 @@ export const CHAPTERS = {
 
 /** 04 의 리서치 이미지 — 작은 캡션 */
 export const RESEARCH = [
-  { src: '/campaign/r-desk.jpg', w: 896, h: 1200, cap: 'R/01 — 밤 10시의 책상' },
-  { src: '/campaign/r-crosswalk.jpg', w: 1200, h: 1200, cap: 'R/02 — 같은 시간, 다른 방향' },
-  { src: '/campaign/r-corridor.jpg', w: 896, h: 1200, cap: 'R/03 — 마지막 교실의 불빛' },
-  { src: '/campaign/r-paper.jpg', w: 1400, h: 1045, cap: 'R/04 — 다시 쓰기 위해 찢는 종이' },
+  { src: '/campaign/r-atlas.jpg', w: 896, h: 1200, cap: 'R/01 — 아직 가보지 않은 곳의 지도', alt: '햇빛 드는 책상 위에 펼쳐진 지도책과 돋보기, 색연필, 먼 곳의 엽서들' },
+  { src: '/campaign/r-crosswalk.jpg', w: 1200, h: 1200, cap: 'R/02 — 같은 시간, 다른 방향', alt: '비 갠 낮, 여러 방향으로 건너는 사람들과 색색의 우산을 위에서 내려다본 횡단보도' },
+  { src: '/campaign/r-museum.jpg', w: 896, h: 1200, cap: 'R/03 — 오래 보게 되는 것', alt: '밝은 전시실, 커다란 색면 그림 앞에서 한 곳을 가리키며 이야기하는 두 사람의 뒷모습' },
+  { src: '/campaign/r-making.jpg', w: 896, h: 1200, cap: 'R/04 — 생각을 손으로 만들기', alt: '햇빛 드는 작업대에서 흰 종이로 작은 건축 모형을 만드는 손' },
 ];
 
 /** 보조 문장 — 열림 */
@@ -60,12 +70,13 @@ export const COLLECTION = [
     no: 'I',
     name: 'THE QUESTION',
     line: '내 삶의 방향을 다시 묻는 첫 장면',
-    img: { src: '/campaign/question.jpg', alt: '푸른 저녁, 통유리창 앞에 서서 도시를 내려다보는 학생의 뒷모습' },
-    alt: { src: '/campaign/question-alt.jpg', alt: '밤의 창을 향해 놓인 빈 의자와 책상, 켜진 스탠드' },
+    img: { src: '/campaign/question.jpg', alt: '그늘진 학교 복도 끝, 햇빛 가득한 마당으로 열린 문 앞에 선 학생의 뒷모습' },
+    alt: { src: '/campaign/question-alt.jpg', alt: '아침 햇살이 드는 열린 창가, 빈 공책과 연필, 빨간 책갈피' },
     body: [
       'THE TOTAL의 모든 과정은 한 가지 질문에서 시작합니다. 당신은 정말 당신을 위한 공부를 하고 있나요?',
       '정답을 고르는 문제가 아닙니다. 지금의 공부와 앞으로의 방향을 처음으로 나란히 놓고 보는 장면입니다. 그 장면에서 학생은 무엇을 향하는지, 무엇을 믿는지, 무엇을 공부할지를 자기 말로 꺼내기 시작합니다.',
     ],
+    cta: { label: '첫 질문에서 시작하기 — 온라인 진단', href: '/diagnosis' },
   },
   {
     slug: 'the-index',
@@ -78,6 +89,7 @@ export const COLLECTION = [
       '같은 교과서를 읽어도 학생마다 멈추는 곳이 다릅니다. THE INDEX는 그 멈춤을 기록합니다.',
       '대화에서 드러난 관심과 질문을 따라, 다음에 읽을 것 · 볼 것 · 만날 사람을 한 사람의 경로로 엮습니다. 알고리즘이 고른 다음이 아니라, 자기가 고른 다음입니다.',
     ],
+    cta: { label: '교육과정 보기', href: '/programs' },
   },
   {
     slug: 'the-world',
@@ -90,6 +102,7 @@ export const COLLECTION = [
       '교실 밖의 세계를 편집해 보여줍니다. 한 편의 영화, 한 편의 글, 한 사람의 이야기, 하나의 도시, 하나의 기술.',
       '각 편집은 결론이 아니라 질문으로 끝납니다. 그 질문은 학생의 글과 말과 작업이 되어, 다시 세계로 돌아갑니다.',
     ],
+    cta: { label: 'THE TOTAL FORUM 보기', href: '/forum' },
     edits: [
       { key: '영화', q: '설명할 수 없는데 오래 남는 장면은 무엇인가.' },
       { key: '글', q: '내 말로 설명할 수 없는 것을 나는 정말 아는가.' },

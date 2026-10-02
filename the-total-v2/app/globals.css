@@ -33,6 +33,7 @@
 html {
   background: var(--black);
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -261,8 +262,8 @@ video {
   height: 100svh;
   min-height: 560px;
   overflow: hidden;
-  background: var(--black);
-  color: var(--white);
+  background: var(--off);
+  color: var(--ink);
 }
 
 .film {
@@ -277,11 +278,14 @@ video {
   object-position: 30% 50%;
 }
 
-.hero-veil,
+.hero-veil {
+  display: none;
+}
+
 .ch1-veil {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.18);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .hero-season {
@@ -352,18 +356,20 @@ video {
   color: var(--white);
 }
 
-.ch1 .ch-tag {
-  position: absolute;
-  top: clamp(96px, 14vh, 140px);
-  left: var(--m);
-}
-
-.ch1-line {
+/* 밝은 영상 위의 검은 라벨 — 매장 쇼카드처럼 */
+.ch1-label {
   position: absolute;
   right: var(--m);
   bottom: clamp(40px, 9vh, 96px);
-  max-width: 520px;
-  font-size: clamp(22px, 2.3vw, 36px);
+  max-width: 460px;
+  padding: 22px 26px 26px;
+  background: var(--black);
+  color: var(--white);
+}
+
+.ch1-line {
+  margin-top: 14px;
+  font-size: clamp(20px, 1.9vw, 30px);
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: -0.03em;
@@ -982,16 +988,34 @@ video {
     right: auto;
   }
 
+  /* 휴대폰: 영상은 위, 질문은 그 아래 종이 위에 — 사진 위에 겹쳐 읽히지 않게 */
+  .hero {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-film {
+    position: relative;
+    height: 62svh;
+  }
+
   .hero-title {
+    position: static;
+    padding: 28px var(--m) 44px;
     font-size: clamp(32px, 9.6vw, 48px);
-    bottom: 14%;
+  }
+
+  .hero-index {
+    display: none;
   }
 
   .hl {
     white-space: normal;
   }
 
-  .ch1-line {
+  .ch1-label {
     left: var(--m);
   }
 
@@ -1045,6 +1069,176 @@ video {
   .foot-place {
     margin-left: 0;
   }
+}
+
+/* ── THE HOUSE 띠(홈) · 머리의 두 층 메뉴 ── */
+
+.house-band {
+  padding: clamp(96px, 14vh, 160px) var(--m);
+  border-top: 1px solid var(--ink);
+}
+
+.band-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: end;
+}
+
+.band-title {
+  font-size: clamp(28px, 3vw, 48px);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.04em;
+}
+
+.band-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px var(--m);
+  margin-top: clamp(48px, 7vh, 80px);
+}
+
+.band-col {
+  padding-top: 16px;
+  border-top: 1px solid var(--ink);
+}
+
+.band-sub {
+  margin: 0 0 12px;
+  font-family: var(--latin);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.band-entry {
+  display: block;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+}
+
+.band-entry span {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  transition: transform 700ms var(--ease);
+}
+
+.band-entry small {
+  display: block;
+  margin-top: 4px;
+  color: #5d5b56;
+  font-size: 13.5px;
+}
+
+.band-entry:hover span {
+  transform: translateX(8px);
+}
+
+.band-entry:hover span::after {
+  content: ' →';
+  color: var(--signal);
+}
+
+.band-more {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.band-more:hover {
+  color: var(--signal);
+}
+
+.menu-strong {
+  padding: 4px 10px !important;
+  border: 1px solid currentColor;
+}
+
+.menu-strong::after {
+  display: none;
+}
+
+.head .menu-button {
+  display: block;
+}
+
+.sheet-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px var(--m);
+  margin-top: 8px;
+}
+
+.sheet-label {
+  margin: 24px 0 4px;
+  color: var(--grey);
+  font-family: var(--latin);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.sheet-house a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sheet-house small {
+  color: var(--grey);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.foot-row-house {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #2c2c2c;
+}
+
+@media (max-width: 1023px) {
+  .band-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 719px) {
+  .band-head,
+  .sheet-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sheet-cols {
+    overflow-y: auto;
+  }
+
+  .sheet-menu a {
+    font-size: 22px;
+    padding: 12px 0;
+  }
+}
+
+/* THE HOUSE 의 머리 — 블렌드 없이 종이 바탕 */
+.head-solid {
+  padding-block: 16px;
+  background: var(--off);
+  color: var(--ink);
+  mix-blend-mode: normal;
+  border-bottom: 1px solid var(--rule);
+}
+
+.head .menu-button {
+  border-width: 1.5px;
 }
 
 /* ── 움직임: 느린 가림막 · 페이드 · 호버의 교차. 그 외 없음 ── */
