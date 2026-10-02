@@ -326,8 +326,8 @@ export function Diagnosis({ onExit }: { onExit?: () => void }) {
             )}
             <Summary draft={draft} />
             <div className="dx-actions">
-              <Link className="button" href="/admissions#guide">
-                입학시험 응시 안내
+              <Link className="button" href={course ? `/admissions/apply?interest=${course}` : '/admissions/apply'}>
+                입학 안내 요청하기
               </Link>
               {course && (
                 <Link className="text-link" href={`/programs#${course}`}>

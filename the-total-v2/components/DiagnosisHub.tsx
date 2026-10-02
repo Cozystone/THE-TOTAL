@@ -7,7 +7,7 @@ import { ForumDiagnosis } from '@/components/ForumDiagnosis';
 
 /*
  * 온라인 진단의 첫 화면 — 두 경로 중 하나를 고른다.
- * 경로는 주소에 남는다(/diagnosis?track=academic | forum). FORUM 페이지의 버튼은 곧바로 forum 경로로 온다.
+ * 각 진단은 독립 주소(/diagnosis/academic · /diagnosis/forum)를 가진다. 예전 ?track= 주소도 그대로 열린다.
  */
 export function DiagnosisHub() {
   const params = useSearchParams();
@@ -27,7 +27,7 @@ export function DiagnosisHub() {
 
       <ul className="tracks-choice">
         <li>
-          <Link href="/diagnosis?track=academic">
+          <Link href="/diagnosis/academic">
             <span className="choice-kicker">ACADEMIC</span>
             <span className="choice-title">학업과정 진단</span>
             <span className="choice-text">학습 상태, 과목별 필요, 목표와 수업 방식을 확인합니다.</span>
@@ -38,7 +38,7 @@ export function DiagnosisHub() {
           </Link>
         </li>
         <li>
-          <Link href="/diagnosis?track=forum">
+          <Link href="/diagnosis/forum">
             <span className="choice-kicker">FORUM</span>
             <span className="choice-title">FORUM 지원 진단</span>
             <span className="choice-text">

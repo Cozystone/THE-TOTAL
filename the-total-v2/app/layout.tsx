@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import './globals.css';
 import './house.css';
+import './entry.css';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Reveal } from '@/components/Reveal';

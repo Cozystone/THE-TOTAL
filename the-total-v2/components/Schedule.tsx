@@ -28,14 +28,24 @@ const WEEK = ['일', '월', '화', '수', '목', '금', '토'];
 const MONTHS_BACK = 1;
 const MONTHS_AHEAD = 6;
 
-type Filter = 'all' | CourseId;
+export type Filter = 'all' | CourseId;
 
-export function Schedule({ today, withFilter = false, compact = false }: { today: Ymd; withFilter?: boolean; compact?: boolean }) {
+export function Schedule({
+  today,
+  withFilter = false,
+  compact = false,
+  initialFilter = 'all',
+}: {
+  today: Ymd;
+  withFilter?: boolean;
+  compact?: boolean;
+  initialFilter?: Filter;
+}) {
   const uid = useId();
   const todayKey = toKey(today);
   const [view, setView] = useState({ y: today.y, m: today.m });
   const [picked, setPicked] = useState<string | null>(null);
-  const [filter, setFilter] = useState<Filter>('all');
+  const [filter, setFilter] = useState<Filter>(initialFilter);
 
   const offset = (view.y - today.y) * 12 + (view.m - today.m);
   const move = (delta: number) => {
@@ -202,7 +212,7 @@ export function Schedule({ today, withFilter = false, compact = false }: { today
                       </dd>
                     </div>
                   </dl>
-                  <Link className="session-link" href="/admissions#guide">
+                  <Link className="session-link" href={`/admissions/apply?session=${s.id}`}>
                     {st === 'preparing' ? '일정 문의하기' : st === 'closed' ? '다음 회차 안내 받기' : '응시 안내 받기'}
                     <span aria-hidden="true"> →</span>
                   </Link>

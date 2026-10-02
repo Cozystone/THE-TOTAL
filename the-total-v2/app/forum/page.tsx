@@ -27,7 +27,7 @@ export default function Forum() {
           만들어 가는 교육 프로그램입니다.
         </p>
         <div className="actions">
-          <Link className="button" href="/diagnosis?track=forum">
+          <Link className="button" href="/diagnosis/forum">
             FORUM 지원 진단 시작하기
           </Link>
           <a className="text-link" href="#flow">
@@ -121,7 +121,7 @@ export default function Forum() {
       <section className="block block-cta" aria-label="지원">
         <p>FORUM은 지원 진단에서 시작합니다. 관심사와 생각의 방식, 만들고 싶은 작업을 먼저 묻습니다.</p>
         <div className="actions">
-          <Link className="button" href="/diagnosis?track=forum">
+          <Link className="button" href="/diagnosis/forum">
             FORUM 지원 진단 시작하기
           </Link>
           <Link className="text-link" href="/programs">

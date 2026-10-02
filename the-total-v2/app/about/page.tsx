@@ -120,7 +120,7 @@ export default function About() {
       <section className="block block-cta" aria-label="다음 단계">
         <p>THE TOTAL의 수업은 진단에서 시작됩니다.</p>
         <div className="actions">
-          <Link className="button" href="/diagnosis?track=academic">
+          <Link className="button" href="/diagnosis/academic">
             온라인 개인진단 시작하기
           </Link>
           <Link className="text-link" href="/programs">

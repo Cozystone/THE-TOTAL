@@ -56,3 +56,15 @@ Higgsfield 가 영상 프롬프트를 자체 프리셋("IN THE DARK")으로 바�
 | desire.mp4 | desire (ac2e2743…) | 6c156cc1-2166-46ec-ae02-1d8b682db596 | The hand stays resting on the shop window. In the glass, colorful reflections of passing people and glowing screens slide past and overlap with the products inside, sunlight flares drift. Very slow, almost still camera. Bright afternoon, no cuts. (16:9, 6s, 1080p, 무음) |
 
 비용(2차): 정지 9 × 2.75 = 24.75, 영상 2 × 72 = 144 크레딧.
+
+## 3차 — THE HOUSE 블록 (2026-10-02)
+
+모델 gpt_image_2_5 · quality high · 2k · 4:3. 원본 PNG 는 저장소 밖 보관, 웹용 2000px JPG(q82).
+
+| 파일 | job | 프롬프트 |
+|---|---|---|
+| house-academic.jpg | 9c3d8578-4fcd-4f41-afa9-6c6fa9346b2e | Editorial campaign photograph, bright morning. Close view of a student's hand writing in a notebook on a sunlit desk beside an open textbook with diagrams and graph paper, a ruler and a red pencil; strong window light and crisp shadows, deep blue sweater sleeve. Focused, calm, precise. Documentary meets high-fashion editorial, 35mm film grain. No face, no readable text, no logos. |
+| house-forum.jpg | 2518eed3-866b-4ad9-a320-8039aef2084f | Editorial campaign photograph in a bright studio with large windows: three teenagers seen from behind and the side, gathered around a long wooden table covered with printed photographs, notes and a laptop, one gesturing while explaining an idea, others leaning in; warm daylight, plants, a red folder. Lively, curious, collaborative. Documentary meets fashion editorial, 35mm film grain. No faces visible, no readable text, no logos. |
+| house-admissions.jpg | 29702884-ee10-4c31-b0a0-0e581e31de27 | Architectural campaign photograph, early morning. The tall glass-and-wood front door of a calm, minimal school building stands wide open; low sun pours in across a pale stone floor and a few steps; a student seen from behind is just walking in, carrying a tote bag. Inviting, open, quiet confidence. Off-white walls, warm light, one small red detail. 35mm film grain. No face visible, no readable text, no logos. |
+
+메모: admissions 컷은 프롬프트와 달리 인물이 문 밖으로 걸어 나가는 방향으로 나왔다. '열린 문 · 문턱' 으로 읽혀서 채택.

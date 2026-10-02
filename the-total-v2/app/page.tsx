@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Film } from '@/components/Film';
 import { CHAPTERS, CLOSE, COLLECTION, HERO, OPEN, RESEARCH, SITE } from '@/lib/copy';
-import { latestNotices, NOTICE_TYPES } from '@/lib/notices';
-import { COURSES, STATUS, formatDay, formatShort, nextSessions, statusOf, toKey } from '@/lib/schedule';
+import { ENTER, HOUSE } from '@/lib/entry';
+import { COURSES, STATUS, formatDay, nextSessions, statusOf, toKey } from '@/lib/schedule';
 import { seoulToday } from '@/lib/today';
 
 // 입학 일정의 상태가 서울 기준 '오늘'로 계산되도록 한 시간마다 다시 만든다.
@@ -13,13 +13,14 @@ export const revalidate = 3600;
  * S.01 — THE FIRST QUESTION. 홈은 하나의 캠페인.
  *   첫 장면(무음 영상, 21:9) → 01 전체 화면 영상(어둠) → 02 좁은 세로 사진 + 여백(오프화이트)
  *   → 03 흰 바탕의 짧은 문장(시그널 레드) → 04 리서치 이미지 여러 장 + 작은 캡션(검정)
- *   → 열림(보조 문장) → 컬렉션 세 오브제(오프화이트) → THE HOUSE(진단 · 다음 입학시험 · 공지, 실제 데이터) → 맺음(산파술).
+ *   → 열림(보조 문장) → 컬렉션 세 오브제(오프화이트) → THE HOUSE(ACADEMIC · FORUM · ADMISSIONS 세 블록 + NEXT ENTRY 한 줄)
+ *   → 맺음(산파술) → ENTER THE TOTAL(세 입장 링크).
  * 장면마다 비율 · 밝기 · 글자 위치가 다르다. 문장은 장면의 제목.
  */
 export default function Campaign() {
   const todayKey = toKey(seoulToday());
-  const upcoming = nextSessions(todayKey, 3);
-  const notices = latestNotices(2);
+  // 홈의 일정은 한 줄 — 접수 마감 전의 가장 가까운 회차
+  const next = nextSessions(todayKey, 9).find((x) => statusOf(x, todayKey) !== 'closed');
 
   return (
     <main id="main">
@@ -154,71 +155,56 @@ export default function Campaign() {
         </ul>
       </section>
 
-      {/* THE HOUSE — 실제로 동작하는 기관의 층 */}
-      <section className="house house-band" aria-labelledby="house-title">
-        <div className="band-head">
+      {/* THE HOUSE — 질문이 실제로 시작되는 곳. 세 개의 큰 블록 */}
+      <section className="hs" aria-labelledby="house-title">
+        <div className="hs-head">
           <p className="ch-tag">THE HOUSE</p>
-          <h2 className="band-title" id="house-title">
-            세계에 들어온 뒤,
+          <h2 className="hs-title" id="house-title">
+            질문이,
             <br />
-            실제로 시작하는 곳.
+            실제로 시작되는 곳.
           </h2>
         </div>
-        <div className="band-cols">
-          <div className="band-col">
-            <h3 className="band-sub">온라인 진단</h3>
-            <Link className="band-entry" href="/diagnosis?track=academic">
-              <span>학업과정 진단</span>
-              <small>학습 상태 · 과목별 필요 · 목표와 수업 방식 · 약 5분</small>
+        {HOUSE.map((h, i) => (
+          <article key={h.key} className={`hb hb-${h.tone}${i % 2 ? ' hb-flip' : ''}`} aria-labelledby={`hb-${h.key}`}>
+            <Link className="hb-media" href={h.href} tabIndex={-1} aria-hidden="true">
+              <Image src={h.img} width={2000} height={1493} sizes="(max-width: 719px) 100vw, 58vw" alt="" />
             </Link>
-            <Link className="band-entry" href="/diagnosis?track=forum">
-              <span>FORUM 지원 진단</span>
-              <small>관심사 · 생각의 방식 · 만들고 싶은 작업 · 약 10분</small>
+            <div className="hb-text">
+              <p className="hb-no">{h.no}</p>
+              <h3 className="hb-name" id={`hb-${h.key}`}>
+                {h.name}
+              </h3>
+              <p className="hb-line">
+                {h.lines.map((l) => (
+                  <span key={l}>{l}</span>
+                ))}
+              </p>
+              <p className="hb-meta">{h.meta}</p>
+              <div className="hb-links">
+                <Link className="hb-cta" href={h.href}>
+                  {h.cta} <span aria-hidden="true">→</span>
+                </Link>
+                <Link className="hb-more" href={h.more.href}>
+                  {h.more.label}
+                </Link>
+              </div>
+              <span className="sr">{h.alt}</span>
+            </div>
+          </article>
+        ))}
+        {next && (
+          <p className="hs-next">
+            <span className="hs-next-tag">NEXT ENTRY</span>
+            <span>
+              {COURSES[next.course].label} {next.round} · {next.online ? '온라인 입학시험' : '입학시험'} · {formatDay(next.date)}
+              {next.time ? ` ${next.time}` : ''} · {STATUS[statusOf(next, todayKey)].label}
+            </span>
+            <Link href="/admissions/schedule">
+              일정 전체 <span aria-hidden="true">→</span>
             </Link>
-          </div>
-          <div className="band-col">
-            <h3 className="band-sub">다음 입학시험</h3>
-            <ul className="list">
-              {upcoming.map((x) => {
-                const st = statusOf(x, todayKey);
-                return (
-                  <li key={x.id}>
-                    <span className="badge" data-status={st}>
-                      {STATUS[st].label}
-                    </span>
-                    <span className="list-title">
-                      {COURSES[x.course].label} {x.round}
-                    </span>
-                    <span className="list-meta">
-                      {formatDay(x.date)}
-                      {x.applyOpen && x.applyClose && ` · 접수 ${formatShort(x.applyOpen)} – ${formatShort(x.applyClose)}`}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
-            <Link className="band-more" href="/admissions#schedule">
-              입학 일정 전체 <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-          <div className="band-col">
-            <h3 className="band-sub">공지</h3>
-            <ul className="list">
-              {notices.map((n) => (
-                <li key={n.id}>
-                  <span className="list-type">{NOTICE_TYPES[n.type]}</span>
-                  <Link className="list-title" href={`/notices#${n.id}`}>
-                    {n.title}
-                  </Link>
-                  <span className="list-meta">{formatDay(n.date, true)}</span>
-                </li>
-              ))}
-            </ul>
-            <Link className="band-more" href="/notices">
-              공지 전체 <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </div>
+          </p>
+        )}
       </section>
 
       {/* 맺음 */}
@@ -228,9 +214,30 @@ export default function Campaign() {
             <span key={l}>{l}</span>
           ))}
         </p>
-        <Link className="closing-link" href="/the-question">
-          첫 질문으로 <span aria-hidden="true">→</span>
-        </Link>
+      </section>
+
+      {/* ENTER THE TOTAL — 컬렉션 입장 링크 */}
+      <section className="enter" aria-labelledby="enter-title">
+        <p className="ch-tag ch-tag-signal">ENTER THE TOTAL</p>
+        <h2 className="enter-title" id="enter-title">
+          당신의 질문은,
+          <br />
+          어디에서 시작되나요?
+        </h2>
+        <ul className="enter-list">
+          {ENTER.map((e) => (
+            <li key={e.href}>
+              <Link href={e.href}>
+                <span className="enter-no">{e.no}</span>
+                <span className="enter-label">{e.label}</span>
+                <span className="enter-meta">{e.meta}</span>
+                <span className="enter-arrow" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
     </main>
   );

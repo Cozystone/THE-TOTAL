@@ -279,13 +279,13 @@ export function ForumDiagnosis({ onExit }: { onExit?: () => void }) {
                 <p className="dx-lead">확인 후 다음 안내를 드립니다.</p>
                 <p className="dx-notice">
                   온라인 접수 기능이 연결되기 전까지 응답은 저장 · 전송되지 않으며, 이 화면에서만 확인할 수 있습니다. 안내를
-                  받으려면 입학 안내의 응시 안내 신청에서 ‘FORUM 지원 안내’를 선택해 주세요.
+                  받으려면 입학 안내 요청서에서 관심 과정을 ‘THE TOTAL FORUM’ 으로 골라 주세요.
                 </p>
               </>
             )}
             <ForumSummary draft={draft} />
             <div className="dx-actions">
-              <Link className="button" href="/admissions#guide">
+              <Link className="button" href="/admissions/apply?interest=forum">
                 FORUM 지원 안내 받기
               </Link>
               <Link className="text-link" href="/forum">
