@@ -1,84 +1,83 @@
 import { courseOfGrade, type Grade } from '@/lib/diagnosis/schema';
-import type { CourseId } from '@/lib/schedule';
-import { many, one, type Answers, type JourneyStep } from './types';
+import { COURSES, type CourseId } from '@/lib/schedule';
+import { many, noteOf, one, quote, type Answers, type JourneyStep } from './types';
 
 /*
- * 부모 — 자녀의 학습 방향 살펴보기. 아이를 분류하거나 등급을 매기지 않는다. 약 5분.
- *   학년 → 학업에서 함께 볼 부분 → 학습 환경 → 아이가 움직이는 때 → 요즘의 대화 → 확인 → PARENT NOTE
- * 쓰지 않는 말: 불안 · 뒤처짐 · 문제 학생 · 성격 판정.
+ * 부모 — 자녀의 학습 방향 살펴보기. 5단계, 약 5분. 아이를 평가하거나 분류하지 않는다.
+ * 쓰지 않는 말: 불안 · 뒤처짐 · 관리 · 문제 행동 · 교정, 그리고 결과에서 '진단'.
+ * 결과는 늘 열린 표현으로 — "함께 살펴볼 수 있습니다", "첫 수업에서 더 정확히 정리합니다".
  */
 export const PARENT_STEPS: JourneyStep[] = [
   { id: 'grade', kind: 'grade', title: '자녀는 지금 몇 학년인가요?' },
   {
-    id: 'academic',
+    id: 'see',
     kind: 'multi',
-    max: 3,
-    title: '학업에서 지금 함께 확인하고 싶은 부분은 무엇인가요?',
-    hint: '최대 3개.',
-    options: ['과목의 개념 이해', '시험을 준비하는 방식', '내신 · 수행평가의 흐름', '입시 전형과 일정', '읽기와 글쓰기', '다음 과정으로의 연결'],
+    title: '지금 가장 함께 보고 싶은 부분은 무엇인가요?',
+    hint: '여러 개를 골라도 됩니다.',
+    options: ['학업의 흐름', '공부 습관', '진로와 관심사', '대화'],
   },
   {
     id: 'env',
     kind: 'multi',
-    max: 2,
-    title: '학습 환경에서 조정이 필요해 보이는 부분이 있나요?',
-    hint: '최대 2개.',
-    options: ['한 주의 일정이 빽빽하다', '혼자 공부하는 시간이 적다', '공부 시간이 일정하지 않다', '지금의 수업 방식이 아이와 맞는지 모르겠다', '쉬는 시간과 수면이 부족하다', '아직 잘 모르겠다'],
+    title: '지금의 학습 환경은 어떤가요?',
+    hint: '해당하는 것을 모두 골라 주세요.',
+    options: ['시간 부족', '동기 저하', '과도한 과제', '과목별 편차', '기타'],
+    note: { label: '기타 — 한 줄로 (선택)', max: 60 },
   },
   {
     id: 'moves',
-    kind: 'single',
-    title: '아이가 가장 잘 움직이는 때는 언제인가요?',
-    options: ['좋아하는 주제를 만났을 때', '누군가와 함께할 때', '스스로 정한 목표가 있을 때', '직접 만들어 볼 때', '아직 잘 모르겠다'],
+    kind: 'text',
+    title: '아이가 비교적 스스로 움직이는 순간은 언제인가요?',
+    hint: '작은 순간이어도 괜찮습니다.',
+    note: { label: '그 순간', max: 80, placeholder: '예: 좋아하는 게임의 규칙을 설명해 줄 때', long: true },
   },
   {
     id: 'talk',
-    kind: 'single',
-    title: '요즘 아이와 주로 나누는 대화는 무엇인가요?',
-    options: ['주로 성적과 일정', '관심사와 일상', '진로와 방향', '대화할 시간이 적다'],
+    kind: 'text',
+    optional: true,
+    title: '지금 아이와 나누고 싶은 대화나 질문이 있나요?',
+    hint: '없으면 건너뛰어도 됩니다.',
+    note: { label: '나누고 싶은 것 (선택)', max: 80, long: true },
   },
 ];
 
+const SEE: Record<string, string> = {
+  '학업의 흐름': '과목마다 지금 어디까지 왔는지, 다음 단원으로 이어지는 흐름',
+  '공부 습관': '한 주의 공부가 어떤 순서와 리듬으로 흘러가는지',
+  '진로와 관심사': '요즘의 관심이 지금 배우는 과목과 이어지는 지점',
+  대화: '공부에 대해 아이가 스스로 쓰는 말',
+};
 const ENV: Record<string, string> = {
-  '한 주의 일정이 빽빽하다': '일정 안에서 스스로 공부할 시간을 먼저 확보하기',
-  '혼자 공부하는 시간이 적다': '수업 밖에서 혼자 정리하는 시간을 짧게라도 고정하기',
-  '공부 시간이 일정하지 않다': '요일마다 같은 시간에 시작하는 습관 만들기',
-  '지금의 수업 방식이 아이와 맞는지 모르겠다': '아이가 잘 배우는 수업 방식을 진단에서 먼저 확인하기',
-  '쉬는 시간과 수면이 부족하다': '공부 분량보다 쉬는 시간과 수면을 먼저 확보하기',
-  '아직 잘 모르겠다': '한 주 동안의 공부 시간을 함께 기록해 보기',
-};
-
-const MOVES: Record<string, string> = {
-  '좋아하는 주제를 만났을 때': '요즘 가장 오래 생각하게 되는 건 뭐야?',
-  '누군가와 함께할 때': '누구와 공부할 때 가장 잘 됐던 것 같아?',
-  '스스로 정한 목표가 있을 때': '이번 학기에 스스로 정하고 싶은 목표가 있어?',
-  '직접 만들어 볼 때': '최근에 직접 만들어 보고 싶었던 게 있어?',
-  '아직 잘 모르겠다': '공부하면서 시간이 가장 빨리 갔던 때는 언제였어?',
-};
-const TALK: Record<string, string> = {
-  '주로 성적과 일정': '성적 말고, 요즘 학교에서 재미있었던 건 뭐야?',
-  '대화할 시간이 적다': '이번 주에 하나만 같이 해 본다면 뭘 하고 싶어?',
-  '진로와 방향': '그 일을 떠올리면, 어떤 장면이 먼저 생각나?',
-  '관심사와 일상': '그 관심을 더 알아보려면 무엇부터 해 보고 싶어?',
+  '시간 부족': '일정 안에서 스스로 정리하는 시간을 먼저 확보해 볼 수 있습니다.',
+  '동기 저하': '아이가 스스로 고른 목표 하나에서 다시 시작해 볼 수 있습니다.',
+  '과도한 과제': '과제의 양보다 순서를 함께 정해 볼 수 있습니다.',
+  '과목별 편차': '과목마다 다른 속도를 인정하고, 순서를 나눠 볼 수 있습니다.',
 };
 
 export type ParentNote = {
   course: CourseId | null;
+  courseLabel: string | null;
   academic: string[];
   env: string[];
-  questions: string[];
+  envNote?: string;
+  moment?: string;
+  question: string;
+  talk?: string;
 };
 
 export function buildParentNote(a: Answers): ParentNote {
   const grade = one(a, 'grade') as Grade | undefined;
   const course = grade ? courseOfGrade(grade) : null;
-  const moves = one(a, 'moves');
-  const talk = one(a, 'talk');
-  const questions = [moves && MOVES[moves], talk && TALK[talk]].filter((q): q is string => !!q);
+  const moment = quote(noteOf(a, 'moves'), 60);
   return {
     course,
-    academic: many(a, 'academic'),
+    courseLabel: course ? COURSES[course].label : null,
+    academic: many(a, 'see').map((s) => SEE[s]).filter(Boolean),
     env: many(a, 'env').map((e) => ENV[e]).filter(Boolean),
-    questions: [...new Set(questions)].slice(0, 2),
+    envNote: many(a, 'env').includes('기타') ? quote(noteOf(a, 'env'), 60) : undefined,
+    moment,
+    // 부모가 먼저 건넬 수 있는 열린 질문 한 문장 — 적어 준 '순간' 을 이어 받는다
+    question: moment ? '그때 어떤 부분이 제일 재미있었는지 들려줄래?' : '요즘 가장 오래 생각하게 되는 건 뭐야?',
+    talk: quote(noteOf(a, 'talk'), 80),
   };
 }

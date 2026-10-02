@@ -81,9 +81,15 @@ export default function Home() {
           ))}
         </ol>
         <p className="strip">
-          {STRIP.map((s) => (
-            <span key={s}>{s}</span>
-          ))}
+          {STRIP.map((s) =>
+            'href' in s ? (
+              <Link key={s.label} href={s.href}>
+                {s.label}
+              </Link>
+            ) : (
+              <span key={s.label}>{s.label}</span>
+            ),
+          )}
         </p>
       </section>
 
@@ -138,7 +144,7 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-            <Link className="cta cta-solid entry-cta" href="/admissions">
+            <Link className="cta cta-solid entry-cta" href="/entry">
               입학 안내 보기 <span aria-hidden="true">→</span>
             </Link>
           </div>

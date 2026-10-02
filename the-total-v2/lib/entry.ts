@@ -57,12 +57,18 @@ export const STARTS = [
 export const NOT_OPEN = '현재 온라인 신청 접수는 준비 중입니다. 입학 안내를 먼저 확인해 주세요.';
 
 /** 홈의 정보 스트립 */
-export const STRIP = ['온라인 개인진단', '맞춤 수업 제안', '초등 · 중등 · 고등', '대치 · 서울'] as const;
+export const STRIP = [
+  { label: '온라인 개인진단', href: '/diagnosis' },
+  { label: '맞춤 수업 제안', href: '/programs/s01-choice' },
+  { label: '초등 · 중등 · 고등', href: '/programs' },
+  { label: '입학 안내', href: '/entry' },
+  { label: '대치 · 서울' },
+] as const;
 
 /** 홈의 마지막 — THE TOTAL에 들어오는 방법 */
 export const ENTRY_STEPS = [
   { no: '01', title: '온라인 개인진단', text: '학생은 나의 INDEX, 부모는 자녀의 학습 방향에서 시작합니다.' },
-  { no: '02', title: '과정 제안 및 안내', text: '응답을 바탕으로 맞는 과정과 시작 방법을 개별로 안내합니다.' },
+  { no: '02', title: '과정 제안 및 안내', text: '응답을 바탕으로 맞는 과정과 시작 방법을 함께 봅니다.' },
   { no: '03', title: '입학시험 또는 상담', text: '과정별 온라인 입학시험이나 첫 상담으로 수업 설계를 시작합니다.' },
 ] as const;
 
@@ -76,7 +82,7 @@ export const START = {
     more: [
       { label: '학업과정 진단', meta: '과목 · 학습 상태 · 학습 환경 중심', href: '/diagnosis/academic' },
       { label: 'FORUM 지원 진단', meta: '관심사 · 표현 · 만들고 싶은 것 중심', href: '/diagnosis/forum' },
-      { label: '입학 일정 보기', meta: '과정별 온라인 입학시험', href: '/admissions/schedule' },
+      { label: 'S.01 — 선택의 근거', meta: '첫 시즌 · 4주', href: '/programs/s01-choice' },
     ],
     img: '/campaign/house-forum.jpg',
     alt: '창이 큰 작업실, 사진과 메모가 펼쳐진 탁자에 둘러서서 이야기하는 학생들의 뒷모습',
@@ -89,8 +95,8 @@ export const START = {
     main: { label: '자녀의 학습 방향 살펴보기', meta: '약 5분', href: '/diagnosis/parent' },
     more: [
       { label: '교육과정 보기', meta: '초등 · 중등 · 고등 과정의 운영 방식', href: '/programs' },
-      { label: '입학 일정 보기', meta: '과정별 온라인 입학시험', href: '/admissions/schedule' },
-      { label: '입학 안내', meta: '진단 · 입학시험 · 개별 안내 요청', href: '/admissions' },
+      { label: 'S.01 — 선택의 근거', meta: '첫 시즌 · 4주', href: '/programs/s01-choice' },
+      { label: '입학 안내', meta: 'ENTRY 01 · 온라인 입학시험', href: '/entry' },
     ],
     img: '/campaign/house-academic.jpg',
     alt: '햇빛이 드는 책상 위, 펼친 교과서 옆 공책에 풀이를 적는 손',

@@ -153,6 +153,7 @@ export function ApplyForm({
       </fieldset>
 
       <div className="apply-grid">
+        {upcoming.length > 0 && (
         <div className="apply-field apply-wide">
           <label htmlFor={`${id}-session`}>희망 입학시험 회차 (선택)</label>
           <select id={`${id}-session`} value={session} onChange={(e) => setSession(e.target.value)}>
@@ -164,6 +165,7 @@ export function ApplyForm({
             ))}
           </select>
         </div>
+        )}
         <div className="apply-field apply-wide">
           <label htmlFor={`${id}-concern`}>{audience === 'student' ? '지금 가장 궁금한 것 (선택)' : '자녀에 대한 고민 (선택)'}</label>
           <textarea id={`${id}-concern`} rows={4} maxLength={600} value={concern} onChange={(e) => setConcern(e.target.value)} />

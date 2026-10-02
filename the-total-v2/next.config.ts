@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
       { source: '/house', destination: '/the-question', permanent: false },
       { source: '/scenes', destination: '/the-world', permanent: false },
       { source: '/study', destination: '/programs', permanent: false },
-      { source: '/entry', destination: '/the-question', permanent: false },
     ];
   },
   async headers() {

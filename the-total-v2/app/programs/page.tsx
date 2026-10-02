@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PROGRAMS } from '@/lib/programs';
+import { S01 } from '@/lib/season';
 
 export const metadata: Metadata = { title: '교육과정' };
 
@@ -34,6 +35,25 @@ export default function Programs() {
             </Link>
           </div>
         </header>
+
+        <section aria-labelledby="season-title">
+          <h2 className="prg-branch" id="season-title">
+            SEASON
+          </h2>
+          <ol className="courses courses-list">
+            <li>
+              <Link href={S01.href}>
+                <span className="course-no">{S01.code}</span>
+                <span className="course-name">{S01.name}</span>
+                <span className="course-line">내가 원하는 것과 남들이 원한다고 말하는 것을 구별하는 4주.</span>
+                <span className="course-meta">첫 시즌 · 4주 · 나의 INDEX에서 시작</span>
+                <span className="course-go" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            </li>
+          </ol>
+        </section>
 
         <section aria-labelledby="academic-title">
           <h2 className="prg-branch" id="academic-title">

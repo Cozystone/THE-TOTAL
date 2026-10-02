@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { COURSES, STATUS, formatDay, formatShort, nextSessions, statusOf, toKey, type CourseId } from '@/lib/schedule';
+import { NOT_SCHEDULED } from '@/lib/season';
 import { seoulToday } from '@/lib/today';
 
 /*
@@ -10,7 +11,14 @@ export function NextEntry({ count = 4, course }: { count?: number; course?: Cour
   const todayKey = toKey(seoulToday());
   const list = nextSessions(todayKey, count, course);
 
-  if (list.length === 0) return <p className="next-empty">공지된 다음 입학시험이 없습니다.</p>;
+  if (list.length === 0)
+    return (
+      <p className="next-empty">
+        <strong>{NOT_SCHEDULED.title}</strong>
+        <br />
+        {NOT_SCHEDULED.text}
+      </p>
+    );
 
   return (
     <ul className="next">

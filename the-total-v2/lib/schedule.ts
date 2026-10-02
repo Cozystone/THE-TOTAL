@@ -10,7 +10,9 @@
  *   오늘 > applyClose, waitlist     → 대기 접수
  *   오늘 > applyClose              → 신청 마감
  *
- * ⚠ 아래 SESSIONS 는 운영 일정 확정 전의 예시 값이다. 실제 일정으로 바꾼 뒤 운영 배포한다.
+ * ⚠ 아래 SAMPLE_SESSIONS 는 운영 일정 확정 전의 예시 값이다(구조 확인용).
+ *   SCHEDULE_CONFIRMED 가 false 인 동안 화면에는 어떤 날짜도 나가지 않는다 — 모든 일정 표기는 '준비 중'.
+ *   실제 일정으로 바꾼 뒤 true 로 켠다. 온라인 입학시험 카운트다운은 lib/season.ts 의 ENTRY_EXAM_AT 하나에서만.
  */
 
 export type CourseId = 'elementary' | 'middle' | 'high';
@@ -37,7 +39,9 @@ export type Session = {
   announced: boolean;
 };
 
-export const SESSIONS: Session[] = [
+export const SCHEDULE_CONFIRMED = false;
+
+const SAMPLE_SESSIONS: Session[] = [
   { id: 'h-0926', date: '2026-09-26', course: 'high', round: '9월 회차', online: true, time: '10:00', applyOpen: '2026-09-07', applyClose: '2026-09-23', waitlist: false, announced: true },
   { id: 'h-1010', date: '2026-10-10', course: 'high', round: '10월 1회차', online: true, time: '10:00', applyOpen: '2026-09-21', applyClose: '2026-10-07', waitlist: false, announced: true },
   { id: 'm-1017', date: '2026-10-17', course: 'middle', round: '10월 1회차', online: true, time: '10:00', applyOpen: '2026-09-28', applyClose: '2026-10-14', waitlist: false, announced: true },
@@ -48,6 +52,8 @@ export const SESSIONS: Session[] = [
   { id: 'h-1205', date: '2026-12-05', course: 'high', round: '겨울학기 회차', online: true, time: null, applyOpen: null, applyClose: null, waitlist: false, announced: false },
   { id: 'm-1212', date: '2026-12-12', course: 'middle', round: '겨울학기 회차', online: true, time: null, applyOpen: null, applyClose: null, waitlist: false, announced: false },
 ];
+
+export const SESSIONS: Session[] = SCHEDULE_CONFIRMED ? SAMPLE_SESSIONS : [];
 
 export type Status = 'preparing' | 'upcoming' | 'open' | 'closed' | 'waitlist';
 
