@@ -1,119 +1,88 @@
 /*
- * THE TOTAL V2 — 브랜드 경험(Editorial Education House)의 문장.
- * 캠페인 문장은 본인 확정. 바꿀 때는 여기서만 바꾼다.
- * 운영(진단 · 입학시험 · 공지)은 V1 사이트가 맡는다 — ACADEMY 링크로 넘긴다.
+ * THE TOTAL — S.01 THE FIRST QUESTION.
+ * 홈은 서비스 설명이 아니라 하나의 캠페인. 문장은 장면의 제목이다.
+ * 운영(진단 · 입학시험 · 공지)은 ACADEMY(V1)가 맡는다.
  */
 export const SITE = {
   name: 'THE TOTAL',
-  line: '공부가 한 사람의 삶과 다시 연결되는 순간을 디자인하는 교육기관',
+  season: 'S.01 — THE FIRST QUESTION',
   place: '서울 · 대치',
-  /** 운영형 사이트(V1). 진단 · 입학시험 · 공지는 이곳에서 실제로 동작한다. */
   academy: 'https://2026-10the-total.vercel.app',
 };
 
-/** 메뉴: 집(철학) · 장면 · 공부 · 들어오기 */
+/** 메뉴 — 명세 4절이 잘려 도착해 임시안. 시즌 · 세 컬렉션 · ACADEMY. */
 export const MENU = [
-  { href: '/house', label: '집' },
-  { href: '/scenes', label: '장면' },
-  { href: '/study', label: '공부' },
-  { href: '/entry', label: '들어오기' },
+  { href: '/', label: 'S.01' },
+  { href: '/the-question', label: 'THE QUESTION' },
+  { href: '/the-index', label: 'THE INDEX' },
+  { href: '/the-world', label: 'THE WORLD' },
 ] as const;
 
-export const CAMPAIGN = {
-  hero: ['당신은 정말', '당신을 위한 공부를', '하고 있나요?'],
-  sequence: [
-    ['세상은 빠르게 달라지고 있습니다.'],
-    ['더 많은 답을 아는 것만으로는', '더 멀리 갈 수 없는 시대가 왔습니다.'],
-    ['무엇을 향하는지,', '무엇을 믿는지,', '무엇을 공부할지.'],
-    ['그 질문은 아직', '누구도 대신 답해줄 수 없습니다.'],
-  ],
-  close: ['THE TOTAL은', '한 학생의 삶과 질문에서 시작해', '그 사람만의 공부를 다시 설계합니다.'],
+export const HERO = ['당신은 정말', '당신을 위한 공부를', '하고 있나요?'];
+
+export const CHAPTERS = {
+  c1: { no: '01', title: 'BORROWED DESIRES', line: '내가 고른 것과, 나에게 보여진 것은 어디서 갈라질까.' },
+  c2: { no: '02', title: 'THE WORLD IS MOVING', line: '더 많은 답을 아는 것만으로는 더 멀리 갈 수 없는 시대.' },
+  c3: { no: '03', title: 'A QUESTION OF ONE’S OWN', lines: ['무엇을 향하는지,', '무엇을 믿는지,', '무엇을 공부할지.'] },
+  c4: { no: '04', title: 'THE FIRST STEP', line: '그 질문은 아직 누구도 대신 답해줄 수 없습니다.' },
 };
 
-/** 내부 철학 — 산파술 */
-export const HOUSE = {
-  thesis: ['THE TOTAL은 답을 가르치지 않습니다.', '한 사람이 자기 답을 발견할 수 있는 질문과 장면을 만듭니다.'],
-  intro:
-    'THE TOTAL은 답을 대신 주지 않습니다. 학생 안에 이미 있던 질문, 취향, 방향을 발견할 수 있도록 더 넓은 세계와 더 정확한 장면을 보여줍니다.',
-  principles: [
-    {
-      no: '01',
-      title: '질문은 이미 학생 안에 있습니다.',
-      text: '우리는 질문을 심지 않습니다. 학생이 오래 붙잡고 있던 것, 설명하지 못한 채 지나친 것을 꺼내 놓을 수 있는 자리를 만듭니다.',
-    },
-    {
-      no: '02',
-      title: '장면이 답보다 오래 남습니다.',
-      text: '정리된 결론 대신 정확한 장면을 보여줍니다. 도시, 돈, 예술, 알고리즘 — 세상이 실제로 움직이는 순간을 가까이에서 보게 합니다.',
-    },
-    {
-      no: '03',
-      title: '공부는 삶과 다시 연결되어야 합니다.',
-      text: '성적과 진학은 피하지 않습니다. 다만 그 공부가 누구의 것인지, 어디를 향하는지를 학생이 스스로 말할 수 있을 때까지 함께 설계합니다.',
-    },
-  ],
-  people: [
-    {
-      name: 'Maestro Vin',
-      role: 'Founder & Curator',
-      text: [
-        'Maestro Vin은 2018년부터 대치동을 오가며 학생과 부모, 학원과 경쟁이 만드는 풍경을 가까이에서 기록해 왔습니다.',
-        'THE TOTAL은 그 풍경을 단순히 비판하는 대신, 학생이 더 넓은 세계와 자기 언어를 가질 수 있는 새로운 교육을 만듭니다.',
-      ],
-    },
-    {
-      name: 'J. LEE',
-      role: '원장',
-      text: [
-        '학생의 성취와 학습 방식, 그리고 그 학생이 내리는 선택을 오래 지켜보며 수업을 설계해 온 교육 설계자입니다.',
-        '좋은 교육은 더 많은 것을 요구하기 전에, 먼저 그 학생을 정확히 이해하는 데서 시작됩니다.',
-      ],
-    },
-  ],
-};
-
-/** 장면 — 더 넓은 세계. 각 장면은 하나의 질문으로 끝난다. */
-export const SCENES = [
-  { no: '01', key: '도시', tone: 'ink', figure: 'horizon', q: '이 거리는 누구의 선택으로 이렇게 생겼을까.' },
-  { no: '02', key: '알고리즘', tone: 'slate', figure: 'grid', q: '내가 고른 것과 나에게 보여진 것은 어디서 갈라질까.' },
-  { no: '03', key: '돈', tone: 'ink', figure: 'window', q: '가격은 가치를 말하는가, 욕망을 말하는가.' },
-  { no: '04', key: '예술', tone: 'oxblood', figure: 'arc', q: '설명할 수 없는데 오래 남는 것은 무엇인가.' },
-  { no: '05', key: '브랜드', tone: 'slate', figure: 'window', q: '사람들은 물건을 사는가, 이야기를 사는가.' },
-  { no: '06', key: '기술', tone: 'ink', figure: 'grid', q: '빨라진 것은 답인가, 질문인가.' },
-  { no: '07', key: '몸', tone: 'oxblood', figure: 'horizon', q: '생각은 어디까지 몸의 일인가.' },
-  { no: '08', key: '언어', tone: 'slate', figure: 'arc', q: '내 말로 설명할 수 없는 것을 나는 정말 아는가.' },
-] as const;
-
-export type Tone = (typeof SCENES)[number]['tone'];
-export type Figure = (typeof SCENES)[number]['figure'];
-
-/** 공부 — 세계에 들어온 뒤 발견되는 것 */
-export const STUDY = {
-  academic: {
-    name: 'ACADEMIC',
-    line: '성적과 진학을 정확히 다루는 학업과정.',
-    items: [
-      { key: '초등', text: '공부를 오래 이어갈 습관과 생각의 기초.' },
-      { key: '중등', text: '내신과 교과 이해를 바로 세우고, 공부 방식을 다시 정비.' },
-      { key: '고등', text: '대입의 현실을 기준으로 과목별 전략과 우선순위를 학생마다.' },
-    ],
-    href: '/programs',
-  },
-  forum: {
-    name: 'THE TOTAL FORUM',
-    line: '사고 · 표현 · 방향. 성적 이후에도 남는 능력.',
-    items: [
-      { key: 'SEE', text: '세계를 읽는 법' },
-      { key: 'WRITE', text: '생각을 글로 만드는 법' },
-      { key: 'SPEAK', text: '생각을 사람에게 전달하는 법' },
-      { key: 'MAKE', text: '방향을 결과물로 증명하는 법' },
-    ],
-    href: '/forum',
-  },
-};
-
-export const ENTRY = [
-  { no: '01', title: '온라인 진단', text: '학업과정 진단 또는 FORUM 지원 진단. 학생의 현재와 질문에서 시작합니다.', href: '/diagnosis' },
-  { no: '02', title: '온라인 입학시험', text: '과정별 회차에 온라인으로 응시합니다. 일정과 접수 상태는 입학 안내에서.', href: '/admissions' },
-  { no: '03', title: '개별 설계', text: '진단과 시험을 함께 검토해, 그 학생만의 공부를 설계합니다.', href: '/about' },
+/** 04 의 리서치 이미지 — 작은 캡션 */
+export const RESEARCH = [
+  { src: '/campaign/r-desk.jpg', w: 896, h: 1200, cap: 'R/01 — 밤 10시의 책상' },
+  { src: '/campaign/r-crosswalk.jpg', w: 1200, h: 1200, cap: 'R/02 — 같은 시간, 다른 방향' },
+  { src: '/campaign/r-corridor.jpg', w: 896, h: 1200, cap: 'R/03 — 마지막 교실의 불빛' },
+  { src: '/campaign/r-paper.jpg', w: 1400, h: 1045, cap: 'R/04 — 다시 쓰기 위해 찢는 종이' },
 ];
+
+export const CLOSE = ['THE TOTAL은', '한 학생의 삶과 질문에서 시작해', '그 사람만의 공부를 다시 설계합니다.'];
+
+/** 컬렉션 — 서비스 카드가 아니라 세 개의 오브제 */
+export const COLLECTION = [
+  {
+    slug: 'the-question',
+    no: 'I',
+    name: 'THE QUESTION',
+    line: '내 삶의 방향을 다시 묻는 첫 장면',
+    img: { src: '/campaign/question.jpg', alt: '푸른 저녁, 통유리창 앞에 서서 도시를 내려다보는 학생의 뒷모습' },
+    alt: { src: '/campaign/question-alt.jpg', alt: '밤의 창을 향해 놓인 빈 의자와 책상, 켜진 스탠드' },
+    body: [
+      'THE TOTAL의 모든 과정은 한 가지 질문에서 시작합니다. 당신은 정말 당신을 위한 공부를 하고 있나요?',
+      '정답을 고르는 문제가 아닙니다. 지금의 공부와 앞으로의 방향을 처음으로 나란히 놓고 보는 장면입니다. 그 장면에서 학생은 무엇을 향하는지, 무엇을 믿는지, 무엇을 공부할지를 자기 말로 꺼내기 시작합니다.',
+    ],
+    cta: { label: '첫 질문에서 시작하기', href: '/diagnosis' },
+  },
+  {
+    slug: 'the-index',
+    no: 'II',
+    name: 'THE INDEX',
+    line: '내가 아직 좋아할 줄 몰랐던 것을 만나게 하는 개인화된 경로',
+    img: { src: '/campaign/index.jpg', alt: '오래된 도서 목록 서랍장에서 서랍 하나를 꺼내는 손' },
+    alt: { src: '/campaign/index-alt.jpg', alt: '색 탭이 꽂힌 색인 카드를 넘기는 손끝, 빨간 탭 하나가 올라와 있다' },
+    body: [
+      '같은 교과서를 읽어도 학생마다 멈추는 곳이 다릅니다. THE INDEX는 그 멈춤을 기록합니다.',
+      '진단과 대화에서 드러난 관심과 질문을 따라, 다음에 읽을 것 · 볼 것 · 만날 사람을 한 사람의 경로로 엮습니다. 학업과정과 THE TOTAL FORUM이 그 경로 위에서 학생마다 다르게 설계됩니다.',
+    ],
+    cta: { label: '학업과정 · FORUM 보기', href: '/programs' },
+  },
+  {
+    slug: 'the-world',
+    no: 'III',
+    name: 'THE WORLD',
+    line: '영화, 글, 사람, 도시, 기술을 통해 더 넓은 세계를 읽는 편집',
+    img: { src: '/campaign/world.jpg', alt: '어두운 극장, 연기 속을 가로지르는 영사기 불빛과 관객의 뒷모습' },
+    alt: { src: '/campaign/world-alt.jpg', alt: '새벽, 옥상 난간에 앉아 안개 낀 도시를 바라보는 사람의 뒷모습' },
+    body: [
+      '교실 밖의 세계를 편집해 보여줍니다. 한 편의 영화, 한 편의 글, 한 사람의 이야기, 하나의 도시, 하나의 기술.',
+      '각 편집은 결론이 아니라 질문으로 끝납니다. 그 질문은 THE TOTAL FORUM의 세션으로 이어져, 학생의 글과 말과 작업이 됩니다.',
+    ],
+    edits: [
+      { key: '영화', q: '설명할 수 없는데 오래 남는 장면은 무엇인가.' },
+      { key: '글', q: '내 말로 설명할 수 없는 것을 나는 정말 아는가.' },
+      { key: '사람', q: '한 사람의 선택은 어디서부터 그의 것이었나.' },
+      { key: '도시', q: '이 거리는 누구의 선택으로 이렇게 생겼을까.' },
+      { key: '기술', q: '빨라진 것은 답인가, 질문인가.' },
+    ],
+    cta: { label: 'THE TOTAL FORUM', href: '/forum' },
+  },
+] as const;

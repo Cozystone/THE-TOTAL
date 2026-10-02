@@ -7,8 +7,8 @@ import { Symbol } from '@/components/Symbol';
 import { MENU, SITE } from '@/lib/copy';
 
 /*
- * 머리 — 화면 위에 고정, mix-blend-mode: difference 로 어두운 플레이트 위에서는 밝게, 종이 위에서는 어둡게.
- * 메뉴: 집(철학) · 장면 · 공부 · 들어오기. 1023px 이하는 메뉴 버튼 → 전체 화면.
+ * 머리 — 고정, difference 블렌드(사진 위에서도 종이 위에서도 읽힌다).
+ * 메뉴(임시): S.01 · THE QUESTION · THE INDEX · THE WORLD · ACADEMY ↗. 1023px 이하는 메뉴 버튼 → 전체 화면.
  */
 export function Header() {
   const path = usePathname();
@@ -33,8 +33,8 @@ export function Header() {
   return (
     <>
       <header className="head">
-        <Link className="brand" href="/" aria-label={`${SITE.name} 처음으로`}>
-          <Symbol size={26} animate />
+        <Link className="brand" href="/" aria-label={`${SITE.name} — ${SITE.season}`}>
+          <Symbol size={24} animate />
           <span className="wordmark">{SITE.name}</span>
         </Link>
         <nav className="menu" aria-label="주 메뉴">
@@ -43,6 +43,9 @@ export function Header() {
               {m.label}
             </Link>
           ))}
+          <a href={SITE.academy}>
+            ACADEMY <span aria-hidden="true">↗</span>
+          </a>
         </nav>
         <button
           ref={opener}
@@ -52,7 +55,7 @@ export function Header() {
           aria-controls="sheet"
           onClick={() => setOpen(true)}
         >
-          메뉴
+          MENU
         </button>
       </header>
 
@@ -61,20 +64,20 @@ export function Header() {
           <div className="sheet-head">
             <span className="wordmark">{SITE.name}</span>
             <button ref={closer} type="button" className="menu-button" onClick={() => setOpen(false)}>
-              닫기
+              CLOSE
             </button>
           </div>
           <nav className="sheet-menu" aria-label="주 메뉴">
-            <Link href="/" onClick={() => setOpen(false)}>
-              처음
-            </Link>
             {MENU.map((m) => (
               <Link key={m.href} href={m.href} aria-current={path === m.href ? 'page' : undefined} onClick={() => setOpen(false)}>
                 {m.label}
               </Link>
             ))}
+            <a href={SITE.academy}>
+              ACADEMY <span aria-hidden="true">↗</span>
+            </a>
           </nav>
-          <p className="sheet-foot">{SITE.line}</p>
+          <p className="sheet-foot">{SITE.season}</p>
         </div>
       )}
     </>

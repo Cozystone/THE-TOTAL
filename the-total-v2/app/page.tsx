@@ -1,137 +1,146 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { Plate } from '@/components/Plate';
-import { CAMPAIGN, HOUSE, SCENES, SITE, STUDY } from '@/lib/copy';
+import { Film } from '@/components/Film';
+import { CHAPTERS, CLOSE, COLLECTION, HERO, RESEARCH, SITE } from '@/lib/copy';
 
 /*
- * 처음 — 캠페인.
- *  한 장면(질문) → 네 번의 호흡(세상 · 답 · 질문 · 아직) → 선언 → 그 뒤에 집 · 장면 · 공부가 발견된다.
- *  텍스트와 플레이트는 번갈아 같은 무게로.
+ * S.01 — THE FIRST QUESTION. 홈은 하나의 캠페인.
+ *   첫 장면(무음 영상, 21:9) → 01 전체 화면 영상(어둠) → 02 좁은 세로 사진 + 여백(오프화이트)
+ *   → 03 흰 바탕의 짧은 문장(시그널 레드) → 04 리서치 이미지 여러 장 + 작은 캡션(검정)
+ *   → 컬렉션 세 오브제(오프화이트) → 맺음.
+ * 장면마다 비율 · 밝기 · 글자 위치가 다르다. 문장은 장면의 제목.
  */
-export default function Home() {
+export default function Campaign() {
   return (
     <main id="main">
-      {/* 한 장면 */}
+      {/* 첫 장면 */}
       <section className="hero" aria-labelledby="hero-title">
-        <Plate tone="ink" figure="horizon" ratio="auto" className="hero-plate" priority />
-        <div className="hero-text">
-          <p className="hero-kicker">{SITE.name}</p>
-          <h1 className="hero-title" id="hero-title">
-            {CAMPAIGN.hero.map((l, i) => (
-              <span key={l} className="line" style={{ animationDelay: `${300 + i * 160}ms` }}>
-                <span>{l}</span>
-              </span>
-            ))}
-          </h1>
-          <p className="hero-scroll" aria-hidden="true">
-            아래로
-          </p>
-        </div>
-      </section>
-
-      {/* 네 번의 호흡 */}
-      <section className="sequence" aria-label="캠페인">
-        {CAMPAIGN.sequence.map((group, i) => (
-          <div key={i} className={`beat beat-${i + 1}`} data-reveal>
-            <span className="beat-no">{String(i + 1).padStart(2, '0')}</span>
-            <p className="beat-text">
-              {group.map((l) => (
-                <span key={l}>{l}</span>
-              ))}
-            </p>
-            {i === 1 && <Plate tone="slate" figure="grid" ratio="3 / 4" className="beat-plate" label="장면 02" caption="알고리즘" />}
-            {i === 3 && <Plate tone="oxblood" figure="arc" ratio="4 / 5" className="beat-plate" label="장면 04" caption="예술" />}
-          </div>
-        ))}
-      </section>
-
-      {/* 선언 */}
-      <section className="close" aria-label="선언">
-        <Plate tone="ink" figure="window" ratio="auto" className="close-plate" />
-        <p className="close-text" data-reveal>
-          {CAMPAIGN.close.map((l) => (
-            <span key={l}>{l}</span>
+        <Film
+          className="hero-film"
+          src="/campaign/hero.mp4"
+          poster="/campaign/hero.jpg"
+          label="늦은 저녁, 학원가가 내려다보이는 비 내린 유리창 앞에 선 학생의 뒷모습"
+        />
+        <div className="hero-veil" aria-hidden="true" />
+        <p className="hero-season">{SITE.season}</p>
+        <h1 className="hero-title" id="hero-title">
+          {HERO.map((l, i) => (
+            <span key={l} className={`hl hl-${i + 1}`}>
+              <span style={{ animationDelay: `${500 + i * 180}ms` }}>{l}</span>
+            </span>
           ))}
+        </h1>
+        <p className="hero-index" aria-hidden="true">
+          01 — 04
         </p>
       </section>
 
-      {/* 집 */}
-      <section className="discover" aria-labelledby="house-title">
-        <div className="discover-head">
-          <p className="eyebrow">집</p>
-          <h2 className="discover-title" id="house-title">
-            {HOUSE.thesis[0]}
-            <br />
-            {HOUSE.thesis[1]}
-          </h2>
-        </div>
-        <div className="discover-body" data-reveal>
-          <p className="body">{HOUSE.intro}</p>
-          <Link className="link" href="/house">
-            집으로 <span aria-hidden="true">→</span>
-          </Link>
-        </div>
+      {/* 01 — 전체 화면 영상 */}
+      <section className="ch ch1" aria-labelledby="c1">
+        <Film
+          className="ch1-film"
+          src="/campaign/desire.mp4"
+          poster="/campaign/desire.jpg"
+          label="밤의 창가, 휴대전화 화면의 빛이 도시의 반사와 겹치는 손"
+        />
+        <div className="ch1-veil" aria-hidden="true" />
+        <p className="ch-tag">
+          {CHAPTERS.c1.no} — {CHAPTERS.c1.title}
+        </p>
+        <h2 className="ch1-line" id="c1">
+          {CHAPTERS.c1.line}
+        </h2>
       </section>
 
-      {/* 장면 */}
-      <section className="scenes-teaser" aria-labelledby="scenes-title">
-        <div className="discover-head">
-          <p className="eyebrow">장면</p>
-          <h2 className="discover-title" id="scenes-title">
-            더 넓은 세계와
-            <br />더 정확한 장면.
+      {/* 02 — 좁은 세로 사진, 과감한 여백 */}
+      <section className="ch ch2" aria-labelledby="c2">
+        <p className="ch-tag">
+          {CHAPTERS.c2.no} — {CHAPTERS.c2.title}
+        </p>
+        <h2 className="ch2-line" id="c2" data-reveal>
+          {CHAPTERS.c2.line}
+        </h2>
+        <figure className="ch2-photo" data-reveal>
+          <Image
+            src="/campaign/escalator.jpg"
+            width={792}
+            height={1400}
+            sizes="(max-width: 719px) 70vw, 28vw"
+            alt="푸른 저녁, 유리 건물의 긴 에스컬레이터를 홀로 오르는 학생의 뒷모습과 반대로 흐르는 사람들"
+          />
+          <figcaption>Blue hour, 19:40</figcaption>
+        </figure>
+      </section>
+
+      {/* 03 — 흰 바탕의 짧은 문장 */}
+      <section className="ch ch3" aria-labelledby="c3">
+        <p className="ch-tag ch-tag-signal">
+          {CHAPTERS.c3.no} — {CHAPTERS.c3.title}
+        </p>
+        <h2 className="ch3-lines" id="c3">
+          {CHAPTERS.c3.lines.map((l, i) => (
+            <span key={l} className={`c3l c3l-${i + 1}`} data-reveal>
+              {l}
+            </span>
+          ))}
+        </h2>
+      </section>
+
+      {/* 04 — 리서치 이미지 + 작은 캡션 */}
+      <section className="ch ch4" aria-labelledby="c4">
+        <div className="ch4-head">
+          <p className="ch-tag">
+            {CHAPTERS.c4.no} — {CHAPTERS.c4.title}
+          </p>
+          <h2 className="ch4-line" id="c4" data-reveal>
+            {CHAPTERS.c4.line}
           </h2>
         </div>
-        <ul className="plates" data-reveal>
-          {SCENES.slice(0, 3).map((s) => (
-            <li key={s.no}>
-              <Link href={`/scenes#${s.no}`}>
-                <Plate tone={s.tone} figure={s.figure} label={`장면 ${s.no}`} caption={s.key} />
-                <span className="plate-q">{s.q}</span>
+        <ul className="research">
+          {RESEARCH.map((r, i) => (
+            <li key={r.src} className={`rs rs-${i + 1}`} data-reveal>
+              <Image src={r.src} width={r.w} height={r.h} sizes="(max-width: 719px) 90vw, 30vw" alt={r.cap.split(' — ')[1]} />
+              <span className="rs-cap">{r.cap}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 컬렉션 */}
+      <section className="collection" aria-labelledby="collection-title">
+        <div className="collection-head">
+          <p className="ch-tag">THE TOTAL — S.01</p>
+          <h2 className="collection-title" id="collection-title">
+            THE COLLECTION
+          </h2>
+        </div>
+        <ul className="objects">
+          {COLLECTION.map((c, i) => (
+            <li key={c.slug} className={`object object-${i + 1}`}>
+              <Link href={`/${c.slug}`} aria-label={`${c.name} — ${c.line}`}>
+                <span className="object-frame">
+                  <Image src={c.img.src} width={1195} height={1600} sizes="(max-width: 719px) 90vw, 40vw" alt={c.img.alt} />
+                  <Image className="object-alt" src={c.alt.src} width={1195} height={1600} sizes="(max-width: 719px) 90vw, 40vw" alt="" />
+                </span>
+                <span className="object-no">{c.no}</span>
+                <span className="object-name">{c.name}</span>
+                <span className="object-line">{c.line}</span>
               </Link>
             </li>
           ))}
         </ul>
-        <Link className="link" href="/scenes">
-          여덟 장면 모두 <span aria-hidden="true">→</span>
-        </Link>
       </section>
 
-      {/* 공부 */}
-      <section className="study-teaser" aria-labelledby="study-title">
-        <div className="discover-head">
-          <p className="eyebrow">공부</p>
-          <h2 className="discover-title" id="study-title">
-            세계에 들어온 뒤,
-            <br />
-            공부가 발견됩니다.
-          </h2>
-        </div>
-        <dl className="study-rows" data-reveal>
-          {[STUDY.academic, STUDY.forum].map((s) => (
-            <div key={s.name}>
-              <dt>{s.name}</dt>
-              <dd>
-                <p>{s.line}</p>
-                <ul>
-                  {s.items.map((it) => (
-                    <li key={it.key}>
-                      <span>{it.key}</span>
-                      {it.text}
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
+      {/* 맺음 */}
+      <section className="closing" aria-label="맺음">
+        <p className="closing-text" data-reveal>
+          {CLOSE.map((l) => (
+            <span key={l}>{l}</span>
           ))}
-        </dl>
-        <div className="study-links">
-          <Link className="link" href="/study">
-            공부에 대해 <span aria-hidden="true">→</span>
-          </Link>
-          <Link className="link" href="/entry">
-            들어오는 길 <span aria-hidden="true">→</span>
-          </Link>
-        </div>
+        </p>
+        <a className="closing-link" href={`${SITE.academy}/diagnosis`}>
+          첫 질문에서 시작하기 <span aria-hidden="true">↗</span>
+        </a>
       </section>
     </main>
   );

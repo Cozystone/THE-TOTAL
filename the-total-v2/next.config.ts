@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   devIndicators: false,
+  // 이전 V2 시안의 주소
+  async redirects() {
+    return [
+      { source: '/house', destination: '/the-question', permanent: false },
+      { source: '/scenes', destination: '/the-world', permanent: false },
+      { source: '/study', destination: '/the-index', permanent: false },
+      { source: '/entry', destination: '/the-question', permanent: false },
+    ];
+  },
   async headers() {
     return [
       {
