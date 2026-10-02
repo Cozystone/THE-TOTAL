@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     return [
       { source: '/house', destination: '/the-question', permanent: false },
       { source: '/scenes', destination: '/the-world', permanent: false },
-      { source: '/study', destination: '/the-index', permanent: false },
+      { source: '/study', destination: '/programs', permanent: false },
       { source: '/entry', destination: '/the-question', permanent: false },
     ];
   },

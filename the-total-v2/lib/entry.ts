@@ -56,52 +56,66 @@ export const STARTS = [
 /** 접수 기능이 연결되기 전의 정확한 안내 문구 */
 export const NOT_OPEN = '현재 온라인 신청 접수는 준비 중입니다. 입학 안내를 먼저 확인해 주세요.';
 
-/** 홈의 THE HOUSE — 세 개의 큰 에디토리얼 블록(이미지 · 바탕색 · 짧은 문장 · 링크) */
+/** 홈의 THE HOUSE — 짧게. 자세한 내용은 /programs · /admissions */
 export const HOUSE = [
   {
     key: 'academic',
-    no: 'I',
     name: 'ACADEMIC',
-    lines: ['학업의 현재를 정확히 읽고,', '학생마다 다른 수업의 순서를 설계합니다.'],
-    meta: '초등 · 중등 · 고등',
-    cta: '학업과정 진단 시작',
+    line: '학업의 현재를 정확히 읽고, 학생마다 다른 수업의 순서를 설계합니다.',
+    cta: '학업과정 진단',
     href: '/diagnosis/academic',
-    more: { label: '교육과정 보기', href: '/programs' },
     img: '/campaign/house-academic.jpg',
-    alt: '햇빛이 드는 책상 위, 펼친 교과서와 모눈종이 옆 공책에 도형을 그리며 풀이를 적는 손',
-    tone: 'off',
   },
   {
     key: 'forum',
-    no: 'II',
     name: 'THE TOTAL FORUM',
-    lines: ['생각을 글과 말로 만들고,', '자신의 방향을 실제 작업으로 증명합니다.'],
-    meta: '사고 · 표현 · 방향',
+    line: '생각을 글과 말로 만들고, 자신의 방향을 실제 작업으로 증명합니다.',
     cta: 'FORUM 지원 진단',
     href: '/diagnosis/forum',
-    more: { label: 'FORUM 보기', href: '/forum' },
     img: '/campaign/house-forum.jpg',
-    alt: '창이 큰 작업실, 사진과 메모가 펼쳐진 긴 나무 탁자에 둘러서서 한 사람의 설명을 듣는 세 학생의 뒷모습',
-    tone: 'white',
   },
   {
     key: 'admissions',
-    no: 'III',
-    name: 'ADMISSIONS',
-    lines: ['THE TOTAL에 들어오는', '가장 적합한 방법을 확인합니다.'],
-    meta: '개인 진단 · 입학시험 · 일정',
+    name: '입학 안내',
+    line: 'THE TOTAL에 들어오는 가장 적합한 방법을 확인합니다.',
     cta: '입학 안내 보기',
     href: '/admissions',
-    more: { label: '입학시험 일정', href: '/admissions/schedule' },
     img: '/campaign/house-admissions.jpg',
-    alt: '아침 햇살이 돌바닥으로 쏟아지는 활짝 열린 나무 유리문과 그 문턱을 지나는 학생의 뒷모습',
-    tone: 'black',
   },
 ] as const;
 
-/** 홈의 마지막 — 컬렉션 입장 링크처럼 */
+/** 마지막 입장 — 학생 / 부모 / 입학 안내 */
 export const ENTER = [
-  { no: '01', label: 'ACADEMIC 개인진단', meta: '초등 · 중등 · 고등 · 약 5분', href: '/diagnosis/academic' },
-  { no: '02', label: 'FORUM 지원 진단', meta: '관심사 · 생각의 방식 · 만들고 싶은 작업 · 약 10분', href: '/diagnosis/forum' },
-  { no: '03', label: '입학 안내', meta: '학생 · 부모 · 입학시험 일정', href: '/admissions' },
+  { no: '01', label: '나는 학생입니다', meta: '나에게 맞는 시작 찾기', href: '/start/student' },
+  { no: '02', label: '나는 부모입니다', meta: '자녀에게 맞는 시작 찾기', href: '/start/parent' },
+  { no: '03', label: '입학 안내', meta: '개인진단 · 입학시험 일정 · 안내 요청', href: '/admissions' },
+] as const;
+
+/** /start — QR 로 들어온 학생 · 부모의 두 번째 화면 */
+export const START = {
+  student: {
+    tag: '학생에게',
+    title: ['내가 정말 원하는 것은', '무엇일까?'],
+    body: ['THE TOTAL은', '당신이 더 넓은 세계를 보고,', '자기 생각을 글과 말로 만들고,', '자신만의 공부를 설계하도록 돕습니다.'],
+    cta: '나의 시작 찾기',
+    img: '/campaign/house-forum.jpg',
+    alt: '창이 큰 작업실, 사진과 메모가 펼쳐진 탁자에 둘러서서 이야기하는 학생들의 뒷모습',
+    other: { label: '부모이신가요?', href: '/start/parent' },
+  },
+  parent: {
+    tag: '부모님께',
+    title: ['아이에게 필요한 공부는', '더 많은 답일까요,', '자기 삶을 생각할 시간일까요?'],
+    body: ['THE TOTAL은 학업의 현실을 정확히 다루면서,', '아이의 질문과 방향을 함께 설계합니다.'],
+    cta: '자녀의 시작 찾기',
+    img: '/campaign/house-academic.jpg',
+    alt: '햇빛이 드는 책상 위, 펼친 교과서 옆 공책에 풀이를 적는 손',
+    other: { label: '학생이신가요?', href: '/start/student' },
+  },
+} as const;
+
+/** /start 의 마지막 세 선택 */
+export const CHOICES = [
+  { label: 'ACADEMIC 개인진단', meta: '초등 · 중등 · 고등 · 약 5분', href: '/diagnosis/academic' },
+  { label: 'FORUM 지원 진단', meta: '관심사 · 생각의 방식 · 만들고 싶은 작업 · 약 10분', href: '/diagnosis/forum' },
+  { label: '입학 안내', meta: '입학시험 일정 · 안내 요청', href: '/admissions' },
 ] as const;

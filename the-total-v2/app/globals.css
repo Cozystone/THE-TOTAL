@@ -159,11 +159,11 @@ video {
 
 .menu {
   display: flex;
-  gap: clamp(20px, 2.6vw, 40px);
-  font-family: var(--latin);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  align-items: baseline;
+  gap: clamp(20px, 2.4vw, 36px);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .menu a {
@@ -193,13 +193,13 @@ video {
 
 .menu-button {
   display: none;
-  padding: 6px 10px;
+  padding: 5px 12px;
   background: none;
   border: 1px solid currentColor;
-  font-family: var(--latin);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.5;
 }
 
 .sheet {
@@ -232,12 +232,12 @@ video {
 }
 
 .sheet-menu a {
-  padding: 18px 0;
+  padding: 16px 0;
   border-bottom: 1px solid #2c2c2c;
-  font-family: var(--latin);
-  font-size: 26px;
+  font-size: clamp(24px, 2.6vw, 34px);
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
   text-decoration: none;
 }
 
@@ -288,23 +288,38 @@ video {
   background: rgba(0, 0, 0, 0.06);
 }
 
-.hero-season {
+/* 데스크톱: 문장 · 정체성 · CTA 를 이미지 오른쪽의 밝은 벽 위에 */
+.hero {
+  --fg: var(--ink);
+  --bg: var(--off);
+}
+
+.hero-body {
   position: absolute;
-  top: clamp(96px, 16vh, 160px);
+  top: 50%;
   right: var(--m);
+  width: min(600px, 44vw);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(32px, 3vw, 48px);
+  transform: translateY(-44%);
+  background: rgba(244, 241, 235, 0.82);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 12px 40px rgba(13, 13, 13, 0.08);
+}
+
+.hero-season {
   font-family: var(--latin);
   font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.16em;
 }
 
-/* 문장은 이미지의 여백(오른쪽의 어두운 유리)에 엇갈려 놓는다 */
 .hero-title {
-  position: absolute;
-  top: 34%;
-  left: 52%;
-  right: var(--m);
-  font-size: clamp(34px, 4.4vw, 76px);
+  margin-top: 18px;
+  font-size: clamp(32px, 3.4vw, 56px);
   font-weight: 600;
   line-height: 1.16;
   letter-spacing: -0.045em;
@@ -323,22 +338,87 @@ video {
 }
 
 .hl-2 {
-  padding-left: 0.9em;
+  padding-left: 0.6em;
 }
 
 .hl-3 {
-  padding-left: 3.2em;
+  padding-left: 1.8em;
 }
 
-.hero-index {
-  position: absolute;
-  left: var(--m);
-  bottom: 28px;
-  font-family: var(--latin);
-  font-size: 11.5px;
+.hero-id {
+  margin-top: clamp(20px, 3vh, 32px);
+  font-size: clamp(15px, 1.15vw, 18px);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.hero-id span,
+.st-id span,
+.st-title span,
+.sp-title span,
+.sp-text span {
+  display: block;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: clamp(24px, 3.4vh, 36px);
+}
+
+.hero-more {
+  align-self: flex-start;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.hero-more:hover {
+  color: var(--signal);
+}
+
+/* CTA — 얇은 사각 라벨. 채움 하나, 선 하나 */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 24px;
+  border: 1px solid var(--fg);
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.16em;
-  opacity: 0.7;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    background 300ms,
+    color 300ms,
+    border-color 300ms;
+}
+
+.cta-solid {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.cta-line {
+  color: var(--fg);
+}
+
+.cta-solid:hover,
+.cta-solid:focus-visible {
+  background: var(--signal);
+  border-color: var(--signal);
+  color: var(--white);
+}
+
+.cta-line:hover,
+.cta-line:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
 }
 
 /* ── 장면 공통 ── */
@@ -888,10 +968,39 @@ video {
     display: block;
   }
 
-  .hero-title {
-    left: var(--m);
+  /* 첫 장면: 영상이 화면 전체, 글자는 아래쪽 절제된 그라디언트 위 */
+  .hero {
+    --fg: var(--white);
+    --bg: var(--ink);
+    color: var(--white);
+  }
+
+  .hero-veil {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(13, 13, 13, 0.74) 0%, rgba(13, 13, 13, 0.46) 36%, rgba(13, 13, 13, 0) 64%);
+  }
+
+  .hero-body {
     top: auto;
-    bottom: 18%;
+    left: var(--m);
+    width: auto;
+    padding: 0;
+    transform: none;
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    border: 0;
+    box-shadow: none;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(20px, 4svh, 40px));
+    padding-top: 0;
+  }
+
+  .hero-title {
+    margin-top: 12px;
+    font-size: clamp(30px, 8.4vw, 56px);
+    line-height: 1.2;
   }
 
   .hl-2 {
@@ -900,6 +1009,39 @@ video {
 
   .hl-3 {
     padding-left: 1.6em;
+  }
+
+  .hero-id {
+    margin-top: 14px;
+    font-size: 15px;
+    opacity: 0.92;
+  }
+
+  .hero-cta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 520px;
+    margin-top: 22px;
+  }
+
+  .hero-cta .cta {
+    padding: 0 12px;
+  }
+
+  .hero .cta-line,
+  .st .cta-line {
+    background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .hero-more {
+    margin-top: 14px;
+  }
+
+  .sheet-head {
+    height: auto;
+    padding: calc(env(safe-area-inset-top, 0px) + 10px) 0 10px;
   }
 
   .ch2-photo {
@@ -980,39 +1122,6 @@ video {
 
   .hero-film {
     object-position: 22% 50%;
-  }
-
-  .hero-season {
-    top: 88px;
-    left: var(--m);
-    right: auto;
-  }
-
-  /* 휴대폰: 영상은 위, 질문은 그 아래 종이 위에 — 사진 위에 겹쳐 읽히지 않게 */
-  .hero {
-    height: auto;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .hero-film {
-    position: relative;
-    height: 62svh;
-  }
-
-  .hero-title {
-    position: static;
-    padding: 28px var(--m) 44px;
-    font-size: clamp(32px, 9.6vw, 48px);
-  }
-
-  .hero-index {
-    display: none;
-  }
-
-  .hl {
-    white-space: normal;
   }
 
   .ch1-label {
@@ -1223,7 +1332,7 @@ video {
   }
 
   .sheet-menu a {
-    font-size: 22px;
+    font-size: 26px;
     padding: 12px 0;
   }
 }
@@ -1256,9 +1365,14 @@ video {
     animation: mask-up 1500ms var(--ease) backwards;
   }
 
-  .hero-season,
-  .hero-index {
-    animation: fade 1400ms var(--ease) 1200ms backwards;
+  .hero-season {
+    animation: fade 1400ms var(--ease) 1000ms backwards;
+  }
+
+  .hero-id,
+  .hero-cta,
+  .hero-more {
+    animation: fade 900ms var(--ease) 300ms backwards;
   }
 
   [data-reveal] {

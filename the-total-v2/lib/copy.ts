@@ -10,23 +10,26 @@ export const SITE = {
   place: '서울 · 대치',
 };
 
-/** 캠페인 — 머리에 늘 보이는 층 */
+/** 캠페인 — 머리에 늘 보이는 층. 브랜드명과 INDEX 외에는 한국어 */
 export const MENU = [
-  { href: '/', label: 'S.01' },
-  { href: '/the-question', label: 'THE QUESTION' },
-  { href: '/the-index', label: 'THE INDEX' },
-  { href: '/the-world', label: 'THE WORLD' },
+  { href: '/the-question', label: '첫 질문' },
+  { href: '/the-index', label: '나의 INDEX' },
+  { href: '/the-world', label: '세계' },
 ] as const;
 
-/** THE HOUSE — 세계에 들어온 뒤 발견되는, 실제로 동작하는 기관의 층 */
+/** THE HOUSE — 메뉴 오버레이의 기관 층 */
 export const HOUSE_MENU = [
-  { href: '/about', label: 'ABOUT', ko: '소개' },
-  { href: '/programs', label: 'PROGRAMS', ko: '교육과정' },
-  { href: '/forum', label: 'FORUM', ko: 'THE TOTAL FORUM' },
-  { href: '/diagnosis', label: 'DIAGNOSIS', ko: '온라인 진단' },
-  { href: '/admissions', label: 'ADMISSIONS', ko: '입학 안내' },
-  { href: '/notices', label: 'NOTICES', ko: '공지' },
+  { href: '/programs', label: '교육과정' },
+  { href: '/forum', label: 'THE TOTAL FORUM' },
+  { href: '/admissions', label: '입학 안내' },
+  { href: '/about', label: '소개' },
 ] as const;
+
+/** 바닥 — 오버레이에 없는 진단 · 공지까지 */
+export const FOOT_MENU = [...HOUSE_MENU, { href: '/diagnosis', label: '온라인 진단' }, { href: '/notices', label: '공지' }] as const;
+
+/** 정체성 한 줄 — 홈 첫 화면과 /start */
+export const IDENTITY = ['AI 시대의 개인화 교육.', '더 넓은 세계를 보고,', '자신만의 방향을 발견하는 곳.'];
 
 export const HERO = ['당신은 정말', '당신을 위한 공부를', '하고 있나요?'];
 
