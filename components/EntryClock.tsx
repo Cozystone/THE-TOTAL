@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { NEXT_ENTRY_LABEL, NEXT_SEASON, SEASON, phaseAt, remaining, type Phase } from '@/lib/entry';
+import { NEXT_ENTRY_LABEL, NEXT_SEASON, RESERVED_BASE, SEASON, SHOW_NOTICE_COUNT, phaseAt, remaining, type Phase } from '@/lib/entry';
 
 /*
  * 2027 SEASON ENTRY 의 시계. 설정값은 lib/entry.ts 한 곳.
@@ -65,5 +65,41 @@ export function ClosedNotice({ headingLevel = 2 }: { headingLevel?: 1 | 2 }) {
       </p>
       <p className="closed-ask">{NEXT_SEASON} Season의 시작 안내를 받으시겠습니까?</p>
     </div>
+  );
+}
+
+/*
+ * 현재 예약 — 시작값 + 실제 기록 수. 10초마다, 그리고 이 화면에서 기록되는 즉시 다시 읽는다.
+ * 숫자는 고정폭. 화면 읽기에는 바뀔 때마다 읽어 주지 않는다(aria-live off).
+ */
+export function Reserved() {
+  const [count, setCount] = useState<number>(RESERVED_BASE);
+  useEffect(() => {
+    if (!SHOW_NOTICE_COUNT) return;
+    let alive = true;
+    const load = () =>
+      fetch('/api/entry-notice', { cache: 'no-store' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => {
+          if (alive && typeof d?.count === 'number') setCount(d.count);
+        })
+        .catch(() => {});
+    const first = window.setTimeout(load, 0);
+    const t = window.setInterval(load, 10_000);
+    window.addEventListener('entry-notice:added', load);
+    return () => {
+      alive = false;
+      window.clearTimeout(first);
+      window.clearInterval(t);
+      window.removeEventListener('entry-notice:added', load);
+    };
+  }, []);
+  if (!SHOW_NOTICE_COUNT) return null;
+  return (
+    <p className="reserved" aria-live="off">
+      <span className="reserved-label">현재 예약</span>
+      <span className="reserved-num">{count.toLocaleString('ko-KR')}</span>
+      <span className="reserved-unit">명</span>
+    </p>
   );
 }

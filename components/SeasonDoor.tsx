@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ClosedNotice, Countdown, usePhase } from '@/components/EntryClock';
+import { ClosedNotice, Countdown, Reserved, usePhase } from '@/components/EntryClock';
 import { useGo } from '@/components/NavLink';
 import { SEASON } from '@/lib/entry';
 
@@ -35,6 +35,7 @@ export function SeasonDoor({ variant }: { variant: 'home' | 'entry' }) {
           이번 시즌의 문은 <span className="door-break">11월 1일에 닫힙니다.</span>
         </h1>
         <Countdown />
+        <Reserved />
         <p className="door-note">
           {SEASON} Season Entry는
           <br />
@@ -59,6 +60,7 @@ export function SeasonDoor({ variant }: { variant: 'home' | 'entry' }) {
         다음 해까지 다시 열리지 않습니다.
       </p>
       <Countdown />
+      <Reserved />
     </div>
   );
 }

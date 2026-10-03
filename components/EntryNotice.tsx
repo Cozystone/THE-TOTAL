@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
+import { useId, useState } from 'react';
 import { usePhase } from '@/components/EntryClock';
-import { NEXT_SEASON, SEASON, SHOW_NOTICE_COUNT } from '@/lib/entry';
+import { NEXT_SEASON, SEASON } from '@/lib/entry';
 
 /*
  * ENTRY NOTICE — 사이트에서 이메일을 받는 유일한 곳. 기관 공지 서식처럼 조용하게.
@@ -29,24 +29,6 @@ export function EntryNotice() {
   const [consent, setConsent] = useState(false);
   const [company, setCompany] = useState('');
   const [state, setState] = useState<State>('idle');
-  const [count, setCount] = useState<number | null>(null);
-
-  // 실제 신청 수 — 공개 설정이 켜졌을 때만, 20초마다
-  useEffect(() => {
-    if (!SHOW_NOTICE_COUNT) return;
-    let alive = true;
-    const load = () =>
-      fetch('/api/entry-notice', { cache: 'no-store' })
-        .then((r) => (r.ok ? r.json() : null))
-        .then((d) => alive && typeof d?.count === 'number' && setCount(d.count))
-        .catch(() => {});
-    load();
-    const t = window.setInterval(load, 20_000);
-    return () => {
-      alive = false;
-      window.clearInterval(t);
-    };
-  }, [state]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,6 +43,7 @@ export function EntryNotice() {
         body: JSON.stringify({ email: value, consent, company }),
       });
       const data = (await res.json()) as { status?: State };
+      if (data.status === 'ok') window.dispatchEvent(new Event('entry-notice:added'));
       setState(data.status && data.status in MESSAGES ? data.status : data.status === 'ok' ? 'ok' : 'error');
     } catch {
       setState('error');
@@ -142,7 +125,6 @@ export function EntryNotice() {
         <br />
         {season} Season 종료 후 삭제됩니다.
       </p>
-      {SHOW_NOTICE_COUNT && count !== null && <p className="notice-count">ENTRY NOTICE {count.toLocaleString('ko-KR')}</p>}
     </form>
   );
 }

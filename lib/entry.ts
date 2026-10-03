@@ -5,8 +5,8 @@
  *   카운트다운   ENTRY_CLOSE_DATE 까지 일 · 시 · 분 · 초가 실제로 줄어든다
  *   종료 뒤      CLOSED — 다음 Entry 는 2027년 10월(2028 Season)
  *
- * 숫자(안내 신청 수)는 실제로 쌓인 값만 쓰고, 공개 여부는 SHOW_NOTICE_COUNT 로 따로 정한다.
- * 가짜 예약 · 대기 · 접수 현황은 만들지 않는다.
+ * 예약 수: 시작값 RESERVED_BASE(본인 지정 1376) + 실제로 기록된 ENTRY NOTICE 수. 새 신청이 들어오면 실시간으로 는다.
+ *   공개 여부는 SHOW_NOTICE_COUNT. Entry 가 닫히면 숫자는 내린다.
  */
 export const ENTRY_OPEN_DATE = '2026-10-01T00:00:00+09:00';
 export const ENTRY_CLOSE_DATE = '2026-11-01T23:59:59+09:00';
@@ -15,8 +15,10 @@ export const SEASON = '2027';
 export const NEXT_SEASON = '2028';
 export const NEXT_ENTRY_LABEL = '2027년 10월';
 
-/** 실제 안내 신청 수를 화면에 보일지. 실제 데이터가 쌓인 뒤 따로 결정한다. */
-export const SHOW_NOTICE_COUNT = false;
+/** 예약 수를 화면에 보일지 */
+export const SHOW_NOTICE_COUNT = true;
+/** 예약 수의 시작값(본인 지정). 화면의 숫자 = 시작값 + 실제 기록 수 */
+export const RESERVED_BASE = 1376;
 
 export const OPEN_AT = Date.parse(ENTRY_OPEN_DATE);
 export const CLOSE_AT = Date.parse(ENTRY_CLOSE_DATE);

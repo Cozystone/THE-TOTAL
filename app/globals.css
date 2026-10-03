@@ -2806,3 +2806,30 @@ a.list-title:hover {
 .director-quote + .body-gap {
   margin-top: 16px;
 }
+
+/* 현재 예약 — 카운트다운 아래 한 줄, 고정폭 숫자 */
+.reserved {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 15px;
+}
+
+.reserved-label {
+  color: var(--mute);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.reserved-num {
+  font-family: var(--latin);
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.reserved-unit {
+  font-weight: 600;
+}
