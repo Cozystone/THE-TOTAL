@@ -3398,3 +3398,19 @@ a.list-title:hover {
     backdrop-filter: blur(16px);
   }
 }
+
+/* 맨 위 로고에만 — THE TOTAL 오른쪽에 작게 Academy */
+.wordmark-sub {
+  margin-left: 8px;
+  color: var(--mute);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 719px) {
+  .wordmark-sub {
+    margin-left: 6px;
+    font-size: 10.5px;
+  }
+}

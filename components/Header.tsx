@@ -75,9 +75,12 @@ export function Header() {
     <>
       <header className="masthead">
         <div className="masthead-inner">
-          <Link className="brand" href="/" aria-label={`${SITE.name} 홈`} onClick={(e) => go(e, '/')}>
+          <Link className="brand" href="/" aria-label={`${SITE.name} Academy 홈`} onClick={(e) => go(e, '/')}>
             <Symbol size={34} animate className="insignia" />
-            <span className="wordmark">{SITE.name}</span>
+            <span className="wordmark">
+              {SITE.name}
+              <span className="wordmark-sub">Academy</span>
+            </span>
           </Link>
 
           <nav className="menu" aria-label="주 메뉴">
