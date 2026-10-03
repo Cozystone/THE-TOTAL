@@ -5,12 +5,13 @@ import { METHOD, PROCESS } from '@/lib/method';
 export const metadata: Metadata = { title: '방식' };
 
 /*
- * THE TOTAL의 방식 — 현재를 읽고, 순서를 보고, 선택의 근거를 만든다.
- * 얇은 선 · 번호 · 짧은 문장. 진단 · 평가 · 설계는 한 줄씩. 끝의 CTA 는 하나.
+ * THE TOTAL의 방식 — 현재를 읽고, 순서를 보고, 선택의 근거를 만든다. 한 화면 안에서 끝난다.
+ * 데스크톱: 01 · 02 · 03 세 칸 → 진단 · 평가 · 설계 한 줄씩 → 맺음 문장과 CTA 한 줄.
+ * 얇은 선 · 번호 · 짧은 문장. 끝의 CTA 는 하나.
  */
 export default function Method() {
   return (
-    <main id="main" className="page page-tight">
+    <main id="main" className="page page-tight page-method">
       <header className="page-head">
         <p className="eyebrow">방식</p>
         <h1 className="page-title">THE TOTAL의 방식</h1>
@@ -30,10 +31,10 @@ export default function Method() {
         ))}
       </ol>
 
-      <section className="home-sec" aria-labelledby="process-title">
-        <div className="block-head">
-          <h2 id="process-title">진단 · 평가 · 설계</h2>
-        </div>
+      <section className="method-process" aria-labelledby="process-title">
+        <h2 id="process-title" className="method-process-title">
+          진단 · 평가 · 설계
+        </h2>
         <ol className="process">
           {PROCESS.map((p) => (
             <li key={p.no}>
@@ -45,7 +46,7 @@ export default function Method() {
         </ol>
       </section>
 
-      <section className="home-sec closing-line" aria-label="맺음">
+      <section className="method-closing" aria-label="맺음">
         <p className="statement">
           모든 학생은 같은 목표를 말합니다.
           <br />

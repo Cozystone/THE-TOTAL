@@ -3770,3 +3770,304 @@ a.list-title:hover {
     min-height: 44px;
   }
 }
+
+/* ════════════════════════════════════════════════════════════════
+ * 방식 — 한 화면 안에. 01 · 02 · 03 세 칸 → 진단 · 평가 · 설계 → 맺음과 CTA 한 줄.
+ * ════════════════════════════════════════════════════════════════ */
+
+.page-method .page-title {
+  margin-top: 8px;
+}
+
+.page-method .method {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
+.page-method .method li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 24px 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.page-method .method li + li {
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+
+.page-method .method-title {
+  font-size: clamp(20px, 1.8vw, 24px);
+}
+
+.page-method .method-text {
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+
+.method-process {
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
+.method-process-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.page-method .process {
+  margin-top: 10px;
+  gap: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.page-method .process li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'no title'
+    'text text';
+  gap: 2px 10px;
+  padding: 12px 24px 14px 0;
+}
+
+.page-method .process li + li {
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+
+.page-method .process-no {
+  grid-area: no;
+}
+
+.page-method .process h3 {
+  grid-area: title;
+  margin: 0;
+  font-size: 15px;
+}
+
+.page-method .process p {
+  grid-area: text;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.method-closing {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px 40px;
+  margin-top: clamp(28px, 3.4vw, 44px);
+  padding-top: clamp(20px, 2.4vw, 28px);
+  border-top: 1px solid var(--ink);
+}
+
+.method-closing .statement {
+  font-size: clamp(20px, 2vw, 28px);
+}
+
+@media (max-width: 1023px) {
+  .page-method .method li {
+    display: flex;
+  }
+
+  .page-method .method-text {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 719px) {
+  .page-method {
+    padding-top: 16px;
+  }
+
+  .page-method .page-title {
+    font-size: 24px;
+  }
+
+  .page-method .method {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 16px;
+    border-top: 1px solid var(--ink);
+  }
+
+  .page-method .method li,
+  .page-method .method li + li {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 2px 8px;
+    padding: 12px 0;
+    border-left: 0;
+  }
+
+  .page-method .method-no {
+    grid-row: span 2;
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .page-method .method-title {
+    grid-column: 2;
+    font-size: 17px;
+  }
+
+  .page-method .method-text {
+    grid-column: 2;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .page-method .method-text span {
+    display: inline;
+  }
+
+  .page-method .method-text span + span::before {
+    content: ' ';
+  }
+
+  .method-process {
+    margin-top: 18px;
+  }
+
+  .method-process-title {
+    font-size: 13px;
+    color: var(--mute);
+  }
+
+  .page-method .process {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 4px;
+    border-top: 1px solid var(--line);
+  }
+
+  .page-method .process li,
+  .page-method .process li + li {
+    grid-template-columns: 30px 72px minmax(0, 1fr);
+    grid-template-areas: 'no title text';
+    align-items: baseline;
+    gap: 8px;
+    padding: 8px 0;
+    border-left: 0;
+  }
+
+  .page-method .process li + li {
+    border-top: 1px solid var(--rule);
+  }
+
+  .page-method .process-no {
+    font-size: 12px;
+  }
+
+  .page-method .process h3 {
+    font-size: 13.5px;
+  }
+
+  .page-method .process p {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .method-closing {
+    margin-top: 20px;
+    padding-top: 16px;
+    gap: 14px;
+  }
+
+  .method-closing .statement {
+    font-size: 19px;
+  }
+
+  .method-closing .actions,
+  .method-closing .button {
+    width: 100%;
+  }
+}
+
+/* 방식 — 한 화면 안에(조정) */
+.page-method .page-title {
+  font-size: clamp(30px, 2.8vw, 40px);
+}
+
+.page-method .method li {
+  padding-top: 16px;
+  padding-bottom: 18px;
+}
+
+.method-process {
+  margin-top: 20px;
+}
+
+.method-closing {
+  margin-top: 24px;
+}
+
+@media (max-width: 719px) {
+  .page-method .page-head .eyebrow,
+  .method-process-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .page-method .page-title {
+    margin-top: 0;
+    font-size: 22px;
+  }
+
+  .page-method .method {
+    margin-top: 12px;
+  }
+
+  .page-method .method li,
+  .page-method .method li + li {
+    padding: 9px 0;
+  }
+
+  .method-process {
+    margin-top: 14px;
+  }
+
+  .page-method .process {
+    margin-top: 0;
+  }
+
+  .page-method .process li,
+  .page-method .process li + li {
+    display: block;
+    padding: 6px 0;
+  }
+
+  .page-method .process-no {
+    display: none;
+  }
+
+  .page-method .process h3 {
+    display: inline;
+    margin-right: 6px;
+    font-size: 13px;
+  }
+
+  .page-method .process p {
+    display: inline;
+    color: var(--mute);
+    font-size: 12.5px;
+  }
+
+  .method-closing {
+    margin-top: 16px;
+    padding-top: 14px;
+    gap: 12px;
+  }
+
+  .method-closing .statement {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+}
