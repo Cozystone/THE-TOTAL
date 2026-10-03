@@ -84,3 +84,23 @@ export async function countNotices(season: string): Promise<number | null> {
     return null;
   }
 }
+
+/* ── 평가 개시 안내 — 예약자 중 아직 받지 않은 주소만(한 사람에 한 번) ── */
+const sentKey = (season: string) => `the-total:sent:eval:${season}`;
+
+export async function unsentReservations(season: string, limit: number): Promise<string[] | null> {
+  if (!(redisUrl && redisToken)) return null;
+  const [r] = await redis([['SDIFF', `the-total:notice:${season}`, sentKey(season)]]);
+  return Array.isArray(r.result) ? (r.result as string[]).slice(0, limit) : null;
+}
+
+export async function markSent(season: string, emails: string[]) {
+  if (!(redisUrl && redisToken) || emails.length === 0) return;
+  await redis([['SADD', sentKey(season), ...emails]]);
+}
+
+export async function sentCount(season: string): Promise<number | null> {
+  if (!(redisUrl && redisToken)) return null;
+  const [r] = await redis([['SCARD', sentKey(season)]]);
+  return typeof r.result === 'number' ? r.result : null;
+}

@@ -1,4 +1,6 @@
 import { RESERVED_BASE, SEASON, SHOW_RESERVED_COUNT, noticeSeason, phaseAt } from '@/lib/entry';
+import { after } from 'next/server';
+import { reservationMail, sendOne } from '@/lib/mail';
 import { addNotice, countNotices, storeConnected } from '@/lib/notice-store';
 
 /*
@@ -6,6 +8,7 @@ import { addNotice, countNotices, storeConnected } from '@/lib/notice-store';
  *   POST { email, consent, company? } → ok | duplicate | invalid | consent | not_connected | error
  *     - 시즌은 서버 시각으로 정한다: 예약 기간에는 2027 예약, 그 뒤에는 2028 시작 안내.
  *     - company 는 사람에게 보이지 않는 칸(자동 입력 걸러내기). 채워져 있으면 기록하지 않고 ok 처럼 끝낸다.
+ *     - 새로 기록되면 응답 뒤에(after) 확인 메일 한 통. 메일이 실패해도 예약은 그대로다.
  *   GET → { connected, count } — count = RESERVED_BASE + 2027 실제 예약 수. 저장소가 없으면 connected:false(화면은 숫자를 숨긴다).
  * 예약자 목록: Upstash 집합 the-total:notice:2027 (평가 개시 안내는 이 목록에만).
  */
@@ -35,6 +38,7 @@ export async function POST(req: Request) {
     return Response.json({ status: 'consent' } satisfies NoticeResponse, { status: 400 });
   }
   const result = await addNotice(email, season);
+  if (result === 'ok') after(async () => void (await sendOne(reservationMail(email, season))));
   const code = result === 'ok' ? 201 : result === 'duplicate' ? 200 : result === 'not_connected' ? 503 : 500;
   return Response.json({ status: result, season } satisfies NoticeResponse, { status: code });
 }
