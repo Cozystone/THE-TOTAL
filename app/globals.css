@@ -3437,3 +3437,20 @@ a.list-title:hover {
     margin-top: 28px;
   }
 }
+
+/* 일정 셋을 예약 버튼 아래로 */
+.hero-entry > .schedule-strip {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+
+@media (max-width: 719px) {
+  .hero-entry > .schedule-strip {
+    margin-top: 24px;
+  }
+
+  .hero-note-below {
+    margin-top: 16px;
+  }
+}

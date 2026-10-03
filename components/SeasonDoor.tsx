@@ -8,7 +8,7 @@ import { RESERVE_CTA, RESERVE_CTA_PAGE, SCHEDULE } from '@/lib/entry';
 /*
  * 홈 첫 화면 — 2027 입학평가 안내. 첫 3초 안에: 2027 입학평가 / 예약 마감 / 예약 CTA.
  *   2027 THE TOTAL 입학평가 → 2027 Season Entry 평가 예약 → 예약 마감까지 [DAYS · HOURS · MINUTES · SECONDS]
- *   → 평가 예약 기간 · 평가 진행 · 평가 종료 → 입학평가 예약하기 → 연 1회
+ *   → 입학평가 예약하기(+ 연 1회) → 평가 예약 기간 · 평가 진행 · 평가 종료
  * 평가일(11.01)에는 '평가 종료까지', 그 뒤에는 CLOSED 공고.
  */
 export function HomeHero() {
@@ -40,14 +40,6 @@ export function HomeHero() {
           {evaluation ? '평가 진행' : '평가 예약'}
         </h1>
         <Countdown aside={<Reserved />} />
-        <dl className="schedule-strip">
-          {SCHEDULE.map((s) => (
-            <div key={s.k}>
-              <dt>{s.k}</dt>
-              <dd>{s.v}</dd>
-            </div>
-          ))}
-        </dl>
         <div className="hero-actions">
           {evaluation ? (
             <p className="hero-note">예약이 마감되었습니다. 평가 개시 안내는 예약한 이메일로 전달됩니다.</p>
@@ -65,6 +57,15 @@ export function HomeHero() {
           )}
         </div>
       </div>
+      {/* 일정 셋 — 예약 버튼 아래(휴대폰에서는 스크롤 뒤) */}
+      <dl className="schedule-strip">
+        {SCHEDULE.map((s) => (
+          <div key={s.k}>
+            <dt>{s.k}</dt>
+            <dd>{s.v}</dd>
+          </div>
+        ))}
+      </dl>
       {!evaluation && (
         <p className="hero-note hero-note-below">
           2027 Season Entry는
