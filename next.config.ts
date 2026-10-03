@@ -18,15 +18,15 @@ const nextConfig: NextConfig = {
   // 이전 판의 주소는 지금의 문서로 보낸다
   async redirects() {
     return [
-      { source: '/about', destination: '/record', permanent: false },
+      { source: '/record', destination: '/about', permanent: false },
       { source: '/admissions', destination: '/entry', permanent: false },
       { source: '/notices', destination: '/entry', permanent: false },
       { source: '/philosophy', destination: '/method', permanent: false },
-      { source: '/s-01', destination: '/record', permanent: false },
-      { source: '/records', destination: '/record', permanent: false },
-      { source: '/institution', destination: '/record', permanent: false },
+      { source: '/s-01', destination: '/about', permanent: false },
+      { source: '/records', destination: '/about', permanent: false },
+      { source: '/institution', destination: '/about', permanent: false },
       { source: '/criteria', destination: '/programs', permanent: false },
-      { source: '/research', destination: '/record', permanent: false },
+      { source: '/research', destination: '/about', permanent: false },
       { source: '/program', destination: '/entry', permanent: false },
     ];
   },

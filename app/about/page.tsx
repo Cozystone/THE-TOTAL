@@ -2,17 +2,17 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ARCHIVE, VIEWS } from '@/lib/record';
 
-export const metadata: Metadata = { title: '기록' };
+export const metadata: Metadata = { title: '소개' };
 
 /*
- * 기록 — J. LEE · 관점(제목 + 한 문장) · 짧은 아카이브. 맨 아래 THE TOTAL FORUM 으로 가는 조용한 링크.
+ * 소개 — J. LEE · 관점(제목 + 한 문장) · 짧은 아카이브. 맨 아래 THE TOTAL FORUM 으로 가는 조용한 링크.
  * 대표는 J. LEE 한 사람. 경력 · 학력 · 자격 · 실적을 만들지 않는다.
  */
-export default function Record() {
+export default function About() {
   return (
     <main id="main" className="page page-tight">
       <header className="page-head">
-        <p className="eyebrow">기록</p>
+        <p className="eyebrow">소개</p>
         <h1 className="page-title">J. LEE</h1>
         <p className="director-role">Representative, THE TOTAL</p>
       </header>

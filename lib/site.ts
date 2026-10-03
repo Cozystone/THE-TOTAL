@@ -12,11 +12,11 @@ export const SITE = {
   place: '서울 · 대치',
 };
 
-/** 상단 메뉴 — THE TOTAL(휘장 · 홈) / 방식 / 과정 / 기록 / 입학평가 예약(→ 2027 ENTRY). 각각 독립 페이지. */
+/** 상단 메뉴 — THE TOTAL(휘장 · 홈) / 소개 / 방식 / 과정 / 입학평가 예약(→ 2027 ENTRY). 각각 독립 페이지. */
 export const MENU = [
+  { href: '/about', label: '소개' },
   { href: '/method', label: '방식' },
   { href: '/programs', label: '과정' },
-  { href: '/record', label: '기록' },
 ] as const;
 
 /** 상단 오른쪽 — 작고 단단한 레이블(채움 없음). */

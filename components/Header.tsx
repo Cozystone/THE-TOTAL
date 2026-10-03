@@ -9,7 +9,7 @@ import { HEADER_CTA, MENU, SITE } from '@/lib/site';
 
 /*
  * 고정 머리(모든 페이지, sticky).
- *   [휘장] THE TOTAL      방식  과정  기록      [2027 ENTRY]
+ *   [휘장] THE TOTAL      소개  방식  과정      [입학평가 예약]
  * 메뉴는 독립 페이지로 이동. 현재 페이지만 밑줄.
  * 1179px 이하: 휘장 · THE TOTAL · 햄버거 → 전체 화면 메뉴(같은 항목 + 2027 ENTRY).
  * 휴대폰에서는 머리가 얇은 반투명 흰 판이 된다(블러는 약하게, globals.css).

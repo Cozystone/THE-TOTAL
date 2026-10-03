@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: 'THE TOTAL FORUM' };
 /*
  * THE TOTAL FORUM — 학업과정 옆의 교육 분기.
  *   첫 화면 → 네 가지 과정(SEE · WRITE · SPEAK · MAKE) → 운영 방식(+ 인사이트 영상 설계) → 운영 안내 → 지원
- * 상단 메뉴에는 없다 — 기록 페이지 맨 아래에서 이어진다.
+ * 상단 메뉴에는 없다 — 소개 페이지 맨 아래에서 이어진다.
  * 시각 언어는 사이트 전체와 같다(흰 바탕 · 검정 글자 · 얇은 선).
  */
 export default function Forum() {
@@ -102,8 +102,8 @@ export default function Forum() {
         <p>FORUM도 2027 Season Entry 평가에서 시작합니다. 관심사와 생각의 방식, 만들고 싶은 작업을 함께 봅니다.</p>
         <div className="actions">
           <ReserveLink />
-          <Link className="text-link" href="/record">
-            기록으로 <span aria-hidden="true">→</span>
+          <Link className="text-link" href="/about">
+            소개로 <span aria-hidden="true">→</span>
           </Link>
         </div>
       </section>
