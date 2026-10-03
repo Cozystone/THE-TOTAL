@@ -104,3 +104,10 @@ export async function sentCount(season: string): Promise<number | null> {
   const [r] = await redis([['SCARD', sentKey(season)]]);
   return typeof r.result === 'number' ? r.result : null;
 }
+
+/** 시험 발송 제한 — 10분에 한 번(Redis SET NX EX). 저장소가 없으면 허용하지 않는다. */
+export async function allowSelfTest(): Promise<boolean> {
+  if (!(redisUrl && redisToken)) return false;
+  const [r] = await redis([['SET', 'the-total:selftest', '1', 'NX', 'EX', 600]]);
+  return r.result === 'OK';
+}

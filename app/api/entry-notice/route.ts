@@ -1,6 +1,6 @@
 import { RESERVED_BASE, SEASON, SHOW_RESERVED_COUNT, noticeSeason, phaseAt } from '@/lib/entry';
 import { after } from 'next/server';
-import { reservationMail, sendOne } from '@/lib/mail';
+import { applicationMail, sendOne } from '@/lib/mail';
 import { addNotice, countNotices, storeConnected } from '@/lib/notice-store';
 
 /*
@@ -12,6 +12,8 @@ import { addNotice, countNotices, storeConnected } from '@/lib/notice-store';
  *   GET → { connected, count } — count = RESERVED_BASE + 2027 실제 신청 수. 저장소가 없으면 connected:false(화면은 숫자를 숨긴다).
  * 신청자 목록: Upstash 집합 the-total:notice:2027 (평가 개시 안내는 이 목록에만).
  */
+export const runtime = 'nodejs';
+
 export type NoticeResponse = {
   status: 'ok' | 'duplicate' | 'invalid' | 'consent' | 'not_connected' | 'error';
   season?: string;
@@ -38,7 +40,7 @@ export async function POST(req: Request) {
     return Response.json({ status: 'consent' } satisfies NoticeResponse, { status: 400 });
   }
   const result = await addNotice(email, season);
-  if (result === 'ok') after(async () => void (await sendOne(reservationMail(email, season))));
+  if (result === 'ok') after(async () => void (await sendOne(applicationMail(email, season))));
   const code = result === 'ok' ? 201 : result === 'duplicate' ? 200 : result === 'not_connected' ? 503 : 500;
   return Response.json({ status: result, season } satisfies NoticeResponse, { status: code });
 }
