@@ -3454,3 +3454,19 @@ a.list-title:hover {
     margin-top: 16px;
   }
 }
+
+/* 데스크톱도 같은 여백 감각 — 첫 화면이 예약 버튼에서 끝나고, 위쪽이 비워진다. 아주 큰 화면에서는 960px 까지만 */
+@media (min-width: 720px) {
+  .hero-fold {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: min(calc(100svh - var(--head-h) - clamp(28px, 3.4vw, 48px) - 32px), 960px);
+  }
+}
+
+@media (min-width: 720px) {
+  .hero-entry > .schedule-strip {
+    margin-top: 48px;
+  }
+}
