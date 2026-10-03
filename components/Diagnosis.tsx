@@ -18,7 +18,7 @@ import {
   type Grade,
   type Subject,
 } from '@/lib/diagnosis/schema';
-import { COURSES } from '@/lib/schedule';
+import { COURSES } from '@/lib/courses';
 
 /*
  * 온라인 개인진단 — 한 화면에 한 단계.
@@ -311,11 +311,11 @@ export function Diagnosis({ onExit }: { onExit?: () => void }) {
             ) : (
               <>
                 <p className="dx-lead">
-                  상세 수업 제안은 입학시험 이후 개별 안내 단계에서 진단 내용과 시험 결과를 함께 검토해 드립니다. 그 결과가
-                  Personalized Class 설계로 이어집니다.
+                  진단은 Entry의 첫 단계입니다. 이 응답과 과정별 평가 세션을 함께 읽고, 그 학생에게 필요한 수업의 순서를
+                  설계합니다.
                 </p>
                 <p className="dx-notice">
-                  현재 온라인 진단 응답은 저장 · 전송되지 않습니다. 안내를 받으려면 입학 안내에서 응시 안내를 신청해 주세요.
+                  현재 온라인 진단 응답은 저장 · 전송되지 않습니다. 평가 세션 안내는 2027 ENTRY의 ENTRY NOTICE로 받을 수 있습니다.
                 </p>
               </>
             )}
@@ -326,8 +326,8 @@ export function Diagnosis({ onExit }: { onExit?: () => void }) {
             )}
             <Summary draft={draft} />
             <div className="dx-actions">
-              <Link className="button" href="/admissions#guide">
-                입학시험 응시 안내
+              <Link className="button" href="/entry#notice">
+                ENTRY NOTICE
               </Link>
               {course && (
                 <Link className="text-link" href={`/programs#${course}`}>

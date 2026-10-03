@@ -14,7 +14,7 @@ import {
   type ForumInput,
   type Grade,
 } from '@/lib/diagnosis/schema';
-import { COURSES } from '@/lib/schedule';
+import { COURSES } from '@/lib/courses';
 
 /*
  * FORUM 지원 진단 — 시험이 아니라 자기 서술.
@@ -278,15 +278,15 @@ export function ForumDiagnosis({ onExit }: { onExit?: () => void }) {
               <>
                 <p className="dx-lead">확인 후 다음 안내를 드립니다.</p>
                 <p className="dx-notice">
-                  온라인 접수 기능이 연결되기 전까지 응답은 저장 · 전송되지 않으며, 이 화면에서만 확인할 수 있습니다. 안내를
-                  받으려면 입학 안내의 응시 안내 신청에서 ‘FORUM 지원 안내’를 선택해 주세요.
+                  응답은 저장 · 전송되지 않으며, 이 화면에서만 확인할 수 있습니다. 진행 안내는 2027 ENTRY의 ENTRY NOTICE로
+                  받을 수 있습니다.
                 </p>
               </>
             )}
             <ForumSummary draft={draft} />
             <div className="dx-actions">
-              <Link className="button" href="/admissions#guide">
-                FORUM 지원 안내 받기
+              <Link className="button" href="/entry#notice">
+                ENTRY NOTICE
               </Link>
               <Link className="text-link" href="/forum">
                 THE TOTAL FORUM 보기 →

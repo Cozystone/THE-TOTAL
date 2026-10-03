@@ -6,7 +6,7 @@ import { SiteFooter } from '@/components/SiteFooter';
 
 export const metadata: Metadata = {
   title: { default: 'THE TOTAL', template: '%s — THE TOTAL' },
-  description: 'THE TOTAL — 서울 대치의 개인화 교육기관. 온라인 개인진단 · 온라인 입학시험 · 초등 · 중등 · 고등 과정.',
+  description: 'THE TOTAL — 서울 대치. 2027 SEASON ENTRY · 초등 · 중등 · 고등.',
   // 검색 노출은 공개 방식이 정해질 때까지 막아 둔다.
   robots: { index: false, follow: false, nocache: true },
   icons: { icon: '/symbol.svg' },

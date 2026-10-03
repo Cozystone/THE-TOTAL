@@ -9,9 +9,10 @@ import { HEADER_CTA, MENU, SITE } from '@/lib/site';
 
 /*
  * 고정 머리(모든 페이지, sticky).
- *   [휘장] THE TOTAL      소개  교육과정  온라인 진단  입학 안내  공지   [입학시험 안내]
+ *   [휘장] THE TOTAL      방식  과정  기록      [2027 ENTRY]
  * 메뉴는 독립 페이지로 이동. 현재 페이지만 밑줄.
- * 1023px 이하: 휘장 · THE TOTAL · 햄버거 → 전체 화면 메뉴(같은 다섯 항목 + 버튼).
+ * 1179px 이하: 휘장 · THE TOTAL · 햄버거 → 전체 화면 메뉴(같은 항목 + 2027 ENTRY).
+ * 휴대폰에서는 머리가 얇은 반투명 흰 판이 된다(블러는 약하게, globals.css).
  */
 const SHEET_MS = 320;
 
@@ -88,7 +89,12 @@ export function Header() {
           </nav>
 
           <div className="masthead-end">
-            <Link className="button button-sm" href={HEADER_CTA.href} onClick={(e) => go(e, HEADER_CTA.href)}>
+            <Link
+              className="button button-sm entry-tag"
+              href={HEADER_CTA.href}
+              aria-current={current(HEADER_CTA.href)}
+              onClick={(e) => go(e, HEADER_CTA.href)}
+            >
               {HEADER_CTA.label}
             </Link>
             <button
@@ -138,7 +144,7 @@ export function Header() {
           </nav>
 
           <div className="sheet-foot">
-            <Link className="button" href={HEADER_CTA.href} onClick={(e) => go(e, HEADER_CTA.href, closeSheet)}>
+            <Link className="button button-line entry-tag" href={HEADER_CTA.href} onClick={(e) => go(e, HEADER_CTA.href, closeSheet)}>
               {HEADER_CTA.label}
             </Link>
             <p>{SITE.place}</p>

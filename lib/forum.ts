@@ -57,12 +57,3 @@ export const VIDEO = [
   { label: '실제 레퍼런스', text: '작품, 브랜드, 기사, 데이터처럼 실제로 존재하는 자료를 직접 보여줍니다.' },
   { label: '질문과 과제', text: '영상은 답으로 끝나지 않습니다. 다음 세션까지 붙잡을 질문과 과제로 끝납니다.' },
 ];
-
-export const FOUNDER = {
-  name: 'Maestro Vin',
-  title: 'Founder & Curator',
-  text: [
-    'Maestro Vin은 2018년부터 대치동을 오가며 학생과 부모, 학원과 경쟁이 만드는 풍경을 가까이에서 기록해 왔습니다.',
-    'THE TOTAL은 그 풍경을 단순히 비판하는 대신, 학생이 더 넓은 세계와 자기 언어를 가질 수 있는 새로운 교육을 만듭니다.',
-  ],
-};

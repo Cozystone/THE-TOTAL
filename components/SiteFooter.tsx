@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { MENU, SITE } from '@/lib/site';
+import { HEADER_CTA, MENU, SITE } from '@/lib/site';
 
 /** 모든 페이지 끝 — 기관명 · 메뉴 · 위치. */
 export function SiteFooter() {
@@ -13,6 +13,7 @@ export function SiteFooter() {
               {m.label}
             </Link>
           ))}
+          <Link href={HEADER_CTA.href}>{HEADER_CTA.label}</Link>
         </nav>
         <p className="site-foot-place">{SITE.place}</p>
       </div>

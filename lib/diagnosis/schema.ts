@@ -7,7 +7,7 @@
  * 분석 서비스(AI · 상담 DB)가 연결되기 전에는 API 가 { status: 'not_connected' } 를 돌려주고,
  * 화면은 분석 결과를 지어내지 않는다 — 응답 요약과 "확인 후 안내" 만 보여준다.
  */
-import type { CourseId } from '@/lib/schedule';
+import type { CourseId } from '@/lib/courses';
 
 export type Grade =
   | 'e1' | 'e2' | 'e3' | 'e4' | 'e5' | 'e6'

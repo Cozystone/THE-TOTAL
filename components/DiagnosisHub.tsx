@@ -23,7 +23,7 @@ export function DiagnosisHub() {
       <h2 className="dx-title" id="hub-title">
         어떤 진단을 시작할까요?
       </h2>
-      <p className="dx-lead">두 진단은 묻는 것이 다릅니다. 지원하려는 과정에 맞는 진단을 골라 주세요.</p>
+      <p className="dx-lead">두 진단은 묻는 것이 다릅니다. Entry에서 함께 볼 과정에 맞는 진단을 골라 주세요.</p>
 
       <ul className="tracks-choice">
         <li>

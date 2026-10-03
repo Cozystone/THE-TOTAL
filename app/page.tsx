@@ -1,88 +1,60 @@
 import Link from 'next/link';
-import { Schedule } from '@/components/Schedule';
-import { TRACKS } from '@/lib/forum';
-import { latestNotices, NOTICE_TYPES } from '@/lib/notices';
-import { COURSES, STATUS, formatDay, formatShort, nextSessions, statusOf, toKey } from '@/lib/schedule';
-import { seoulToday } from '@/lib/today';
-
-// 일정 상태가 서울 기준 '오늘'로 계산되도록 한 시간마다 다시 만든다.
-export const revalidate = 3600;
+import { EntryLine, SeasonDoor } from '@/components/SeasonDoor';
+import { COURSES } from '@/lib/courses';
+import { METHOD } from '@/lib/method';
 
 /*
- * 홈 — 10초 안에: 무슨 기관인지 · 어떤 과정을 하는지 · 어떻게 지원하는지.
- *   첫 화면(문장 · 설명 · 진단 시작 · 입학 일정 달력) → 방식 → 과정 → THE TOTAL FORUM → 온라인 개인진단 → 입학 안내
+ * 홈 — 2027 SEASON ENTRY 가 중심.
+ *   첫 화면(THE TOTAL · 문장 · 카운트다운 · 2027 ENTRY 보기)은 한 화면 안에서 끝난다.
+ *   → 학생을 평균으로 설명하지 않는다 → 방식(세 줄) → 과정(세 줄) → 마지막 한 줄.
+ * 캘린더 · 다회차 시험 · 접수 상태는 두지 않는다. 철학은 서두르지 않는다(FORUM 은 기록 아래).
  */
-const STEPS = [
-  { no: '01', title: '온라인 개인진단', text: '학년과 과목별 상태, 목표와 어려움, 선호하는 수업 방식을 확인합니다.' },
-  { no: '02', title: '온라인 입학시험', text: '과정별 시험으로 현재의 학업 수준을 정확히 확인합니다.' },
-  { no: '03', title: '개인화 수업 설계', text: '진단과 시험을 함께 검토해 학생별 Personalized Class를 설계합니다.' },
-];
-
 const COURSE_LINES = [
-  { id: 'elementary', text: '학습 습관과 사고력, 스스로 질문하는 힘과 교과 기초를 다집니다.' },
-  { id: 'middle', text: '내신과 교과 이해를 바로 세우고, 공부 방식을 다시 정비합니다.' },
-  { id: 'high', text: '대입의 현실을 기준으로 과목별 전략과 우선순위를 학생마다 설계합니다.' },
+  { id: 'elementary', text: '질문을 잃지 않는 학습의 기초를 만듭니다.' },
+  { id: 'middle', text: '내신의 현실 속에서, 자기 방식의 공부를 다시 세웁니다.' },
+  { id: 'high', text: '대입의 선택을 현실적으로 읽고, 과목과 시간의 우선순위를 설계합니다.' },
 ] as const;
 
 export default function Home() {
-  const today = seoulToday();
-  const todayKey = toKey(today);
-  const upcoming = nextSessions(todayKey, 3);
-  const notices = latestNotices(3);
-
   return (
-    <main id="main" className="page">
-      {/* 첫 화면 */}
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-main">
-          <p className="eyebrow">서울 대치 · 초등 · 중등 · 고등 개인화 교육</p>
-          <h1 className="hero-title" id="hero-title">
-            모든 다음은,
-            <br />
-            정확한 이해에서 시작됩니다.
-          </h1>
-          <p className="lead">
-            THE TOTAL은 온라인 개인진단과 입학시험으로 학생의 현재를 먼저 읽고, 그 결과를 바탕으로 학생마다 다른 수업을
-            설계합니다. 입시의 현실을 정확히 다루되, 학생을 성적표 하나로 설명하지 않습니다.
-          </p>
-          <div className="actions">
-            <Link className="button" href="/diagnosis?track=academic">
-              온라인 개인진단 시작하기
-            </Link>
-            <Link className="text-link" href="/admissions#schedule">
-              입학시험 일정 보기 <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </div>
-
-        <div className="hero-side">
-          <h2 className="side-title">입학 일정</h2>
-          <Schedule today={today} compact />
-        </div>
+    <main id="main" className="page page-home">
+      <section className="home-door" aria-label="2027 SEASON ENTRY">
+        <SeasonDoor variant="home" />
       </section>
 
-      {/* 방식 */}
+      <section className="block home-thesis" aria-label="THE TOTAL">
+        <p className="statement">
+          THE TOTAL은 학생을 평균으로 설명하지 않습니다.
+        </p>
+        <p className="lead">
+          현재의 성취, 학습 방식, 선택의 기준을 함께 읽고
+          <br />
+          한 명의 학생에게 필요한 다음을 설계합니다.
+        </p>
+      </section>
+
       <section className="block" aria-labelledby="way-title">
         <div className="block-head">
-          <h2 id="way-title">THE TOTAL의 방식</h2>
+          <h2 id="way-title">방식</h2>
+          <Link className="text-link" href="/method">
+            THE TOTAL의 방식 <span aria-hidden="true">→</span>
+          </Link>
         </div>
         <ol className="steps">
-          {STEPS.map((s) => (
+          {METHOD.map((s) => (
             <li key={s.no}>
               <span className="step-no">{s.no}</span>
               <h3>{s.title}</h3>
-              <p>{s.text}</p>
             </li>
           ))}
         </ol>
       </section>
 
-      {/* 과정 */}
       <section className="block" aria-labelledby="course-title">
         <div className="block-head">
-          <h2 id="course-title">학업과정</h2>
+          <h2 id="course-title">과정</h2>
           <Link className="text-link" href="/programs">
-            교육과정 전체 <span aria-hidden="true">→</span>
+            과정 전체 <span aria-hidden="true">→</span>
           </Link>
         </div>
         <ul className="course-rows">
@@ -100,108 +72,12 @@ export default function Home() {
         </ul>
       </section>
 
-      {/* THE TOTAL FORUM — 홈에 단 하나 */}
-      <section className="block forum-band" aria-labelledby="forum-home-title">
-        <p className="forum-band-kicker">
-          THE TOTAL FORUM <span className="forum-axes">사고 · 표현 · 방향</span>
-        </p>
-        <div className="split">
-          <h2 className="forum-band-title" id="forum-home-title">
-            성적 이후에도
-            <br />
-            남는 능력을 만듭니다.
-          </h2>
-          <div>
-            <p className="body">
-              AI가 만든 답을 판단하고,{' '}
-              <br />
-              자기 생각을 글과 말로 표현하며,{' '}
-              <br />
-              자신만의 작업으로 세상에 답하는 학생을 위한 과정.
-            </p>
-            <ul className="forum-keys" aria-label="네 가지 과정">
-              {TRACKS.map((t) => (
-                <li key={t.key}>
-                  <span>{t.key}</span>
-                  {t.title}
-                </li>
-              ))}
-            </ul>
-            <div className="actions">
-              <Link className="text-link" href="/forum">
-                FORUM 알아보기 <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 온라인 개인진단 */}
-      <section className="block" aria-labelledby="dx-home-title">
-        <div className="block-head">
-          <h2 id="dx-home-title">온라인 개인진단</h2>
-        </div>
-        <div className="split">
-          <p className="statement">개별 수업은 진단에서 시작됩니다.</p>
-          <div>
-            <p className="body">
-              진단은 학생의 학습 상태와 공부하는 방식, 지금 필요한 것을 함께 살핍니다. 그 응답이 입학시험 결과와 함께 수업
-              설계의 출발점이 됩니다. 학년 선택부터 응답 확인까지 약 5분이 걸립니다.
-            </p>
-            <div className="actions">
-              <Link className="button" href="/diagnosis?track=academic">
-                진단 시작하기
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 입학 안내 */}
-      <section className="block" aria-labelledby="adm-home-title">
-        <div className="block-head">
-          <h2 id="adm-home-title">입학 안내</h2>
-          <Link className="text-link" href="/admissions">
-            입학 안내 전체 <span aria-hidden="true">→</span>
+      <section className="block block-cta" aria-label="2027 ENTRY">
+        <EntryLine />
+        <div className="actions">
+          <Link className="text-link" href="/entry">
+            2027 ENTRY <span aria-hidden="true">→</span>
           </Link>
-        </div>
-        <div className="split split-even">
-          <div>
-            <h3 className="sub-title">다음 입학시험</h3>
-            <ul className="list">
-              {upcoming.map((s) => {
-                const st = statusOf(s, todayKey);
-                return (
-                  <li key={s.id}>
-                    <span className="badge" data-status={st}>
-                      {STATUS[st].label}
-                    </span>
-                    <span className="list-title">
-                      {COURSES[s.course].label} {s.round}
-                    </span>
-                    <span className="list-meta">
-                      {formatDay(s.date)}
-                      {s.applyOpen && s.applyClose && ` · 접수 ${formatShort(s.applyOpen)} – ${formatShort(s.applyClose)}`}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div>
-            <h3 className="sub-title">공지</h3>
-            <ul className="list">
-              {notices.map((n) => (
-                <li key={n.id}>
-                  <span className="list-type">{NOTICE_TYPES[n.type]}</span>
-                  <Link className="list-title" href={`/notices#${n.id}`}>
-                    {n.title}
-                  </Link>
-                  <span className="list-meta">{formatDay(n.date, true)}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </section>
     </main>

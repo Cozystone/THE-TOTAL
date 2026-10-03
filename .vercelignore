@@ -1,0 +1,9 @@
+node_modules
+.next
+*.tsbuildinfo
+.vercel
+.env*
+BRIEF.md
+the-total-v2
+qr
+docs

@@ -1,26 +1,23 @@
 /*
  * THE TOTAL — 사이트 설정.
  *
- * 대치동의 개인화 교육기관. 온라인 입학시험 · 온라인 개인진단 · 초등/중등/고등 과정(ACADEMIC)
- * + 사고 · 표현 · 방향의 교육 분기 THE TOTAL FORUM.
- * 문장은 한국어 중심. 허위 실적 · 연수 · 마감 수치 · 후기 · 인용을 만들지 않는다.
- * 저장/전송 기능이 실제로 연결되기 전에는 "등록 완료" 류의 문구를 띄우지 않는다(app/api/*).
+ * 서울 대치의 개인화 교육기관처럼 보이는 WILDCARD* 의 독립 프로젝트.
+ * 사이트의 중심은 2027 SEASON ENTRY(연 1회, 시간 구조는 lib/entry.ts 한 곳).
+ * 문장은 한국어 중심. 허위 실적 · 연수 · 가짜 인원 · 후기를 만들지 않는다. 대표는 J. LEE 한 사람.
+ * 이메일은 ENTRY NOTICE 한 곳에서만 받는다(app/api/entry-notice).
  */
 export const SITE = {
   name: 'THE TOTAL',
-  director: 'J. LEE',
+  representative: 'J. LEE',
   place: '서울 · 대치',
 };
 
-/** 상단 메뉴 — 각각 독립 페이지. */
+/** 상단 메뉴 — THE TOTAL(휘장 · 홈) / 방식 / 과정 / 기록 / 2027 ENTRY. 각각 독립 페이지. */
 export const MENU = [
-  { href: '/about', label: '소개' },
-  { href: '/programs', label: '교육과정' },
-  { href: '/forum', label: 'THE TOTAL FORUM' },
-  { href: '/diagnosis', label: '온라인 진단' },
-  { href: '/admissions', label: '입학 안내' },
-  { href: '/notices', label: '공지' },
+  { href: '/method', label: '방식' },
+  { href: '/programs', label: '과정' },
+  { href: '/record', label: '기록' },
 ] as const;
 
-/** 상단 오른쪽 작은 버튼. */
-export const HEADER_CTA = { href: '/admissions', label: '입학시험 안내' } as const;
+/** 상단 오른쪽 — 작고 단단한 레이블(채움 없음). */
+export const HEADER_CTA = { href: '/entry', label: '2027 ENTRY' } as const;

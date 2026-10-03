@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { FLOW, FORUM, FOUNDER, TRACKS, VIDEO } from '@/lib/forum';
+import { FLOW, FORUM, TRACKS, VIDEO } from '@/lib/forum';
 
 export const metadata: Metadata = { title: 'THE TOTAL FORUM' };
 
 /*
  * THE TOTAL FORUM — 학업과정 옆의 교육 분기.
- *   첫 화면 → 네 가지 과정(SEE · WRITE · SPEAK · MAKE) → 운영 방식(+ 인사이트 영상 설계) → 운영 안내 → Maestro Vin → 지원
+ *   첫 화면 → 네 가지 과정(SEE · WRITE · SPEAK · MAKE) → 운영 방식(+ 인사이트 영상 설계) → 운영 안내 → 지원
+ * 상단 메뉴에는 없다 — 기록 페이지 맨 아래에서 이어진다.
  * 시각 언어는 사이트 전체와 같다(흰 바탕 · 검정 글자 · 얇은 선).
  */
 export default function Forum() {
@@ -98,33 +99,14 @@ export default function Forum() {
         </p>
       </section>
 
-      <section className="block" aria-labelledby="founder-title">
-        <div className="block-head">
-          <h2 id="founder-title">설계</h2>
-        </div>
-        <div className="split director">
-          <div>
-            <p className="director-name">{FOUNDER.name}</p>
-            <p className="muted">{FOUNDER.title}</p>
-          </div>
-          <div>
-            {FOUNDER.text.map((t) => (
-              <p key={t} className="body body-gap">
-                {t}
-              </p>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="block block-cta" aria-label="지원">
         <p>FORUM은 지원 진단에서 시작합니다. 관심사와 생각의 방식, 만들고 싶은 작업을 먼저 묻습니다.</p>
         <div className="actions">
           <Link className="button" href="/diagnosis?track=forum">
             FORUM 지원 진단 시작하기
           </Link>
-          <Link className="text-link" href="/programs">
-            교육과정 전체 <span aria-hidden="true">→</span>
+          <Link className="text-link" href="/record">
+            기록으로 <span aria-hidden="true">→</span>
           </Link>
         </div>
       </section>
