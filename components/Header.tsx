@@ -128,9 +128,12 @@ export function Header() {
           data-closing={closing || undefined}
         >
           <div className="sheet-head">
-            <Link className="brand" href="/" onClick={(e) => go(e, '/', closeSheet)}>
-              <Symbol size={28} />
-              <span className="wordmark">{SITE.name}</span>
+            <Link className="brand" href="/" aria-label={`${SITE.name} Academy 홈`} onClick={(e) => go(e, '/', closeSheet)}>
+              <Symbol size={34} className="insignia" />
+              <span className="wordmark">
+                {SITE.name}
+                <span className="wordmark-sub">Academy</span>
+              </span>
             </Link>
             <button ref={closerRef} type="button" className="close" aria-label="메뉴 닫기" onClick={closeSheet}>
               <i />

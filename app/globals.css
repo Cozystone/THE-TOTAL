@@ -4071,3 +4071,12 @@ a.list-title:hover {
     line-height: 1.5;
   }
 }
+
+/* 휴대폰 메뉴 — 아래 글자가 번져 비치지 않게 완전한 흰 판 */
+@media (max-width: 719px) {
+  .sheet {
+    background: var(--paper);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
