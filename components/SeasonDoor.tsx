@@ -31,37 +31,47 @@ export function HomeHero() {
   const evaluation = phase === 'evaluation';
   return (
     <div className="hero-entry">
-      <p className="hero-kicker">2027 THE TOTAL 입학평가</p>
-      <h1 className="hero-entry-title">
-        2027 Season Entry
-        <br />
-        {evaluation ? '평가 진행' : '평가 예약'}
-      </h1>
-      <Countdown aside={<Reserved />} />
-      <dl className="schedule-strip">
-        {SCHEDULE.map((s) => (
-          <div key={s.k}>
-            <dt>{s.k}</dt>
-            <dd>{s.v}</dd>
-          </div>
-        ))}
-      </dl>
-      <div className="hero-actions">
-        {evaluation ? (
-          <p className="hero-note">예약이 마감되었습니다. 평가 개시 안내는 예약한 이메일로 전달됩니다.</p>
-        ) : (
-          <>
-            <Link className="button hero-cta" href="/entry#reserve" onClick={(e) => go(e, '/entry#reserve')}>
-              {RESERVE_CTA}
-            </Link>
-            <p className="hero-note">
-              2027 Season Entry는
-              <br />
-              연 1회 진행됩니다.
-            </p>
-          </>
-        )}
+      {/* 휴대폰: 이 묶음이 첫 화면을 채우고, 화면 끝이 예약 버튼에서 닫힌다(위쪽에 간격) */}
+      <div className="hero-fold">
+        <p className="hero-kicker">2027 THE TOTAL 입학평가</p>
+        <h1 className="hero-entry-title">
+          2027 Season Entry
+          <br />
+          {evaluation ? '평가 진행' : '평가 예약'}
+        </h1>
+        <Countdown aside={<Reserved />} />
+        <dl className="schedule-strip">
+          {SCHEDULE.map((s) => (
+            <div key={s.k}>
+              <dt>{s.k}</dt>
+              <dd>{s.v}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className="hero-actions">
+          {evaluation ? (
+            <p className="hero-note">예약이 마감되었습니다. 평가 개시 안내는 예약한 이메일로 전달됩니다.</p>
+          ) : (
+            <>
+              <Link className="button hero-cta" href="/entry#reserve" onClick={(e) => go(e, '/entry#reserve')}>
+                {RESERVE_CTA}
+              </Link>
+              <p className="hero-note hero-note-side">
+                2027 Season Entry는
+                <br />
+                연 1회 진행됩니다.
+              </p>
+            </>
+          )}
+        </div>
       </div>
+      {!evaluation && (
+        <p className="hero-note hero-note-below">
+          2027 Season Entry는
+          <br />
+          연 1회 진행됩니다.
+        </p>
+      )}
     </div>
   );
 }

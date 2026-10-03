@@ -3414,3 +3414,26 @@ a.list-title:hover {
     font-size: 10.5px;
   }
 }
+
+/* 휴대폰 첫 화면 — 위쪽에 간격을 두고, 화면이 예약 버튼에서 끝난다. 버튼 아래 한 줄은 스크롤 뒤 */
+.hero-note-below {
+  display: none;
+}
+
+@media (max-width: 719px) {
+  .hero-fold {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: calc(100svh - var(--head-h) - 20px - 16px);
+  }
+
+  .hero-note-side {
+    display: none;
+  }
+
+  .hero-note-below {
+    display: block;
+    margin-top: 28px;
+  }
+}
