@@ -41,12 +41,12 @@ export function usePhase(): Phase | null {
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
-/** 예약 기간에는 예약 마감까지, 평가일에는 평가 종료까지 */
+/** 신청 기간에는 신청 마감까지, 평가일에는 평가 종료까지 */
 export function Countdown({ label, aside }: { label?: string; aside?: React.ReactNode }) {
   const now = useNow(1000);
   const phase = now === null ? null : phaseAt(now);
   const target = phase === 'evaluation' ? CLOSE_AT : RESERVE_CLOSE_AT;
-  const text = label ?? (phase === 'evaluation' ? '평가 종료까지' : '예약 마감까지');
+  const text = label ?? (phase === 'evaluation' ? '평가 종료까지' : '신청 마감까지');
   const r = now === null ? null : remaining(now, target);
   const units = [
     { v: r?.d, u: 'DAYS' },
@@ -76,8 +76,8 @@ export function Countdown({ label, aside }: { label?: string; aside?: React.Reac
 }
 
 /*
- * 현재 예약 — 시작값 + 실제 예약 수. 저장소가 연결돼 있을 때만, 예약 기간에만.
- * 10초마다, 그리고 이 화면에서 예약되는 즉시 다시 읽는다.
+ * 현재 신청 — 시작값 + 실제 신청 수. 저장소가 연결돼 있을 때만, 신청 기간에만.
+ * 10초마다, 그리고 이 화면에서 신청되는 즉시 다시 읽는다.
  */
 export function Reserved() {
   const phase = usePhase();
@@ -106,7 +106,7 @@ export function Reserved() {
   if (!SHOW_RESERVED_COUNT || count === null || phase !== 'reserve') return null;
   return (
     <p className="reserved" aria-live="off">
-      현재 예약 <b>{count.toLocaleString('ko-KR')}</b>명
+      현재 신청 <b>{count.toLocaleString('ko-KR')}</b>명
     </p>
   );
 }

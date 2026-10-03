@@ -6,8 +6,8 @@ export const VIEWS = [
 ] as const;
 
 export const ARCHIVE = [
-  { date: '2026.10.01', text: '2027 Season Entry 평가 예약 시작' },
-  { date: '2026.10.31', text: '평가 예약 마감 — 23:59' },
+  { date: '2026.10.01', text: '2027 Season Entry 평가 신청 시작' },
+  { date: '2026.10.31', text: '평가 신청 마감 — 23:59' },
   { date: '2026.11.01', text: '온라인 Entry — 23:59 종료' },
   { date: '2027.10', text: '2028 Season Entry' },
 ] as const;

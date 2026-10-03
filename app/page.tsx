@@ -5,7 +5,7 @@ import { METHOD } from '@/lib/method';
 
 /*
  * 홈 — 2027 입학평가 안내. 데스크톱 약 2.5 화면.
- *   첫 화면(2027 THE TOTAL 입학평가 · 평가 예약 · 네 단위 카운트다운 · 일정 셋 · 예약 CTA)
+ *   첫 화면(2027 THE TOTAL 입학평가 · 평가 신청 · 네 단위 카운트다운 · 일정 셋 · 신청 CTA)
  *   → A. 짧은 소개 → B. 평가의 방식 셋(→ /method) → C. 과정 셋(→ /programs#…)
  */
 const COURSE_LINES = [

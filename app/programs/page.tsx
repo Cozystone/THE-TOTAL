@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import { ReserveLink } from '@/components/SeasonDoor';
+import { ProgramTabs } from '@/components/ProgramTabs';
 import { COURSES, type CourseId } from '@/lib/courses';
 
 export const metadata: Metadata = { title: '과정' };
 
 /*
- * 과정 — 초등 · 중등 · 고등. 각 과정은 네 가지만: 대상 · 먼저 읽는 것 · 방향 · 2027 입학평가 예약.
+ * 과정 — 초등 · 중등 · 고등을 탭으로 하나씩, 한 화면 안에(#elementary · #middle · #high).
+ * 각 과정은 네 가지만: 대상 · 먼저 읽는 것 · 방향 · 2027 입학평가 신청.
  * 같은 말(수업의 순서 · 학생별 설계 · 현재를 읽는다)을 과정마다 되풀이하지 않는다.
  */
 const PROGRAMS: { id: CourseId; line: [string, string]; who: string; read: string[]; way: string }[] = [
@@ -34,57 +35,13 @@ const PROGRAMS: { id: CourseId; line: [string, string]; who: string; read: strin
 
 export default function Programs() {
   return (
-    <main id="main" className="page page-tight">
+    <main id="main" className="page page-tight page-programs">
       <header className="page-head">
         <p className="eyebrow">과정</p>
         <h1 className="page-title">초등 · 중등 · 고등</h1>
-        <nav className="tabs" aria-label="과정 바로가기">
-          {PROGRAMS.map((p) => (
-            <a key={p.id} href={`#${p.id}`}>
-              {COURSES[p.id].label}
-            </a>
-          ))}
-        </nav>
       </header>
 
-      {PROGRAMS.map((p) => (
-        <section key={p.id} className="home-sec program" id={p.id} aria-labelledby={`${p.id}-title`}>
-          <div className="program-head">
-            <h2 id={`${p.id}-title`}>{COURSES[p.id].label}</h2>
-            <p className="program-line">
-              {p.line[0]}
-              <br />
-              {p.line[1]}
-            </p>
-          </div>
-          <dl className="program-body">
-            <div>
-              <dt>대상</dt>
-              <dd>{p.who}</dd>
-            </div>
-            <div>
-              <dt>먼저 읽는 것</dt>
-              <dd>
-                <ul className="tags">
-                  {p.read.map((f) => (
-                    <li key={f}>{f}</li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-            <div>
-              <dt>방향</dt>
-              <dd>{p.way}</dd>
-            </div>
-            <div>
-              <dt>입학평가</dt>
-              <dd className="actions">
-                <ReserveLink />
-              </dd>
-            </div>
-          </dl>
-        </section>
-      ))}
+      <ProgramTabs items={PROGRAMS.map((p) => ({ ...p, label: COURSES[p.id].label }))} />
 
       <section className="home-sec closing-line" aria-label="맺음">
         <p className="statement">

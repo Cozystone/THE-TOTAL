@@ -6,9 +6,9 @@ import { useGo } from '@/components/NavLink';
 import { RESERVE_CTA, RESERVE_CTA_PAGE, SCHEDULE } from '@/lib/entry';
 
 /*
- * 홈 첫 화면 — 2027 입학평가 안내. 첫 3초 안에: 2027 입학평가 / 예약 마감 / 예약 CTA.
- *   2027 THE TOTAL 입학평가 → 2027 Season Entry 평가 예약 → 예약 마감까지 [DAYS · HOURS · MINUTES · SECONDS]
- *   → 입학평가 예약하기(+ 연 1회) → 평가 예약 기간 · 평가 진행 · 평가 종료
+ * 홈 첫 화면 — 2027 입학평가 안내. 첫 3초 안에: 2027 입학평가 / 신청 마감 / 신청 CTA.
+ *   2027 THE TOTAL 입학평가 → 2027 Season Entry 평가 신청 → 신청 마감까지 [DAYS · HOURS · MINUTES · SECONDS]
+ *   → 입학평가 신청하기(+ 연 1회) → 평가 신청 기간 · 평가 진행 · 평가 종료
  * 평가일(11.01)에는 '평가 종료까지', 그 뒤에는 CLOSED 공고.
  */
 export function HomeHero() {
@@ -31,18 +31,18 @@ export function HomeHero() {
   const evaluation = phase === 'evaluation';
   return (
     <div className="hero-entry">
-      {/* 휴대폰: 이 묶음이 첫 화면을 채우고, 화면 끝이 예약 버튼에서 닫힌다(위쪽에 간격) */}
+      {/* 휴대폰: 이 묶음이 첫 화면을 채우고, 화면 끝이 신청 버튼에서 닫힌다(위쪽에 간격) */}
       <div className="hero-fold">
         <p className="hero-kicker">2027 THE TOTAL 입학평가</p>
         <h1 className="hero-entry-title">
           2027 Season Entry
           <br />
-          {evaluation ? '평가 진행' : '평가 예약'}
+          {evaluation ? '평가 진행' : '평가 신청'}
         </h1>
         <Countdown aside={<Reserved />} />
         <div className="hero-actions">
           {evaluation ? (
-            <p className="hero-note">예약이 마감되었습니다. 평가 개시 안내는 예약한 이메일로 전달됩니다.</p>
+            <p className="hero-note">신청이 마감되었습니다. 평가 개시 안내는 신청한 이메일로 전달됩니다.</p>
           ) : (
             <>
               <Link className="button hero-cta" href="/entry#reserve" onClick={(e) => go(e, '/entry#reserve')}>
@@ -57,7 +57,7 @@ export function HomeHero() {
           )}
         </div>
       </div>
-      {/* 일정 셋 — 예약 버튼 아래(휴대폰에서는 스크롤 뒤) */}
+      {/* 일정 셋 — 신청 버튼 아래(휴대폰에서는 스크롤 뒤) */}
       <dl className="schedule-strip">
         {SCHEDULE.map((s) => (
           <div key={s.k}>
@@ -89,7 +89,7 @@ export function EntryTop() {
   );
 }
 
-/** 다른 페이지 끝의 하나뿐인 CTA — 예약 기간에만 예약으로 */
+/** 다른 페이지 끝의 하나뿐인 CTA — 신청 기간에만 신청으로 */
 export function ReserveLink() {
   const phase = usePhase();
   const go = useGo();
@@ -108,8 +108,8 @@ export function ReserveLink() {
 }
 
 /*
- * 진단 · 평가는 평가일(11.01)에만 열린다 — 예약자에게 전달되는 안내로 들어온다.
- * 예약 기간에는 예약으로, 종료 뒤에는 공고로.
+ * 진단 · 평가는 평가일(11.01)에만 열린다 — 신청자에게 전달되는 안내로 들어온다.
+ * 신청 기간에는 신청으로, 종료 뒤에는 공고로.
  */
 export function EntryGate({ children }: { children: React.ReactNode }) {
   const phase = usePhase();
@@ -131,7 +131,7 @@ export function EntryGate({ children }: { children: React.ReactNode }) {
     <div className="gate">
       <p className="hero-kicker">2027 THE TOTAL 입학평가</p>
       <h2 className="gate-title">평가는 2026년 11월 1일, 온라인으로 진행됩니다.</h2>
-      <p className="body">예약한 이메일로 평가 개시 안내를 전달합니다. 예약은 10월 31일 23:59에 마감됩니다.</p>
+      <p className="body">신청한 이메일로 평가 개시 안내를 전달합니다. 신청은 10월 31일 23:59에 마감됩니다.</p>
       <div className="hero-actions">
         <Link className="button" href="/entry#reserve">
           {RESERVE_CTA}

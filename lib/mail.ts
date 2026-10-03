@@ -5,8 +5,8 @@
  *   인증된 도메인이 없으면 Resend 시험 주소(onboarding@resend.dev)로 나가고, 이때는 Resend 계정 주인 주소로만 실제로 도착한다.
  *
  *   두 가지 메일만 보낸다:
- *     1) 예약 확인 — ENTRY RESERVATION 직후 그 주소로 한 통(2028 시작 안내 신청이면 그 확인)
- *     2) 평가 개시 안내 — 평가일(11.01) 00:05 KST 에 예약자 목록에만, 한 사람에 한 번
+ *     1) 신청 확인 — ENTRY APPLICATION 직후 그 주소로 한 통(2028 시작 안내 신청이면 그 확인)
+ *     2) 평가 개시 안내 — 평가일(11.01) 00:05 KST 에 신청자 목록에만, 한 사람에 한 번
  */
 import { ENTRY_CLOSE_DATE, SEASON } from '@/lib/entry';
 
@@ -64,7 +64,7 @@ function layout(lines: string[], action?: { label: string; href: string }) {
 <tr><td style="height:24px"></td></tr>
 ${body}${button}
 <tr><td style="padding-top:28px;border-bottom:1px solid #e8e8e8"></td></tr>
-<tr><td style="padding-top:14px;font-size:12px;line-height:1.7;color:#66696d">이 메일은 2027 THE TOTAL 입학평가 예약 때 동의하신 주소로만 발송됩니다.<br>이메일 주소는 ${SEASON === '2027' ? '2026년 11월 30일' : '시즌 종료'}까지 보관한 뒤 삭제합니다.<br>THE TOTAL · 서울 · 대치</td></tr>
+<tr><td style="padding-top:14px;font-size:12px;line-height:1.7;color:#66696d">이 메일은 2027 THE TOTAL 입학평가 신청 때 동의하신 주소로만 발송됩니다.<br>이메일 주소는 ${SEASON === '2027' ? '2026년 11월 30일' : '시즌 종료'}까지 보관한 뒤 삭제합니다.<br>THE TOTAL · 서울 · 대치</td></tr>
 </table></td></tr></table></body></html>`;
 }
 
@@ -80,7 +80,7 @@ export function reservationMail(to: string, season: string): Mail {
     return { to, subject: `[THE TOTAL] ${season} Season Entry 시작 안내 신청 확인`, html: layout(lines), text: strip(lines) };
   }
   const lines = [
-    '<b>2027 Season Entry 예약이 완료되었습니다.</b>',
+    '<b>2027 Season Entry 신청이 완료되었습니다.</b>',
     '',
     '평가 진행 &nbsp;온라인 Entry',
     '평가일 &nbsp;2026년 11월 1일',
@@ -90,7 +90,7 @@ export function reservationMail(to: string, season: string): Mail {
   ];
   return {
     to,
-    subject: '[THE TOTAL] 2027 Season Entry 예약 확인',
+    subject: '[THE TOTAL] 2027 Season Entry 신청 확인',
     html: layout(lines, { label: '2027 입학평가 안내 보기 →', href: `${SITE_URL}/entry` }),
     text: `${strip(lines).replace(/&nbsp;/g, ' ')}\n\n${SITE_URL}/entry`,
   };

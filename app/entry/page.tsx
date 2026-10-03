@@ -6,9 +6,9 @@ import { ENTRY_TABLE } from '@/lib/entry';
 export const metadata: Metadata = { title: '2027 입학평가' };
 
 /*
- * 2027 ENTRY — 실제 예약 안내. 한 화면 반 ~ 두 화면.
- *   2027 THE TOTAL 입학평가 · 예약 마감까지(네 단위) → 정보 표 → 짧은 소개 → ENTRY RESERVATION(이메일 · 고지 · 예약).
- * 지금은 평가를 시작하는 단계가 아니라 예약하는 단계 — '시작' 버튼은 두지 않는다.
+ * 2027 ENTRY — 실제 신청 안내. 한 화면 반 ~ 두 화면.
+ *   2027 THE TOTAL 입학평가 · 신청 마감까지(네 단위) → 정보 표 → 짧은 소개 → ENTRY APPLICATION(이메일 · 고지 · 신청).
+ * 지금은 평가를 시작하는 단계가 아니라 신청하는 단계 — '시작' 버튼은 두지 않는다.
  */
 export default function Entry() {
   return (
@@ -40,7 +40,7 @@ export default function Entry() {
       <section className="entry-reserve" id="reserve" aria-labelledby="reserve-title">
         <div className="entry-reserve-head">
           <h2 id="reserve-title" className="label">
-            ENTRY RESERVATION
+            ENTRY APPLICATION
           </h2>
           <NoticeLead />
         </div>

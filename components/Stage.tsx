@@ -12,7 +12,6 @@ export function Stage({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    delete document.documentElement.dataset.leaving; // 앞 페이지의 나감 표시 해제
     const root = ref.current;
     if (!root) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;

@@ -85,7 +85,7 @@ export async function countNotices(season: string): Promise<number | null> {
   }
 }
 
-/* ── 평가 개시 안내 — 예약자 중 아직 받지 않은 주소만(한 사람에 한 번) ── */
+/* ── 평가 개시 안내 — 신청자 중 아직 받지 않은 주소만(한 사람에 한 번) ── */
 const sentKey = (season: string) => `the-total:sent:eval:${season}`;
 
 export async function unsentReservations(season: string, limit: number): Promise<string[] | null> {

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
 import './globals.css';
 import { Header } from '@/components/Header';
+import { NavFx } from '@/components/NavLink';
 import { SiteFooter } from '@/components/SiteFooter';
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" data-scroll-behavior="smooth">
       <body>
         <a className="skip" href="#main">
           본문으로 건너뛰기
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <SiteFooter />
+        <NavFx />
       </body>
     </html>
   );
