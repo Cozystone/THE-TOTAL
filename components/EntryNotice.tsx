@@ -85,6 +85,7 @@ export function EntryNotice() {
           onChange={(e) => setEmail(e.target.value)}
           aria-invalid={invalid || undefined}
           aria-describedby={`${id}-status`}
+          placeholder="이메일 주소"
           required
         />
         <button type="submit" className="button reserve-button" disabled={state === 'sending'}>

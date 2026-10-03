@@ -3470,3 +3470,132 @@ a.list-title:hover {
     margin-top: 48px;
   }
 }
+
+/* 휴대폰 /entry — 첫 화면에 예약하기까지: 제목 → 시계 → 예약 폼 → (스크롤) 정보 표 · 소개.
+   폼 안에서는 이메일 → 고지 → 동의 → 예약하기 순(동의하고 바로 누른다). */
+@media (max-width: 719px) {
+  .page-entry {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page-entry .entry-head {
+    order: 0;
+  }
+
+  .page-entry .entry-reserve {
+    order: 1;
+    margin-top: 24px;
+    padding-top: 16px;
+    gap: 10px;
+  }
+
+  .page-entry .entry-info {
+    order: 2;
+    margin-top: 40px;
+  }
+
+  .entry-title {
+    font-size: 26px;
+  }
+
+  .entry-reserve-head .body {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
+  .reserve-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reserve-row {
+    display: contents;
+  }
+
+  .reserve-label {
+    order: 0;
+  }
+
+  .reserve-input {
+    order: 1;
+    flex: none;
+  }
+
+  .reserve-privacy {
+    order: 2;
+    margin-top: 12px;
+  }
+
+  .reserve-privacy div {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .reserve-check {
+    order: 3;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .reserve-button {
+    order: 4;
+    margin-top: 14px;
+  }
+
+  .reserve-status {
+    order: 5;
+  }
+}
+
+/* 휴대폰 /entry — 실제 브라우저의 보이는 높이(주소창 제외)에서도 예약하기까지 들어오게 조금 더 촘촘히 */
+@media (max-width: 719px) {
+  .page-entry {
+    padding-top: 16px;
+  }
+
+  .entry-title {
+    font-size: 24px;
+  }
+
+  .page-entry .cd {
+    margin-top: 14px;
+  }
+
+  .page-entry .cd-units li {
+    padding-bottom: 8px;
+  }
+
+  .page-entry .cd-num {
+    font-size: clamp(30px, 9vw, 40px);
+  }
+
+  .page-entry .entry-reserve {
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+
+  .page-entry .reserve-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 719px) {
+  .entry-table dd {
+    font-size: 14.5px;
+    white-space: nowrap;
+  }
+
+  .entry-table div {
+    padding-right: 10px;
+  }
+}
