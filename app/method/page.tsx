@@ -1,17 +1,16 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { ReserveLink } from '@/components/SeasonDoor';
 import { METHOD, PROCESS } from '@/lib/method';
 
 export const metadata: Metadata = { title: '방식' };
 
 /*
- * THE TOTAL의 방식 — 현재를 읽고, 순서를 설계하고, 선택의 근거를 만든다.
- * 얇은 선 · 번호 · 짧은 문장. 카드 · 아이콘 없음.
- * 아래에 실제로 일어나는 순서(진단 → Entry 평가 → 순서의 설계)를 같은 문법으로.
+ * THE TOTAL의 방식 — 현재를 읽고, 순서를 보고, 선택의 근거를 만든다.
+ * 얇은 선 · 번호 · 짧은 문장. 진단 · 평가 · 설계는 한 줄씩. 끝의 CTA 는 하나.
  */
 export default function Method() {
   return (
-    <main id="main" className="page">
+    <main id="main" className="page page-tight">
       <header className="page-head">
         <p className="eyebrow">방식</p>
         <h1 className="page-title">THE TOTAL의 방식</h1>
@@ -31,7 +30,7 @@ export default function Method() {
         ))}
       </ol>
 
-      <section className="block" aria-labelledby="process-title">
+      <section className="home-sec" aria-labelledby="process-title">
         <div className="block-head">
           <h2 id="process-title">진단 · 평가 · 설계</h2>
         </div>
@@ -44,19 +43,16 @@ export default function Method() {
             </li>
           ))}
         </ol>
-        <p className="process-note muted">진단과 평가는 2027 Season Entry 기간에만 진행합니다.</p>
       </section>
 
-      <section className="block closing-line" aria-label="맺음">
+      <section className="home-sec closing-line" aria-label="맺음">
         <p className="statement">
           모든 학생은 같은 목표를 말합니다.
           <br />
           그러나 같은 방식으로 도착하지는 않습니다.
         </p>
         <div className="actions">
-          <Link className="text-link" href="/entry">
-            2027 ENTRY <span aria-hidden="true">→</span>
-          </Link>
+          <ReserveLink />
         </div>
       </section>
     </main>

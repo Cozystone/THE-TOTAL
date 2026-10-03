@@ -3,119 +3,129 @@
 import Link from 'next/link';
 import { ClosedNotice, Countdown, Reserved, usePhase } from '@/components/EntryClock';
 import { useGo } from '@/components/NavLink';
-import { SEASON } from '@/lib/entry';
+import { RESERVE_CTA, RESERVE_CTA_PAGE, SCHEDULE } from '@/lib/entry';
 
 /*
- * 2027 SEASON ENTRY 의 첫 화면 — 홈과 /entry 가 같이 쓴다. 카운트다운이 0 이 되면 저절로 CLOSED 공고로.
- *   home : 2027 SEASON ENTRY / 이번 시즌의 문은 11월 1일에 닫힙니다. / ENTRY CLOSES IN / D–00 00:00:00 / 연 1회 / 2027 ENTRY 보기 →
- *   entry: 2027 SEASON / THE TOTAL ENTRY / 한 번 열린 문은 다음 해까지 다시 열리지 않습니다. / ENTRY CLOSES IN / D–00 00:00:00
+ * 홈 첫 화면 — 2027 입학평가 안내. 첫 3초 안에: 2027 입학평가 / 예약 마감 / 예약 CTA.
+ *   2027 THE TOTAL 입학평가 → 2027 Season Entry 평가 예약 → 예약 마감까지 [DAYS · HOURS · MINUTES · SECONDS]
+ *   → 평가 예약 기간 · 평가 진행 · 평가 종료 → 입학평가 예약하기 → 연 1회
+ * 평가일(11.01)에는 '평가 종료까지', 그 뒤에는 CLOSED 공고.
  */
-export function SeasonDoor({ variant }: { variant: 'home' | 'entry' }) {
+export function HomeHero() {
   const phase = usePhase();
   const go = useGo();
 
   if (phase === 'closed') {
     return (
-      <div className="door door-closed">
+      <div className="hero-entry hero-closed">
         <ClosedNotice headingLevel={1} />
-        <div className="door-actions">
-          <Link className="button button-line" href="/entry#notice" onClick={(e) => go(e, '/entry#notice')}>
-            {variant === 'home' ? '2028 SEASON 안내 받기 →' : '아래에서 안내 받기 →'}
+        <div className="hero-actions">
+          <Link className="button button-line" href="/entry#reserve" onClick={(e) => go(e, '/entry#reserve')}>
+            2028 Season 안내 받기 →
           </Link>
         </div>
       </div>
     );
   }
 
-  if (variant === 'home') {
-    return (
-      <div className="door">
-        <p className="label">{SEASON} SEASON ENTRY</p>
-        <h1 className="door-title">
-          이번 시즌의 문은 <span className="door-break">11월 1일에 닫힙니다.</span>
-        </h1>
-        <Countdown />
-        <Reserved />
-        <p className="door-note">
-          {SEASON} Season Entry는
-          <br />
-          매년 10월, 한 번만 열립니다.
-        </p>
-        <div className="door-actions">
-          <Link className="button button-line" href="/entry" onClick={(e) => go(e, '/entry')}>
-            2027 ENTRY 보기 →
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
+  const evaluation = phase === 'evaluation';
   return (
-    <div className="door">
-      <p className="label">{SEASON} SEASON</p>
-      <h1 className="door-title door-title-entry">THE TOTAL ENTRY</h1>
-      <p className="door-sub">
-        한 번 열린 문은
+    <div className="hero-entry">
+      <p className="hero-kicker">2027 THE TOTAL 입학평가</p>
+      <h1 className="hero-entry-title">
+        2027 Season Entry
         <br />
-        다음 해까지 다시 열리지 않습니다.
-      </p>
-      <Countdown />
-      <Reserved />
+        {evaluation ? '평가 진행' : '평가 예약'}
+      </h1>
+      <Countdown aside={<Reserved />} />
+      <dl className="schedule-strip">
+        {SCHEDULE.map((s) => (
+          <div key={s.k}>
+            <dt>{s.k}</dt>
+            <dd>{s.v}</dd>
+          </div>
+        ))}
+      </dl>
+      <div className="hero-actions">
+        {evaluation ? (
+          <p className="hero-note">예약이 마감되었습니다. 평가 개시 안내는 예약한 이메일로 전달됩니다.</p>
+        ) : (
+          <>
+            <Link className="button hero-cta" href="/entry#reserve" onClick={(e) => go(e, '/entry#reserve')}>
+              {RESERVE_CTA}
+            </Link>
+            <p className="hero-note">
+              2027 Season Entry는
+              <br />
+              연 1회 진행됩니다.
+            </p>
+          </>
+        )}
+      </div>
     </div>
   );
 }
 
-/** Entry 시작 — 열려 있을 때만. 닫히면 비활성 + 이유 */
-export function EntryStart() {
+/** ENTRY 상단 — 같은 시계, 반복 없이 짧게 */
+export function EntryTop() {
+  const phase = usePhase();
+  if (phase === 'closed') return <ClosedNotice headingLevel={1} />;
+  return (
+    <>
+      <h1 className="entry-title">2027 THE TOTAL 입학평가</h1>
+      <Countdown aside={<Reserved />} />
+    </>
+  );
+}
+
+/** 다른 페이지 끝의 하나뿐인 CTA — 예약 기간에만 예약으로 */
+export function ReserveLink() {
   const phase = usePhase();
   const go = useGo();
-  if (phase === 'closed') {
+  if (phase === 'evaluation' || phase === 'closed') {
     return (
-      <div className="door-actions">
-        <button type="button" className="button" disabled aria-describedby="entry-start-closed">
-          온라인 Entry 시작 →
-        </button>
-        <p className="muted" id="entry-start-closed">
-          2027 Season Entry가 종료되어 새로운 진단 · 평가를 진행하지 않습니다.
-        </p>
-      </div>
+      <Link className="button button-line" href="/entry" onClick={(e) => go(e, '/entry')}>
+        2027 ENTRY 안내 →
+      </Link>
     );
   }
   return (
-    <div className="door-actions">
-      <Link className="button" href="/diagnosis" onClick={(e) => go(e, '/diagnosis')}>
-        온라인 Entry 시작 →
-      </Link>
-      <p className="muted">온라인 진단으로 시작합니다. 약 5분.</p>
-    </div>
+    <Link className="button button-line" href="/entry#reserve" onClick={(e) => go(e, '/entry#reserve')}>
+      {RESERVE_CTA_PAGE}
+    </Link>
   );
 }
 
-/** 한 줄 공고 — 열려 있을 때는 종료 시각, 닫히면 다음 Entry */
-export function EntryLine() {
-  const phase = usePhase();
-  return (
-    <p>
-      {phase === 'closed' ? '다음 Entry는 2027년 10월에 열립니다.' : '2027 Season Entry는 11월 1일 23:59에 종료됩니다.'}
-    </p>
-  );
-}
-
-/** 진단 · 평가는 Entry 기간에만 — 닫히면 공고와 다음 시즌 안내로 */
+/*
+ * 진단 · 평가는 평가일(11.01)에만 열린다 — 예약자에게 전달되는 안내로 들어온다.
+ * 예약 기간에는 예약으로, 종료 뒤에는 공고로.
+ */
 export function EntryGate({ children }: { children: React.ReactNode }) {
   const phase = usePhase();
+  if (phase === 'evaluation') return <>{children}</>;
   if (phase === 'closed') {
     return (
       <div className="gate">
         <ClosedNotice />
-        <p className="body body-gap">Entry가 종료되어 새로운 진단 · 평가를 진행하지 않습니다.</p>
-        <div className="door-actions">
-          <Link className="button button-line" href="/entry#notice">
-            2028 SEASON 안내 받기 →
+        <div className="hero-actions">
+          <Link className="button button-line" href="/entry#reserve">
+            2028 Season 안내 받기 →
           </Link>
         </div>
       </div>
     );
   }
-  return <>{children}</>;
+  if (phase === null) return null;
+  return (
+    <div className="gate">
+      <p className="hero-kicker">2027 THE TOTAL 입학평가</p>
+      <h2 className="gate-title">평가는 2026년 11월 1일, 온라인으로 진행됩니다.</h2>
+      <p className="body">예약한 이메일로 평가 개시 안내를 전달합니다. 예약은 10월 31일 23:59에 마감됩니다.</p>
+      <div className="hero-actions">
+        <Link className="button" href="/entry#reserve">
+          {RESERVE_CTA}
+        </Link>
+      </div>
+    </div>
+  );
 }

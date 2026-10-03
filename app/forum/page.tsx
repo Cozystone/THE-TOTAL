@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ReserveLink } from '@/components/SeasonDoor';
 import { FLOW, FORUM, TRACKS, VIDEO } from '@/lib/forum';
 
 export const metadata: Metadata = { title: 'THE TOTAL FORUM' };
@@ -27,9 +28,7 @@ export default function Forum() {
           만들어 가는 교육 프로그램입니다.
         </p>
         <div className="actions">
-          <Link className="button" href="/diagnosis?track=forum">
-            FORUM 지원 진단 시작하기
-          </Link>
+          <ReserveLink />
           <a className="text-link" href="#flow">
             운영 방식 보기 <span aria-hidden="true">↓</span>
           </a>
@@ -100,11 +99,9 @@ export default function Forum() {
       </section>
 
       <section className="block block-cta" aria-label="지원">
-        <p>FORUM은 지원 진단에서 시작합니다. 관심사와 생각의 방식, 만들고 싶은 작업을 먼저 묻습니다.</p>
+        <p>FORUM도 2027 Season Entry 평가에서 시작합니다. 관심사와 생각의 방식, 만들고 싶은 작업을 함께 봅니다.</p>
         <div className="actions">
-          <Link className="button" href="/diagnosis?track=forum">
-            FORUM 지원 진단 시작하기
-          </Link>
+          <ReserveLink />
           <Link className="text-link" href="/record">
             기록으로 <span aria-hidden="true">→</span>
           </Link>

@@ -1,12 +1,13 @@
-import { RESERVED_BASE, SEASON, SHOW_NOTICE_COUNT, noticeSeason, phaseAt } from '@/lib/entry';
-import { addNotice, countNotices } from '@/lib/notice-store';
+import { RESERVED_BASE, SEASON, SHOW_RESERVED_COUNT, noticeSeason, phaseAt } from '@/lib/entry';
+import { addNotice, countNotices, storeConnected } from '@/lib/notice-store';
 
 /*
- * ENTRY NOTICE — 이메일 한 곳.
+ * ENTRY RESERVATION — 이메일 한 곳.
  *   POST { email, consent, company? } → ok | duplicate | invalid | consent | not_connected | error
- *     - 시즌은 서버 시각으로 정한다: Entry 기간에는 2027, 종료 뒤에는 2028(다음 시즌 안내만).
+ *     - 시즌은 서버 시각으로 정한다: 예약 기간에는 2027 예약, 그 뒤에는 2028 시작 안내.
  *     - company 는 사람에게 보이지 않는 칸(자동 입력 걸러내기). 채워져 있으면 기록하지 않고 ok 처럼 끝낸다.
- *   GET → 예약 수 = RESERVED_BASE + 이번 시즌(2027) 실제 기록 수. SHOW_NOTICE_COUNT 가 꺼져 있으면 404.
+ *   GET → { connected, count } — count = RESERVED_BASE + 2027 실제 예약 수. 저장소가 없으면 connected:false(화면은 숫자를 숨긴다).
+ * 예약자 목록: Upstash 집합 the-total:notice:2027 (평가 개시 안내는 이 목록에만).
  */
 export type NoticeResponse = {
   status: 'ok' | 'duplicate' | 'invalid' | 'consent' | 'not_connected' | 'error';
@@ -39,7 +40,11 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  if (!SHOW_NOTICE_COUNT) return new Response(null, { status: 404 });
-  const real = await countNotices(SEASON);
-  return Response.json({ season: SEASON, count: RESERVED_BASE + (real ?? 0) }, { headers: { 'Cache-Control': 'no-store' } });
+  if (!SHOW_RESERVED_COUNT) return new Response(null, { status: 404 });
+  const connected = storeConnected();
+  const real = connected ? await countNotices(SEASON) : null;
+  return Response.json(
+    { season: SEASON, connected: connected && real !== null, count: real === null ? null : RESERVED_BASE + real },
+    { headers: { 'Cache-Control': 'no-store' } },
+  );
 }
